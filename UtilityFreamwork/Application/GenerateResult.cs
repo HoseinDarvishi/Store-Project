@@ -1,4 +1,4 @@
-﻿namespace UtilityFreamwork
+﻿namespace UtilityFreamwork.Application
 {
     public class GenerateResult
     {

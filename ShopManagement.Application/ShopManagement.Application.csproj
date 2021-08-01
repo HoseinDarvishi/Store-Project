@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ShopManagement.Application.Constract\ShopManagement.Application.Constract.csproj" />
     <ProjectReference Include="..\ShopManagement.Domain\ShopManagement.Domain.csproj" />
+    <ProjectReference Include="..\UtilityFreamwork\UtilityFreamwork.csproj" />
   </ItemGroup>
 
 </Project>
