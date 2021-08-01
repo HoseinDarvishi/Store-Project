@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShopManagement", "ShopManagement", "{2185943D-22B3-4B71-9068-BEDA9F7667DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Domain", "SM.Domain", "{04352A9A-9DBD-4CEB-89FB-1D18F74C7635}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Application", "SM.Application", "{EEA925FB-74BA-42CD-8040-3F6B275BE70F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Infrastructor", "SM.Infrastructor", "{4A4A370D-846D-4961-8FBC-6C8405DF47A4}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{04352A9A-9DBD-4CEB-89FB-1D18F74C7635} = {2185943D-22B3-4B71-9068-BEDA9F7667DA}
+		{EEA925FB-74BA-42CD-8040-3F6B275BE70F} = {2185943D-22B3-4B71-9068-BEDA9F7667DA}
+		{4A4A370D-846D-4961-8FBC-6C8405DF47A4} = {2185943D-22B3-4B71-9068-BEDA9F7667DA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A730691C-AE1D-4063-B98F-62BA30BA5496}
+	EndGlobalSection
+EndGlobal
