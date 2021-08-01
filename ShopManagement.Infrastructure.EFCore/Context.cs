@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopManagement.Domain.ProductCategoryAgg;
-using System;
 using ShopManagement.Infrastructure.EFCore.Mapping;
 
 namespace ShopManagement.Infrastructure.EFCore
@@ -15,8 +14,7 @@ namespace ShopManagement.Infrastructure.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ProductCategoryMapping());
-            //modelBuilder.ApplyConfiguration(new ProductMapping());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductCategoryMapping).Assembly);
 
             base.OnModelCreating(modelBuilder);
         }

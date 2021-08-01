@@ -1,20 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace ShopManagement.Domain.ProductCategoryAgg
 {
-    public interface IProductCategoryRepository
+    public interface IProductCategoryRepository : IGenericRepository<long , ProductCategory>
     {
-        void Create(ProductCategory category);
-
-        ProductCategory GetBy(long id);
-
-        List<ProductCategory> GetAll();
-
-        bool IsExists(Expression<Func<ProductCategory , bool>> expression);
-
-        void Save();
+        List<ProductCategory> Search(string name);
     }
 }

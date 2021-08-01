@@ -1,6 +1,5 @@
 ﻿using ShopManagement.Application.Constract.ProductCategory;
 using ShopManagement.Domain.ProductCategoryAgg;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UtilityFreamwork.Application;
@@ -23,7 +22,7 @@ namespace ShopManagement.Application
         {
             var result = new GenerateResult();
 
-            if (productCategoryRepository.IsExists(x=>x.Name == category.Name))
+            if (productCategoryRepository.IsExists(x => x.Name == category.Name))
                 return result.Failed("امکان ایجاد گروه های محصولی همنام وجود ندارد");
 
             var chengedSlug = GenerateSlug.Slugify(category.Name);
@@ -44,7 +43,7 @@ namespace ShopManagement.Application
             if (cat == null)
                 return result.Failed("چنین گروه محصولی وجود ندارد");
 
-            if (productCategoryRepository.IsExists(x=>x.Name == category.Name && x.Id != category.Id))
+            if (productCategoryRepository.IsExists(x => x.Name == category.Name && x.Id != category.Id))
                 return result.Failed("امکان ایجاد گروه های محصولی همنام وجود ندارد");
 
             var chengedSlug = category.Slug.Slugify();
@@ -76,16 +75,14 @@ namespace ShopManagement.Application
 
         public List<ProductCategoryVM> Search(ProductCategorySearchModel searchModel)
         {
-            var list = productCategoryRepository.GetAll()
+            return productCategoryRepository.Search(searchModel.Name)
                 .Select(x => new ProductCategoryVM
                 {
                     Id = x.Id,
                     Name = x.Name,
                     Picture = x.Picture,
-                    CreationDate = x.Picture
+                    CreationDate = x.CreationDate.ToString()
                 }).ToList();
-
-            return list;
         }
     }
 }
