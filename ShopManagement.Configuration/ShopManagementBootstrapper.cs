@@ -8,13 +8,12 @@ using ShopManagement.Infrastructure.EFCore.Repositories;
 
 namespace ShopManagement.Configuration
 {
-    public class ShopManagementConfigServices
+    public class ShopManagementBootstrapper
     {
-        public void Configure(IServiceCollection services , string connectionString)
+        public static void Configure(IServiceCollection services , string connectionString)
         {
             services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddTransient<IProductCategoryApplication, ProductCategoryApplication>();
-
             services.AddDbContext<Context>(x => x.UseSqlServer(connectionString));
         }
     }
