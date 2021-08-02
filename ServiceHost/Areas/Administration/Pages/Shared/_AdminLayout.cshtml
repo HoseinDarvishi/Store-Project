@@ -21,10 +21,14 @@
     <link href="~/Admin/assets/css/material-design-iconic-font.min.css" rel="stylesheet">
     <link href="~/Admin/assets/css/animate.css" rel="stylesheet" />
     <link href="~/Admin/assets/css/waves-effect.css" rel="stylesheet">
+
+    <link href="~/Admin/assets/datatables/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Admin/assets/assets/sweet-alert/sweet-alert.min.css" rel="stylesheet">
 
     <link href="~/Admin/assets/css/helper.css" rel="stylesheet" type="text/css" />
     <link href="~/Admin/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+    @RenderSection("Styles", false);
 
 </head>
 
@@ -490,6 +494,8 @@
 
     <!-- Todo -->
     <script src="~/Admin/assets/js/jquery.todo.js"></script>
+
+    @RenderSection("Scripts", false);
 
 </body>
 </html>
