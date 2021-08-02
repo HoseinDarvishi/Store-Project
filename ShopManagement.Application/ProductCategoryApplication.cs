@@ -38,7 +38,7 @@ namespace ShopManagement.Application
         public GenerateResult Edit(EditProductCategory category)
         {
             var result = new GenerateResult();
-            var cat = productCategoryRepository.GetBy(category.Id);
+            var cat = productCategoryRepository.Get(category.Id);
 
             if (cat == null)
                 return result.Failed("چنین گروه محصولی وجود ندارد");
@@ -57,7 +57,7 @@ namespace ShopManagement.Application
 
         public EditProductCategory GetBy(long id)
         {
-            var pro = productCategoryRepository.GetBy(id);
+            var pro = productCategoryRepository.Get(id);
 
             return new EditProductCategory
             {
