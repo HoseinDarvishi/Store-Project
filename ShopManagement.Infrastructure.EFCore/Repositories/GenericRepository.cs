@@ -18,7 +18,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
 
         public void Create(TModel model)
         {
-            context.Add(model);
+            context.Add<TModel>(model);
+            Save();
         }
 
         public TModel Get(TKey id)

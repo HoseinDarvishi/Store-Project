@@ -18,10 +18,22 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
         }
 
         public List<ProductCategoryVM> categories;
+        public ProductCategorySearchModel searchModel { get; set; }
 
         public void OnGet(ProductCategorySearchModel search)
         {
-            //categories = categoryApplication.Search(search);
+            categories = categoryApplication.Search(search);
+        }
+
+        public IActionResult OnGetCreate()
+        {
+            return Partial("./Create" , new CreateProductCategory());
+        }
+
+        public JsonResult OnPostCreate(CreateProductCategory category)
+        {
+            var result = categoryApplication.Create(category);
+            return new JsonResult(result);
         }
     }
 }
