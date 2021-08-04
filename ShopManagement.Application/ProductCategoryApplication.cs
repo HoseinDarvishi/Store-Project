@@ -52,6 +52,8 @@ namespace ShopManagement.Application
                 category.PictureTitle, category.PictureAlt, category.Keywords,
                 category.MetaDescription, chengedSlug);
 
+            productCategoryRepository.Save();
+
             return result.Succedded();
         }
 

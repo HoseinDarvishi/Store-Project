@@ -19,6 +19,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
 
         public List<ProductCategoryVM> categories;
         public ProductCategorySearchModel searchModel { get; set; }
+        public EditProductCategory editCategory;
 
         public void OnGet(ProductCategorySearchModel search)
         {
@@ -33,6 +34,18 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
         public JsonResult OnPostCreate(CreateProductCategory category)
         {
             var result = categoryApplication.Create(category);
+            return new JsonResult(result);
+        }
+
+        public IActionResult OnGetEdit(long id)
+        {
+            editCategory = categoryApplication.GetBy(id);
+            return Partial("./Edit", editCategory);
+        } 
+
+        public JsonResult OnPostEdit(EditProductCategory category)
+        {
+            var result = categoryApplication.Edit(category);
             return new JsonResult(result);
         }
     }
