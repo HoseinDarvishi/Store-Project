@@ -1,7 +1,6 @@
-﻿using System;
+﻿using ShopManagement.Domain.ProductAgg;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace ShopManagement.Domain.ProductCategoryAgg
 {
@@ -27,7 +26,7 @@ namespace ShopManagement.Domain.ProductCategoryAgg
 
         public DateTime CreationDate { get; private set; }
 
-        //public List<Product> Products { get;private set; }
+        public List<Product> Products { get; private set; }
 
 
         public ProductCategory(string name, string description, string picture,

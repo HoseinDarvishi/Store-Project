@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ShopManagement.Application.Constract\ShopManagement.Application.Constract.csproj" />
+  </ItemGroup>
+
 </Project>
