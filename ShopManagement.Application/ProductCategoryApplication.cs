@@ -75,6 +75,15 @@ namespace ShopManagement.Application
             };
         }
 
+        public List<ProductCategoryVM> GetSelectList()
+        {
+            return productCategoryRepository.Get().Select(x => new ProductCategoryVM 
+            {
+                Id = x.Id,
+                Name = x.Name
+            }).ToList();
+        }
+
         public List<ProductCategoryVM> Search(ProductCategorySearchModel searchModel)
         {
             return productCategoryRepository.Search(searchModel.Name)

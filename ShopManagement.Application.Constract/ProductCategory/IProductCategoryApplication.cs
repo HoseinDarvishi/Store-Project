@@ -12,5 +12,7 @@ namespace ShopManagement.Application.Constract.ProductCategory
         List<ProductCategoryVM> Search(ProductCategorySearchModel searchModel);
 
         EditProductCategory GetBy(long id);
+
+        List<ProductCategoryVM> GetSelectList();
     }
 }

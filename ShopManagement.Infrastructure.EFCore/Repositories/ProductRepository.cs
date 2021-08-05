@@ -46,7 +46,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 Code = x.Code,
                 CreationDate = x.CreationDate.ToString(),
                 Id = x.Id,
-                Picture = x.Picture
+                Picture = x.Picture,
+                Price = x.Price
             })
             .ToList();
         }
@@ -66,7 +67,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 Code = x.Code,
                 CreationDate = x.CreationDate.ToString(),
                 Id = x.Id,
-                Picture = x.Picture
+                Picture = x.Picture,
+                Price = x.Price
             });
 
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
