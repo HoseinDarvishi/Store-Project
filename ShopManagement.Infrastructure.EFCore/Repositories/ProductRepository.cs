@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ShopManagement.Infrastructure.EFCore.Repositories
 {
-    class ProductRepository : GenericRepository<long, Product>, IProductRepository
+    public class ProductRepository : GenericRepository<long, Product>, IProductRepository
     {
         private readonly Context context;
 

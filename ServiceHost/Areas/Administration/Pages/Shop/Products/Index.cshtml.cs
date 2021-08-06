@@ -24,7 +24,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
         public SelectList categories;
         public List<ProductVM> Products;
         public ProductSearchModel searchModel { get; set; }
-        //public EditProductCategory editCategory;
+        public EditProduct editProduct;
 
         public void OnGet(ProductSearchModel search)
         {
@@ -34,25 +34,30 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
 
         public IActionResult OnGetCreate()
         {
-            return Partial("./Create" , new CreateProductCategory());
+            var product = new CreateProduct
+            {
+                categories = categoryApplication.GetSelectList()
+            };
+            return Partial("./Create", product);
         }
 
-        public JsonResult OnPostCreate(CreateProductCategory category)
+        public JsonResult OnPostCreate(CreateProduct product)
         {
-            var result = categoryApplication.Create(category);
+            var result = productApplication.Create(product);
             return new JsonResult(result);
         }
 
-        //public IActionResult OnGetEdit(long id)
-        //{
-        //    editCategory = categoryApplication.GetBy(id);
-        //    return Partial("./Edit", editCategory);
-        //} 
+        public IActionResult OnGetEdit(long id)
+        {
+            editProduct = productApplication.GetDetails(id);
+            editProduct.Categories = categoryApplication.GetSelectList();
+            return Partial("./Edit", editProduct);
+        }
 
-        //public JsonResult OnPostEdit(EditProductCategory category)
-        //{
-        //    var result = categoryApplication.Edit(category);
-        //    return new JsonResult(result);
-        //}
+        public JsonResult OnPostEdit(EditProduct product)
+        {
+            var result = productApplication.Edit(product);
+            return new JsonResult(result);
+        }
     }
 }

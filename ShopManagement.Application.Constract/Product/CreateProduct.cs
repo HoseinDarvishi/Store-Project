@@ -1,29 +1,45 @@
-﻿namespace ShopManagement.Application.Constract.Product
+﻿using ShopManagement.Application.Constract.ProductCategory;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace ShopManagement.Application.Constract.Product
 {
     public class CreateProduct
     {
-        public string Name { get; private set; }
 
-        public string Code { get; private set; }
+        [Required(ErrorMessage = "این مقدار الزامی است")]
+        public string Name { get;  set; }
 
-        public double Price { get; private set; }
+        [Required(ErrorMessage = "این مقدار الزامی است")]
+        public string Code { get;  set; }
 
-        public long CategoryId { get; private set; }
+        [Range(200, 1000000000000000, ErrorMessage = "این مقدار الزامی است")]
+        public double Price { get;  set; }
 
-        public string Picture { get; private set; }
+        [Range(1,10000000 , ErrorMessage = "این مقدار الزامی است")]
+        public long CategoryId { get;  set; }
 
-        public string PictureAlt { get; private set; }
+        public string Picture { get;  set; }
 
-        public string PictureTitle { get; private set; }
+        public string PictureAlt { get;  set; }
 
-        public string ShortDescription { get; private set; }
+        public string PictureTitle { get;  set; }
 
-        public string Description { get; private set; }
+        [Required(ErrorMessage = "این مقدار الزامی است")]
+        public string ShortDescription { get;  set; }
 
+        [Required(ErrorMessage = "این مقدار الزامی است")]
+        public string Description { get;  set; }
+
+        [Required(ErrorMessage = "این مقدار الزامی است")]
         public string Slug { get; set; }
 
+        [Required(ErrorMessage = "این مقدار الزامی است")]
         public string Keywords { get; set; }
 
+        [Required(ErrorMessage = "این مقدار الزامی است")]
         public string MetaDescription { get; set; }
+
+        public List<ProductCategoryVM> categories { get; set; }
     }
 }

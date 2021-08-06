@@ -17,7 +17,7 @@ namespace ShopManagement.Configuration
             services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddTransient<IProductCategoryApplication, ProductCategoryApplication>();
 
-            services.AddTransient<IProductApplication, IProductApplication>();
+            services.AddTransient<IProductApplication, ProductAppliation>();
             services.AddTransient<IProductRepository, ProductRepository>();
 
             services.AddDbContext<Context>(x => x.UseSqlServer(connectionString , b => b.MigrationsAssembly("ServiceHost")));

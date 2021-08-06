@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using ShopManagement.Application.Constract.Product;
 using ShopManagement.Application.Constract.ProductCategory;
 
 namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
@@ -12,13 +14,13 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
     {
         private readonly IProductCategoryApplication categoryApplication;
 
-        public IndexModel(IProductCategoryApplication categoryApplication)
+        public IndexModel( IProductCategoryApplication categoryApplication)
         {
             this.categoryApplication = categoryApplication;
         }
 
         public List<ProductCategoryVM> categories;
-        public ProductCategorySearchModel searchModel { get; set; }
+        public ProductSearchModel searchModel { get; set; }
         public EditProductCategory editCategory;
 
         public void OnGet(ProductCategorySearchModel search)
@@ -28,7 +30,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
 
         public IActionResult OnGetCreate()
         {
-            return Partial("./Create" , new CreateProductCategory());
+            return Partial("./Create", new CreateProductCategory());
         }
 
         public JsonResult OnPostCreate(CreateProductCategory category)
@@ -41,7 +43,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
         {
             editCategory = categoryApplication.GetBy(id);
             return Partial("./Edit", editCategory);
-        } 
+        }
 
         public JsonResult OnPostEdit(EditProductCategory category)
         {

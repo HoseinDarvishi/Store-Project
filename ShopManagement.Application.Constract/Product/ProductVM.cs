@@ -12,7 +12,7 @@ namespace ShopManagement.Application.Constract.Product
 
         public string Name { get; set; }
 
-        public double Price { get;set }
+        public double Price { get; set; }
 
         public string Code { get; set; }
 
