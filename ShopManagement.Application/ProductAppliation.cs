@@ -70,6 +70,16 @@ namespace ShopManagement.Application
             return productRepository.GetProducts();
         }
 
+        public void InStock(long id)
+        {
+            productRepository.InStock(id);
+        }
+
+        public void NotInStock(long id)
+        {
+            productRepository.NotInStock(id);
+        }
+
         public List<ProductVM> Search(ProductSearchModel searchModel)
         {
             return productRepository.Search(searchModel);

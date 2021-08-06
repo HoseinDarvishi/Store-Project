@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShopManagement.Application.Constract.Product
+﻿namespace ShopManagement.Application.Constract.Product
 {
     public class ProductVM
     {
@@ -21,5 +17,7 @@ namespace ShopManagement.Application.Constract.Product
         public long CategoryId { get; set; }
 
         public string CreationDate { get; set; }
+
+        public bool IsInStock { get; set; }
     }
 }

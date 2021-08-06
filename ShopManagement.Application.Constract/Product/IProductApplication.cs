@@ -12,5 +12,7 @@ namespace ShopManagement.Application.Constract.Product
         EditProduct GetDetails(long id);
         List<ProductVM> GetProducts();
         List<ProductVM> Search(ProductSearchModel searchModel);
+        void NotInStock(long id);
+        void InStock(long id);
     }
 }

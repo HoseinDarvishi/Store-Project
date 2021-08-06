@@ -47,7 +47,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 CreationDate = x.CreationDate.ToString(),
                 Id = x.Id,
                 Picture = x.Picture,
-                Price = x.Price
+                Price = x.Price,
+                IsInStock = x.IsInStock
             })
             .ToList();
         }
@@ -55,6 +56,18 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
         public Product GetProductWithCategory(long id)
         {
             return context.Products.Find(id);
+        }
+
+        public void InStock(long id)
+        {
+            context.Products.Find(id).InStock();
+            Save();
+        }
+
+        public void NotInStock(long id)
+        {
+            context.Products.Find(id).NoStock();
+            Save();
         }
 
         public List<ProductVM> Search(ProductSearchModel searchModel)
@@ -68,7 +81,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 CreationDate = x.CreationDate.ToString(),
                 Id = x.Id,
                 Picture = x.Picture,
-                Price = x.Price
+                Price = x.Price,
+                IsInStock = x.IsInStock
             });
 
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
