@@ -1,4 +1,5 @@
-﻿using UtilityFreamwork.Application;
+﻿using System.Collections.Generic;
+using UtilityFreamwork.Application;
 
 namespace ShopManagement.Application.Constract.ProductPicture
 {
@@ -15,6 +16,8 @@ namespace ShopManagement.Application.Constract.ProductPicture
         EditProductPicture GetDetail(long id);
 
         ProductPictureVM Get(long id);
+
+        List<ProductPictureVM> Search(ProductPictureSearchModel searchModel);
 
         void Save();
     }

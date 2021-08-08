@@ -40,15 +40,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
         {
             return context.Products.Include(x => x.Category).Select(x => new ProductVM
             {
-                Category = x.Category.Name,
                 Name = x.Name,
-                CategoryId = x.CategoryId,
-                Code = x.Code,
-                CreationDate = x.CreationDate.ToString(),
-                Id = x.Id,
-                Picture = x.Picture,
-                Price = x.Price,
-                IsInStock = x.IsInStock
+                Id = x.Id
             })
             .ToList();
         }

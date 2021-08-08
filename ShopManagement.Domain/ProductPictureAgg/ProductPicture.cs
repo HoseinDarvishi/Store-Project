@@ -29,6 +29,7 @@ namespace ShopManagement.Domain.ProductPictureAgg
             PictureTitle = pictureTitle;
             ProductId = productId;
             IsRemoved = false;
+            CreationDate = DateTime.Now;
         }
 
 

@@ -77,5 +77,10 @@ namespace ShopManagement.Application
         {
             pictureRepository.Save();
         }
+
+        public List<ProductPictureVM> Search(ProductPictureSearchModel searchModel)
+        {
+            return pictureRepository.Search(searchModel);
+        }
     }
 }
