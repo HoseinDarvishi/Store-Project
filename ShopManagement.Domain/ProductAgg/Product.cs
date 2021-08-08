@@ -1,5 +1,7 @@
 ﻿using ShopManagement.Domain.ProductCategoryAgg;
+using ShopManagement.Domain.ProductPictureAgg;
 using System;
+using System.Collections.Generic;
 
 namespace ShopManagement.Domain.ProductAgg
 {
@@ -36,6 +38,8 @@ namespace ShopManagement.Domain.ProductAgg
         public DateTime CreationDate { get; private set; }
 
         public ProductCategory Category { get; private set; }
+
+        public List<ProductPicture> Pictures { get; private set; }
 
 
         public Product(string name, string code, double price, long categoryId,
