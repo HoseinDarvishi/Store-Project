@@ -10,6 +10,7 @@ namespace ShopManagement.Infrastructure.EFCore.Mapping
         public void Configure(EntityTypeBuilder<ProductPicture> b)
         {
             b.ToTable("ProductPictures");
+            b.HasKey(x => x.Id);
 
             b.Property(x => x.Picture).HasMaxLength(700).IsRequired();
             b.Property(x => x.PictureAlt).HasMaxLength(400).IsRequired();
