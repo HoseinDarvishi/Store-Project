@@ -21,7 +21,7 @@ namespace ShopManagement.Application
             if (slideRepository.IsExists(x => x.Picture == slide.Picture && x.Heading == slide.Heading && x.Title == slide.Title && x.Text == slide.Text))
                 return new GenerateResult().Failed("این اسلاید با مشخصات وارد شده قبلا ایجاد شده است");
 
-            slideRepository.Create(new Slide(slide.Picture, slide.PictureAlt, slide.PictureTitle, slide.Heading,slide.Title, slide.Text, slide.BtnText));
+            slideRepository.Create(new Slide(slide.Picture, slide.PictureAlt, slide.PictureTitle, slide.Heading,slide.Title, slide.Text, slide.BtnText , slide.Link));
             slideRepository.Save();
             return new GenerateResult().Succedded();
     

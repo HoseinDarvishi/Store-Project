@@ -21,6 +21,7 @@ namespace ShopManagement.Infrastructure.EFCore.Mapping
             b.Property(x => x.Title).HasMaxLength(255);
             b.Property(x => x.Text).HasMaxLength(500).IsRequired();
             b.Property(x => x.BtnText).HasMaxLength(20).IsRequired();
+            b.Property(x => x.Link).HasMaxLength(1000).IsRequired();
         }
     }
 }

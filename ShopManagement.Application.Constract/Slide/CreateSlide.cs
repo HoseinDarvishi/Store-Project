@@ -23,5 +23,8 @@ namespace ShopManagement.Application.Constract.Slide
 
         [Required(ErrorMessage = "متن دکمه الزامی است")]
         public string BtnText { get; set; }
+
+        [Required(ErrorMessage = "لینک الزامی است")]
+        public string Link { get; set; }
     }
 }

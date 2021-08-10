@@ -1,9 +1,7 @@
 ﻿using ShopManagement.Application.Constract.Slide;
 using ShopManagement.Domain.SlideAgg;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ShopManagement.Infrastructure.EFCore.Repositories
 {
@@ -19,7 +17,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
         public void Edit(EditSlide slide)
         {
             var s = context.Slides.Find(slide.Id);
-            s.Edit(slide.Picture, slide.PictureAlt, slide.PictureTitle, slide.Heading, slide.Title, slide.Text, slide.BtnText);
+            s.Edit(slide.Picture, slide.PictureAlt, slide.PictureTitle, slide.Heading, slide.Title, slide.Text, slide.BtnText ,slide.Link);
         }
 
         public List<SlideVM> GetAll()
@@ -49,7 +47,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 BtnText =x.BtnText,
                 Id = x.Id,
                 PictureAlt = x.PictureAlt,
-                PictureTitle = x.PictureTitle
+                PictureTitle = x.PictureTitle,
+                Link = x.Link
             })
             .ToList();
         }
@@ -66,7 +65,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 BtnText = x.BtnText,
                 Id = x.Id,
                 PictureAlt = x.PictureAlt,
-                PictureTitle = x.PictureTitle
+                PictureTitle = x.PictureTitle,
+                Link = x.Link
             })
                 .FirstOrDefault(x => x.Id == id);
         }
