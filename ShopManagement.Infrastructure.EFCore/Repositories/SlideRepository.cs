@@ -18,9 +18,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
 
         public void Edit(EditSlide slide)
         {
-            var s = Get(slide.Id);
-
-            s.Edit(slide.Picture, slide.PictureAlt, slide.PictureTitle , slide.Heading , slide.Title , slide.Text , slide.BtnText);
+            var s = context.Slides.Find(slide.Id);
+            s.Edit(slide.Picture, slide.PictureAlt, slide.PictureTitle, slide.Heading, slide.Title, slide.Text, slide.BtnText);
         }
 
         public List<SlideVM> GetAll()
@@ -32,7 +31,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 Heading = x.Heading,
                 Picture = x.Picture,
                 Text = x.Text,
-                CreationDate = x.CreationDate.ToString()
+                CreationDate = x.CreationDate.ToString(),
+                IsRemoved = x.IsRemoved
             })
                 .ToList();
         }
@@ -90,7 +90,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                     Text = x.Text,
                     Picture = x.Picture,
                     Title = x.Title,
-                    CreationDate = x.CreationDate.ToString()
+                    CreationDate = x.CreationDate.ToString(),
+                    IsRemoved = x.IsRemoved
                 })
                 .FirstOrDefault(x=>x.Id == id);
         }
