@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using UtilityFreamwork.Application;
 
 namespace ShopManagement.Infrastructure.EFCore.Repositories
 {
@@ -54,7 +55,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
             {
                 Id = x.Id,
                 Picture = x.Picture,
-                CreationDate =x.CreationDate.ToString(),
+                CreationDate =x.CreationDate.ToFarsi(),
                 Product = x.Product.Name
             })
             .FirstOrDefault(x => x.Id == id);
@@ -65,7 +66,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
             var query = context.ProductPictures.Include(x => x.Product).Select(x => new ProductPictureVM
             {
                 Id = x.Id,
-                CreationDate = x.CreationDate.ToString(),
+                CreationDate = x.CreationDate.ToFarsi(),
                 Picture = x.Picture,
                 ProductId = x.ProductId,
                 Product = x.Product.Name,

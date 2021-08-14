@@ -3,6 +3,7 @@ using ShopManagement.Application.Constract.Product;
 using ShopManagement.Domain.ProductAgg;
 using System.Collections.Generic;
 using System.Linq;
+using UtilityFreamwork.Application;
 
 namespace ShopManagement.Infrastructure.EFCore.Repositories
 {
@@ -71,7 +72,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 Name = x.Name,
                 CategoryId = x.CategoryId,
                 Code = x.Code,
-                CreationDate = x.CreationDate.ToString(),
+                CreationDate = x.CreationDate.ToFarsi(),
                 Id = x.Id,
                 Picture = x.Picture,
                 Price = x.Price,

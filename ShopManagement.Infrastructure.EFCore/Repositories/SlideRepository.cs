@@ -2,6 +2,7 @@
 using ShopManagement.Domain.SlideAgg;
 using System.Collections.Generic;
 using System.Linq;
+using UtilityFreamwork.Application;
 
 namespace ShopManagement.Infrastructure.EFCore.Repositories
 {
@@ -29,7 +30,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 Heading = x.Heading,
                 Picture = x.Picture,
                 Text = x.Text,
-                CreationDate = x.CreationDate.ToString(),
+                CreationDate = x.CreationDate.ToFarsi(),
                 IsRemoved = x.IsRemoved
             })
                 .ToList();
@@ -43,7 +44,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 Heading = x.Heading,
                 Picture = x.Picture,
                 Text = x.Text,
-                CreationDate = x.CreationDate.ToString(),
+                CreationDate = x.CreationDate.ToFarsi(),
                 BtnText =x.BtnText,
                 Id = x.Id,
                 PictureAlt = x.PictureAlt,
@@ -61,7 +62,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 Heading = x.Heading,
                 Picture = x.Picture,
                 Text = x.Text,
-                CreationDate = x.CreationDate.ToString(),
+                CreationDate = x.CreationDate.ToFarsi(),
                 BtnText = x.BtnText,
                 Id = x.Id,
                 PictureAlt = x.PictureAlt,
@@ -90,7 +91,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                     Text = x.Text,
                     Picture = x.Picture,
                     Title = x.Title,
-                    CreationDate = x.CreationDate.ToString(),
+                    CreationDate = x.CreationDate.ToFarsi(),
                     IsRemoved = x.IsRemoved
                 })
                 .FirstOrDefault(x=>x.Id == id);

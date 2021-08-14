@@ -1,8 +1,6 @@
 ﻿using ShopManagement.Domain.ProductCategoryAgg;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace ShopManagement.Infrastructure.EFCore.Repositories
 {

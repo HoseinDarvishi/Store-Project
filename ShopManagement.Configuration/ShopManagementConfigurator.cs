@@ -17,7 +17,7 @@ using StoreQuery.Slide;
 
 namespace ShopManagement.Configuration
 {
-    public class ShopManagementBootstrapper
+    public class ShopManagementConfigurator
     {
         public static void Configure(IServiceCollection services , string connectionString)
         {
