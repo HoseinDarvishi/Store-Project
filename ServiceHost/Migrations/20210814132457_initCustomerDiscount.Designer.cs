@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ServiceHost.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(DiscountContext))]
     [Migration("20210814132457_initCustomerDiscount")]
     partial class initCustomerDiscount
     {

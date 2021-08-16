@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ServiceHost.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(DiscountContext))]
     [Migration("20210815092954_update-databasee")]
     partial class updatedatabasee
     {

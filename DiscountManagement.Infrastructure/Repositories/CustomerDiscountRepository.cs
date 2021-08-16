@@ -6,16 +6,16 @@ using System.Globalization;
 using System.Linq;
 using UtilityFreamwork.Application;
 using UtilityFreamwork.Repository;
-using shopContext = ShopManagement.Infrastructure.EFCore.Context;
+using shopContext = ShopManagement.Infrastructure.EFCore.ShopContext;
 
 namespace DiscountManagement.Infrastructure.Repositories
 {
     public class CustomerDiscountRepository : Repository<long, CustomerDiscount>, ICustomerDiscoutRepository
     {
-        private readonly Context context;
+        private readonly DiscountContext context;
         private readonly shopContext _shopContext;
 
-        public CustomerDiscountRepository(Context context , shopContext shopContext) : base(context)
+        public CustomerDiscountRepository(DiscountContext context , shopContext shopContext) : base(context)
         {
             this.context = context;
             _shopContext = shopContext;

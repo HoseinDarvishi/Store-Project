@@ -9,7 +9,7 @@ using ShopManagement.Infrastructure.EFCore;
 
 namespace ServiceHost.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(ShopContext))]
     [Migration("20210808135421_Edit-ProductPictures")]
     partial class EditProductPictures
     {

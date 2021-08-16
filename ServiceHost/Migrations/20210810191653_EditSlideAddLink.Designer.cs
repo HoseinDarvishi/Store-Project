@@ -9,7 +9,7 @@ using ShopManagement.Infrastructure.EFCore;
 
 namespace ServiceHost.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(ShopContext))]
     [Migration("20210810191653_EditSlideAddLink")]
     partial class EditSlideAddLink
     {

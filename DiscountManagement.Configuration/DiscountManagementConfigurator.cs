@@ -1,4 +1,5 @@
 ﻿using DiscountManagement.Application;
+using DiscountManagement.Application.Constracts.ColleagueDiscount;
 using DiscountManagement.Application.Constracts.CustomerDiscount;
 using DiscountManagement.Domain.CustomerDiscountAgg;
 using DiscountManagement.Infrastructure;
@@ -15,7 +16,10 @@ namespace DiscountManagement.Configuration
             services.AddTransient<ICustomerDiscountApplication , CustomerDiscountApplication>();
             services.AddTransient<ICustomerDiscoutRepository, CustomerDiscountRepository>();
 
-            services.AddDbContext<Context>(x => x.UseSqlServer(connectionString , b => b.MigrationsAssembly("ServiceHost")));
+            services.AddTransient<IColleagueDiscountApplication, ColleagueDiscountApplication>();
+            services.AddTransient<IColleagueDiscountRepository, ColleagueDiscountRepository>();
+
+            services.AddDbContext<DiscountContext>(x => x.UseSqlServer(connectionString , b => b.MigrationsAssembly("ServiceHost")));
         }
     }
 }

@@ -8,9 +8,9 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
 {
     public class SlideRepository : GenericRepository<long , Slide> , ISlideRepository
     {
-        private readonly Context context;
+        private readonly ShopContext context;
 
-        public SlideRepository(Context context) : base(context)
+        public SlideRepository(ShopContext context) : base(context)
         {
             this.context = context;
         }

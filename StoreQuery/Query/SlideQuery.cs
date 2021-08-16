@@ -7,9 +7,9 @@ namespace StoreQuery.Query
 {
     public class SlideQuery : ISlideQuery
     {
-        private readonly Context context;
+        private readonly ShopContext context;
 
-        public SlideQuery(Context context)
+        public SlideQuery(ShopContext context)
         {
             this.context = context;
         }

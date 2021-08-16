@@ -1,4 +1,5 @@
-﻿using DiscountManagement.Domain.CustomerDiscountAgg;
+﻿using DiscountManagement.Domain.ColleagueDiscountAgg;
+using DiscountManagement.Domain.CustomerDiscountAgg;
 using DiscountManagement.Infrastructure.Mapping;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,14 +8,15 @@ using System.Text;
 
 namespace DiscountManagement.Infrastructure
 {
-    public class Context : DbContext
+    public class DiscountContext : DbContext
     {
-        public Context(DbContextOptions<Context> options) : base(options)
+        public DiscountContext(DbContextOptions<DiscountContext> options) : base(options)
         {
 
         }
 
         public DbSet<CustomerDiscount> CustomerDiscounts { get; set; }
+        public DbSet<ColleagueDiscount> ColleagueDiscounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

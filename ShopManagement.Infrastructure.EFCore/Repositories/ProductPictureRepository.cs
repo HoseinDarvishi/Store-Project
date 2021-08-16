@@ -11,9 +11,9 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
 {
     public class ProductPictureRepository : GenericRepository<long , ProductPicture> , IProductPictureRepository
     {
-        private readonly Context context;
+        private readonly ShopContext context;
 
-        public ProductPictureRepository(Context context) : base(context)
+        public ProductPictureRepository(ShopContext context) : base(context)
         {
             this.context = context;
         }

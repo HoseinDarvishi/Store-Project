@@ -9,9 +9,9 @@ namespace StoreQuery.Query
 {
     public class ProductCategoryQuery : IProductCategoryQuery
     {
-        private readonly Context context;
+        private readonly ShopContext context;
 
-        public ProductCategoryQuery(Context context)
+        public ProductCategoryQuery(ShopContext context)
         {
             this.context = context;
         }
