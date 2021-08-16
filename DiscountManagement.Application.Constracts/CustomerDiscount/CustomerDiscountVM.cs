@@ -18,6 +18,8 @@ namespace DiscountManagement.Application.Constracts.CustomerDiscount
 
         public string EndDate { get; set; }
 
+        public bool IsActive { get; set; }
+
         public DateTime StartDateEN { get; set; }
 
         public DateTime EndDateEN { get; set; }

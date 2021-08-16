@@ -2,6 +2,7 @@
 using DiscountManagement.Domain.CustomerDiscountAgg;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UtilityFreamwork.Application;
 using UtilityFreamwork.Repository;
@@ -54,7 +55,8 @@ namespace DiscountManagement.Infrastructure.Repositories
                     StartDate = x.StartDate.ToFarsi(),
                     EndDate = x.EndDate.ToFarsi(),
                     StartDateEN = x.StartDate,
-                    EndDateEN = x.EndDate
+                    EndDateEN = x.EndDate,
+                    IsActive = x.IsActive
                 });
 
             if (searchModel.ProductId > 0)
@@ -102,8 +104,8 @@ namespace DiscountManagement.Infrastructure.Repositories
                     ProductId = x.ProductId,
                     DiscountPercent = x.DiscountPercent,
                     Reason = x.Reason,
-                    StartDate = x.StartDate.ToFarsi(),
-                    EndDate = x.EndDate.ToFarsi(),
+                    StartDate = x.StartDate.ToString(CultureInfo.InvariantCulture),
+                    EndDate = x.EndDate.ToString(CultureInfo.InvariantCulture),
                 })
                 .FirstOrDefault(x=>x.Id == id);
         }
