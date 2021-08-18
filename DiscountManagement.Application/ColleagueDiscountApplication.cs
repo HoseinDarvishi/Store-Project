@@ -47,7 +47,7 @@ namespace DiscountManagement.Application
 
         public GenerateResult Edit(EditColleagueDiscount colleagueDiscount)
         {
-            if (!repository.IsExists(x => x.ProductId == colleagueDiscount.Id))
+            if (!repository.IsExists(x => x.Id == colleagueDiscount.Id))
                 return new GenerateResult().Failed("چنین تخفیفی برای همکاران وجود ندارد");
 
             if (repository.IsExists(x => x.ProductId == colleagueDiscount.ProductId && x.Id != colleagueDiscount.Id))

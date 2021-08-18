@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace InventoryManagement.Domain.InventoryAgg
+{
+    public class Inventory
+    {
+        public long Id { get; private set; }
+
+        public long ProductId { get; private set; }
+
+        public double Price { get;private set; }
+
+        public bool InStock { get;private set; }
+
+        public List<InventoryOperation> Operations { get;private set; }
+
+        public DateTime CreationDate { get;private set; }
+
+
+        public Inventory(long productId, double price)
+        {
+            ProductId = productId;
+            Price = price;
+            InStock = false;
+            CreationDate = DateTime.Now;
+        }
+
+        private long CalculateCurrentCount()
+        {
+            var sum = Operations.Where(x => x.IsAdd).Sum(x=>x.Count);
+            var mines = Operations.Where(x => !x.IsAdd).Sum(x => x.Count);
+            return sum - mines;
+        }
+
+
+        public void Increase(long count ,long operatorId , string description)
+        {
+            var currentCount = CalculateCurrentCount() + count;
+            var operation = new InventoryOperation(count , currentCount , true ,operatorId , 0 , Id , description);
+            Operations.Add(operation);
+            InStock = currentCount > 0;
+        }
+
+        public void Reduce(long count , long operatorId , string description , long orderId)
+        {
+            var currentCount = CalculateCurrentCount() - count;
+            var operation = new InventoryOperation(count, currentCount, false, operatorId, orderId, Id, description);
+            Operations.Add(operation);
+            InStock = currentCount > 0;
+        }
+    }
+
+    public class InventoryOperation 
+    {
+        public long Id { get;private set; }
+
+        public long Count { get; private set; }
+
+        public long CurrentCount { get; private set; }
+
+        public bool IsAdd { get; private set; }
+
+        public long OperatorId { get; private set; }
+
+        public long OrderId { get; private set; }
+
+        public long InventoryId { get; private set; }
+
+        public Inventory Inventory { get;private set; }
+
+        public string Description { get; private set; }
+
+        public DateTime OperationDate { get; private set; }
+
+
+        public InventoryOperation(long count, long currentCount, bool isAdd, 
+            long operatorId, long orderId, long inventoryId, string description)
+        {
+            Count = count;
+            CurrentCount = currentCount;
+            IsAdd = isAdd;
+            OperatorId = operatorId;
+            OrderId = orderId;
+            InventoryId = inventoryId;
+            Description = description;
+        }
+    }
+}
