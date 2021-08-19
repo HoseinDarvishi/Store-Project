@@ -117,8 +117,6 @@ namespace InventoryManagement.Infrastructure.EFCore.Repositories
                 query = query.Where(x => x.ProductId == command.ProductId);
 
             if (command.InStock)
-                query = query.Where(x => x.InStock);
-            else if (!command.InStock)
                 query = query.Where(x => !x.InStock);
 
             var invs = query.OrderByDescending(x => x.Id).ToList();
