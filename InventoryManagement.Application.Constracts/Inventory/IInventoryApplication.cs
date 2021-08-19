@@ -16,6 +16,6 @@ namespace InventoryManagement.Application.Constracts.Inventory
         List<EditInventory> GetAllDetails();
 
         List<InventoryVM> Search(InventorySearchModel command);
-        InventoryVM GetBy(long id);
+        InventoryVM GetBy(long productId);
     }
 }

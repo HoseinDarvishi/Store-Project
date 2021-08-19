@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using  inventory = InventoryManagement.Domain.InventoryAgg.Inventory;
 
 namespace InventoryManagement.Application.Constracts.Inventory
 {
-    public interface IInventoryRepository : IRepository<long , inventory>
+    public interface IInventoryRepository : IRepository<long , Domain.InventoryAgg.Inventory>
     {
         void Edit(EditInventory command);
 
@@ -12,9 +11,13 @@ namespace InventoryManagement.Application.Constracts.Inventory
         void Reduce(ReduceInventory command);
 
         EditInventory GetDetail(long id);
+        List<EditInventory> GetAllDetails();
 
-        InventoryVM GetBy(long id);
+        InventoryVM GetByProductId(long productId);
+        InventoryVM GetById(long id);
 
-        List<EditInventory> Search(InventorySearchModel command);
+        InventoryManagement.Domain.InventoryAgg.Inventory GetbyProductId(long productId);
+
+        List<InventoryVM> Search(InventorySearchModel command);
     }
 }

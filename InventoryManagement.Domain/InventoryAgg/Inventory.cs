@@ -27,7 +27,13 @@ namespace InventoryManagement.Domain.InventoryAgg
             CreationDate = DateTime.Now;
         }
 
-        private long CalculateCurrentCount()
+        public void Edit(long productId, double price)
+        {
+            ProductId = productId;
+            Price = price;
+        }
+
+        public long CalculateCurrentCount()
         {
             var sum = Operations.Where(x => x.IsAdd).Sum(x=>x.Count);
             var mines = Operations.Where(x => !x.IsAdd).Sum(x => x.Count);
@@ -49,42 +55,6 @@ namespace InventoryManagement.Domain.InventoryAgg
             var operation = new InventoryOperation(count, currentCount, false, operatorId, orderId, Id, description);
             Operations.Add(operation);
             InStock = currentCount > 0;
-        }
-    }
-
-    public class InventoryOperation 
-    {
-        public long Id { get;private set; }
-
-        public long Count { get; private set; }
-
-        public long CurrentCount { get; private set; }
-
-        public bool IsAdd { get; private set; }
-
-        public long OperatorId { get; private set; }
-
-        public long OrderId { get; private set; }
-
-        public long InventoryId { get; private set; }
-
-        public Inventory Inventory { get;private set; }
-
-        public string Description { get; private set; }
-
-        public DateTime OperationDate { get; private set; }
-
-
-        public InventoryOperation(long count, long currentCount, bool isAdd, 
-            long operatorId, long orderId, long inventoryId, string description)
-        {
-            Count = count;
-            CurrentCount = currentCount;
-            IsAdd = isAdd;
-            OperatorId = operatorId;
-            OrderId = orderId;
-            InventoryId = inventoryId;
-            Description = description;
         }
     }
 }

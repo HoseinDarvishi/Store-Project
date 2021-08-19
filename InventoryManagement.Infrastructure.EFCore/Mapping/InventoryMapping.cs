@@ -1,9 +1,6 @@
 ﻿using InventoryManagement.Domain.InventoryAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace InventoryManagement.Infrastructure.EFCore.Mapping
 {
@@ -11,7 +8,16 @@ namespace InventoryManagement.Infrastructure.EFCore.Mapping
     {
         public void Configure(EntityTypeBuilder<Inventory> b)
         {
-            throw new NotImplementedException();
+            b.ToTable("Inventory");
+            b.HasKey(x => x.Id);
+
+            b.OwnsMany(x => x.Operations, operation =>
+            {
+                operation.ToTable("InventoryOperations");
+                operation.HasKey(x => x.Id);
+                operation.Property(x => x.Description).HasMaxLength(1000);
+                operation.WithOwner(x => x.Inventory).HasForeignKey(x => x.InventoryId);
+            });
         }
     }
 }

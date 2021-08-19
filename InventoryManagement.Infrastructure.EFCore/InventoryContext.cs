@@ -12,7 +12,9 @@ namespace InventoryManagement.Infrastructure.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(InventoryMapping).Assembly);
+            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(InventoryMapping).Assembly);
+
+            modelBuilder.ApplyConfiguration(new InventoryMapping());
             base.OnModelCreating(modelBuilder);
         }
     }
