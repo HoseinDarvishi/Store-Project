@@ -17,5 +17,7 @@ namespace InventoryManagement.Application.Constracts.Inventory
 
         List<InventoryVM> Search(InventorySearchModel command);
         InventoryVM GetBy(long productId);
+
+        List<InventoryOperationVM> GetOperations(long id);
     }
 }

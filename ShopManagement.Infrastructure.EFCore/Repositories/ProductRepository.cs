@@ -30,7 +30,6 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 Picture = x.Picture,
                 PictureAlt = x.PictureAlt,
                 PictureTitle = x.PictureTitle,
-                Price = x.Price,
                 ShortDescription = x.ShortDescription,
                 Slug = x.Slug
             })
@@ -52,18 +51,6 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
             return context.Products.Find(id);
         }
 
-        public void InStock(long id)
-        {
-            context.Products.Find(id).InStock();
-            Save();
-        }
-
-        public void NotInStock(long id)
-        {
-            context.Products.Find(id).NoStock();
-            Save();
-        }
-
         public List<ProductVM> Search(ProductSearchModel searchModel)
         {
             var query = context.Products.Include(x => x.Category).Select(x => new ProductVM
@@ -75,8 +62,6 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 CreationDate = x.CreationDate.ToFarsi(),
                 Id = x.Id,
                 Picture = x.Picture,
-                Price = x.Price,
-                IsInStock = x.IsInStock
             });
 
             if (!string.IsNullOrWhiteSpace(searchModel.Name))

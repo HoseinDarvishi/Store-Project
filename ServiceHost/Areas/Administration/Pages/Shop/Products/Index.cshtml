@@ -80,25 +80,12 @@
                                         </td>
                                         <td>@product.Name</td>
                                         <td>@product.Code</td>
-                                        <td>@product.Price</td>
                                         <td>@product.Category</td>
                                         <td>@product.CreationDate</td>
                                         <td>
                                             <a href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = product.Id})" class="btn btn-warning pull-right mx-2">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
-                                            @if (product.IsInStock)
-                                            {
-                                                <a href="@Url.Page("./Index", "NotInStock" ,new {id = product.Id})" class="btn btn-danger pull-left mx-2">
-                                                    <i class="fa fa-edit"></i> اتمام موجودی
-                                                </a>
-                                            }
-                                            else
-                                            {
-                                                <a href="@Url.Page("./Index", "InStock" ,new {id = product.Id})" class="btn btn-success pull-left mx-2">
-                                                    <i class="fa fa-edit"></i> موجود در انبار
-                                                </a>
-                                            }
                                         </td>
                                     </tr>
                                 }

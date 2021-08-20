@@ -22,7 +22,6 @@ namespace ShopManagement.Infrastructure.EFCore.Mapping
             b.Property(x => x.PictureAlt).HasMaxLength(255);
             b.Property(x => x.PictureTitle).HasMaxLength(200);
             b.Property(x => x.ShortDescription).HasMaxLength(100).IsRequired();
-            b.Property(x => x.Price).IsRequired();
             b.Property(x => x.Keywords).HasMaxLength(255).IsRequired();
             b.Property(x => x.MetaDescription).HasMaxLength(500).IsRequired();
 

@@ -13,11 +13,7 @@ namespace ShopManagement.Domain.ProductAgg
 
         public string Code { get; private set; }
 
-        public double Price { get; private set; }
-
         public long CategoryId { get; private set; }
-
-        public bool IsInStock { get; private set; }
 
         public string Picture { get; private set; }
 
@@ -42,13 +38,12 @@ namespace ShopManagement.Domain.ProductAgg
         public List<ProductPicture> Pictures { get; private set; }
 
 
-        public Product(string name, string code, double price, long categoryId,
+        public Product(string name, string code, long categoryId,
             string picture, string pictureAlt, string pictureTitle,
             string shortDescription, string description , string slug , string keywords , string metaDescription )
         {
             Name = name;
             Code = code;
-            Price = price;
             CategoryId = categoryId;
             Picture = picture;
             PictureAlt = pictureAlt;
@@ -58,18 +53,16 @@ namespace ShopManagement.Domain.ProductAgg
             Slug = slug;
             Keywords = keywords;
             MetaDescription = metaDescription;
-            IsInStock = true;
             CreationDate = DateTime.Now;
         }
 
 
-        public void Edit(string name, string code, double price, long categoryId,
+        public void Edit(string name, string code, long categoryId,
                          string picture, string pictureAlt, string pictureTitle,
                          string shortDescription, string description, string keywords, string metaDescription , string slug)
         {
             Name = name;
             Code = code;
-            Price = price;
             CategoryId = categoryId;
             Picture = picture;
             PictureAlt = pictureAlt;
@@ -79,16 +72,6 @@ namespace ShopManagement.Domain.ProductAgg
             Keywords = keywords;
             MetaDescription = metaDescription;
             Slug = slug;
-        }
-
-        public void InStock()
-        {
-            IsInStock = true;
-        }
-
-        public void NoStock()
-        {
-            IsInStock = false;
         }
     }
 }

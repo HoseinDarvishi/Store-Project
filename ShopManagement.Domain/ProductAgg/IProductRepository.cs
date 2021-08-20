@@ -9,7 +9,5 @@ namespace ShopManagement.Domain.ProductAgg
         Product GetProductWithCategory(long id);
         List<ProductVM> GetProducts();
         List<ProductVM> Search(ProductSearchModel searchModel);
-        void InStock(long id);
-        void NotInStock(long id);
     }
 }

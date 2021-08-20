@@ -34,14 +34,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="@Model.Price" class="control-label">قیمت</label>
-                    <input type="text" class="form-control" asp-for="@Model.Price">
-                    <span asp-validation-for="@Model.Price" class="error"></span>
-                </div>
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label asp-for="@Model.CategoryId" class="control-label">گروه محصولی</label>
                     <select type="text" class="form-control" asp-items='new SelectList(Model.categories , "Id" , "Name")' asp-for="@Model.CategoryId">

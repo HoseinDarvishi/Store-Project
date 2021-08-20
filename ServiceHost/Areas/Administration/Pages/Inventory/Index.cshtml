@@ -73,6 +73,7 @@
                                         <td>@inv.Product</td>
                                         <td>@inv.Price</td>
                                         <td>@inv.Count</td>
+                                        <td>@inv.CreationDate</td>
                                         <td>
                                             <a href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = inv.Id})" class="btn btn-warning mx-1">
                                                 <i class="fa fa-edit"></i> ویرایش
@@ -82,6 +83,9 @@
                                             </a>
                                             <a href="#showmodal=@Url.Page("./Index", "Reduce" ,new {id = inv.Id})" class="btn btn-danger mx-1">
                                                 <i class="fa fa-minus"></i> کاهش
+                                            </a>
+                                            <a href="#showmodal=@Url.Page("./Index", "Log" ,new {id = inv.Id})" class="btn btn-primary mx-1">
+                                                <i class="fa fa-recycle"></i> گردشهای انبار
                                             </a>
                                         </td>
                                     </tr>

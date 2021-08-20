@@ -97,5 +97,10 @@ namespace InventoryManagement.Application
         {
             return _inventoryRepository.Search(command);
         }
+
+        public List<InventoryOperationVM> GetOperations(long id)
+        {
+            return _inventoryRepository.GetOperations(id);
+        }
     }
 }

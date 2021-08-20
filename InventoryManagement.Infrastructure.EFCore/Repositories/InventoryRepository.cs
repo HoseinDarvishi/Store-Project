@@ -3,6 +3,7 @@ using InventoryManagement.Domain.InventoryAgg;
 using ShopManagement.Infrastructure.EFCore;
 using System.Collections.Generic;
 using System.Linq;
+using UtilityFreamwork.Application;
 
 namespace InventoryManagement.Infrastructure.EFCore.Repositories
 {
@@ -35,7 +36,8 @@ namespace InventoryManagement.Infrastructure.EFCore.Repositories
                 ProductId = x.ProductId,
                 InStock = x.InStock,
                 Count = x.CalculateCurrentCount(),
-                Product = _shopContext.Products.FirstOrDefault(x => x.Id == productId).Name
+                Product = _shopContext.Products.FirstOrDefault(x => x.Id == productId).Name,
+                CreationDate = x.CreationDate.ToFarsi()
             })
             .FirstOrDefault(x => x.ProductId == productId);
         }
@@ -50,6 +52,7 @@ namespace InventoryManagement.Infrastructure.EFCore.Repositories
                 ProductId = x.ProductId,
                 InStock = x.InStock,
                 Count = x.CalculateCurrentCount(),
+                CreationDate = x.CreationDate.ToFarsi()
             })
             .FirstOrDefault(x => x.Id == id);
             inv.Product = pros.FirstOrDefault(x => x.Id == inv.ProductId)?.Name;
@@ -110,7 +113,8 @@ namespace InventoryManagement.Infrastructure.EFCore.Repositories
                 Price = x.Price,
                 InStock = x.InStock,
                 ProductId = x.ProductId,
-                Count = x.CalculateCurrentCount()
+                Count = x.CalculateCurrentCount(),
+                CreationDate = x.CreationDate.ToFarsi()
             });
 
             if (command.ProductId > 0)
@@ -125,6 +129,24 @@ namespace InventoryManagement.Infrastructure.EFCore.Repositories
                 inv.Product = pros.FirstOrDefault(x => x.Id == inv.ProductId)?.Name);
 
             return invs;
+        }
+
+        public List<InventoryOperationVM> GetOperations(long id)
+        {
+            var inv = _inventoryContext.Inventories.FirstOrDefault(x => x.Id == id);
+
+            return inv.Operations.Select(x => new InventoryOperationVM
+            {
+                Id = x.Id,
+                Count = x.Count,
+                CurrentCount = x.CurrentCount,
+                IsAdd = x.IsAdd,
+                OperationDate = x.OperationDate.ToFarsi(),
+                Description = x.Description,
+                OperatorId = x.OperatorId,
+                OrderId = x.OrderId,
+                Operator = "مدیر سیستم"
+            }).OrderByDescending(x=>x.Id).ToList();
         }
     }
 }

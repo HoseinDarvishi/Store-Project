@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -58,18 +55,6 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
         {
             var result = productApplication.Edit(product);
             return new JsonResult(result);
-        }
-
-        public IActionResult OnGetNotInStock(long id)
-        {
-            productApplication.NotInStock(id);
-            return RedirectToPage("./Index");
-        }
-
-        public IActionResult OnGetInStock(long id)
-        {
-            productApplication.InStock(id);
-            return RedirectToPage("./Index");
         }
     }
 }

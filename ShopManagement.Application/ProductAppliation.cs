@@ -28,7 +28,7 @@ namespace ShopManagement.Application
 
             var slug = command.Slug.Slugify();
 
-            var pro = new Product(command.Name, command.Code, command.Price, command.CategoryId, command.Picture, command.PictureAlt, command.PictureTitle, command.ShortDescription, command.Description, slug, command.Keywords, command.MetaDescription);
+            var pro = new Product(command.Name, command.Code, command.CategoryId, command.Picture, command.PictureAlt, command.PictureTitle, command.ShortDescription, command.Description, slug, command.Keywords, command.MetaDescription);
 
             productRepository.Create(pro);
             productRepository.Save();
@@ -54,7 +54,7 @@ namespace ShopManagement.Application
             var slug = command.Slug.Slugify();
             var pro = productRepository.GetProductWithCategory(command.Id);
 
-            pro.Edit(command.Name,command.Code,command.Price,command.CategoryId,command.Picture,command.PictureAlt,command.PictureTitle,command.ShortDescription,command.Description,command.Keywords,command.MetaDescription,slug);
+            pro.Edit(command.Name,command.Code,command.CategoryId,command.Picture,command.PictureAlt,command.PictureTitle,command.ShortDescription,command.Description,command.Keywords,command.MetaDescription,slug);
 
             productRepository.Save();
             return result.Succedded();
@@ -68,16 +68,6 @@ namespace ShopManagement.Application
         public List<ProductVM> GetProducts()
         {
             return productRepository.GetProducts();
-        }
-
-        public void InStock(long id)
-        {
-            productRepository.InStock(id);
-        }
-
-        public void NotInStock(long id)
-        {
-            productRepository.NotInStock(id);
         }
 
         public List<ProductVM> Search(ProductSearchModel searchModel)

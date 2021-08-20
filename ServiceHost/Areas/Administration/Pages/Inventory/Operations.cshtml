@@ -1,0 +1,52 @@
+﻿@model List<InventoryManagement.Application.Constracts.Inventory.InventoryOperationVM>
+@{
+
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">لیست گردشهای انبار</h4>
+</div>
+
+
+    <div class="modal-body">
+        <div class="row">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>تعداد</th>
+                        <th>موجودی</th>
+                        <th>عملیات</th>
+                        <th>عملگر</th>
+                        <th>تاریخ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var oper in Model)
+                    {
+                        <tr class="text-white @(oper.IsAdd ? "bg-success" : "bg-danger")">
+                            <td>@oper.Id</td>
+                            <td>@oper.Count</td>
+                            <td>@oper.CurrentCount</td>
+                            <td>
+                                @if (oper.IsAdd)
+                                {
+                                    <span>افزایش</span>
+                                }
+                                else
+                                {
+                                    <span>کاهش</span>
+                                }
+                            </td>
+                            <td>@oper.Operator</td>
+                            <td>@oper.OperationDate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+ 
+
+

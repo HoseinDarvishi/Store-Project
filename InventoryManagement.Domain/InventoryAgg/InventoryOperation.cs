@@ -39,6 +39,7 @@ namespace InventoryManagement.Domain.InventoryAgg
             OrderId = orderId;
             InventoryId = inventoryId;
             Description = description;
+            OperationDate = DateTime.Now;
         }
     }
 }

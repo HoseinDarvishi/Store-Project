@@ -13,6 +13,8 @@
         public double Price { get;  set; }
 
         public bool InStock { get;  set; }
+
+        public string CreationDate { get; set; }
     }
 
 }

@@ -15,9 +15,6 @@ namespace ShopManagement.Application.Constract.Product
         [Required(ErrorMessage = "این مقدار الزامی است")]
         public string Code { get;  set; }
 
-        [Range(200,1000000000000000,ErrorMessage = "این مقدار الزامی است")]
-        public double Price { get;  set; }
-
         [Range(1,1000000,ErrorMessage = "این مقدار الزامی است")]
         public long CategoryId { get;  set; }
 

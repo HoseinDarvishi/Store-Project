@@ -85,5 +85,11 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
             var res = _inventoryApplication.Reduce(reduce);
             return new JsonResult(res);
         }
+
+        public IActionResult OnGetLog(long id)
+        {
+            var operations = _inventoryApplication.GetOperations(id);
+            return Partial("Operations", operations);
+        }
     }
 }
