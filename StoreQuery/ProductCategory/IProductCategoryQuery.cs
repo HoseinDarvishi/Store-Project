@@ -5,5 +5,6 @@ namespace StoreQuery.ProductCategory
     public interface IProductCategoryQuery
     {
         List<ProductCategoryQM> GetCategories();
+        List<ProductCategoryQM> GetCategoriesWithProducts();
     }
 }

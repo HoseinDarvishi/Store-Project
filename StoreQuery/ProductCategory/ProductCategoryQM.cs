@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StoreQuery.Product;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,5 +13,6 @@ namespace StoreQuery.ProductCategory
         public string PictureAlt { get; set; }
         public string PictureTitle { get; set; }
         public string Slug { get; set; }
+        public List<ProductQM> Products { get; set; }
     }
 }
