@@ -44,6 +44,7 @@ namespace StoreQuery.Query
         {
             var invs = invContext.Inventories.Select(x => new { x.ProductId, x.Price }).ToList();
             var discounts = disContext.CustomerDiscounts.Where(x => x.IsActive).Select(x => new { x.ProductId, x.DiscountPercent }).ToList();
+
             var categories = context.ProductCategories
                 .Include(x => x.Products)
                 .ThenInclude(x => x.Category)
@@ -55,7 +56,7 @@ namespace StoreQuery.Query
                    PictureTitle = x.PictureTitle,
                    PictureAlt = x.PictureAlt,
                    Slug = x.Slug,
-                   Products = MapProducts(x.Products)
+                   Products = MapProducts(x.Products),
                 })
                 .ToList();
 
@@ -63,7 +64,22 @@ namespace StoreQuery.Query
             {
                 foreach (var product in category.Products)
                 {
-                    product.Price = invs.FirstOrDefault(x => x.ProductId == product.Id)?.Price.ToMoney();
+
+                    var inv = invs.FirstOrDefault(x => x.ProductId == product.Id);
+                    if (inv != null)
+                    {
+                        product.Price = inv.Price;
+                        product.PriceString = inv.Price.ToMoney();
+                    }
+
+                    var disc = discounts.FirstOrDefault(x => x.ProductId == product.Id);
+                    if (disc != null)
+                    {
+                        product.Discount = disc.DiscountPercent;
+                        var discountw = (product.Price * product.Discount) / 100;
+                        product.PriceWithDiscount = (product.Price - discountw).ToMoney();
+                        product.HasDiscount = product.Discount > 0;
+                    }
                 }
             }
 
