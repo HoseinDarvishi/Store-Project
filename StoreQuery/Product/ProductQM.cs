@@ -19,6 +19,8 @@ namespace StoreQuery.Product
 
         public int Discount { get; set; }
 
+        public string EndDate { get; set; }
+
         public string PriceWithDiscount { get; set; }
 
         public string Slug { get; set; }

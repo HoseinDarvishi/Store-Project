@@ -6,5 +6,6 @@ namespace StoreQuery.ProductCategory
     {
         List<ProductCategoryQM> GetCategories();
         List<ProductCategoryQM> GetCategoriesWithProducts();
+        ProductCategoryQM GetCategoryWithProducts(string slug);
     }
 }
