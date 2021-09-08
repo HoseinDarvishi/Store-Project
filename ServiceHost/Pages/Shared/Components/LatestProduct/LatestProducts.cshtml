@@ -52,14 +52,14 @@
                                                 }
                                                 <span class="new">New</span>
                                             </div>
-                                            <a href="single-product.html">
+                                            <a asp-page="/Product" asp-route-id="@Model[i].Slug">
                                                 <img src="@Model[i].Picture" class="img-fluid" alt="@Model[i].PictureAlt" title="@Model[i].PictureTitle">
                                             </a>
 
                                         </div>
                                         <div class="single-grid-product__content">
                                             <div class="single-grid-product__category-rating">
-                                                <span class="category"><a href="shop-left-sidebar.html">@Model[i].Category</a></span>
+                                                <span class="category"><a asp-page="/ProductCategory" asp-route-id="@Model[i].CategorySlug">@Model[i].Category</a></span>
                                                 <span class="rating">
                                                     <i class="ion-android-star active"></i>
                                                     <i class="ion-android-star active"></i>
@@ -70,7 +70,7 @@
                                             </div>
 
                                             <h3 class="single-grid-product__title">
-                                                <a href="single-product.html">
+                                                <a asp-page="/Product" asp-route-id="@Model[i].Slug">
                                                     @Model[i].Name
                                                 </a>
                                             </h3>

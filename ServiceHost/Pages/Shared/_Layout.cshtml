@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lampshapde Store</title>
+    <title>@ViewData["Title"]</title>
 
     @RenderSection("Styles", false)
 
@@ -42,8 +42,8 @@
         <!--=======  search form  =======-->
 
         <div class="search-form">
-            <form action="#">
-                <input type="search" placeholder="Search entire store here ...">
+            <form method="get" asp-page="/Search">
+                <input type="search" name="value" id="value" placeholder="جستجو کنید ...">
                 <button type="submit">
                     <i class="ion-android-search"></i>
                 </button>

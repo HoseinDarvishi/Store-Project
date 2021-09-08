@@ -38,7 +38,8 @@ namespace StoreQuery.Query
                     PictureAlt = x.PictureAlt,
                     PictureTitle = x.PictureTitle,
                     ShortDescription = x.ShortDescription,
-                    Slug = x.Slug
+                    Slug = x.Slug,
+                    CategorySlug = x.Category.Slug
                 })
                 .OrderByDescending(x=>x.Id)
                 .ToList();
@@ -63,6 +64,110 @@ namespace StoreQuery.Query
             }
 
             return products;
+        }
+
+        public List<ProductQM> Search(string value)
+        {
+            var discounts = disContext.CustomerDiscounts.Where(x=>x.IsActive).Select(x => new { x.ProductId, x.DiscountPercent,x.EndDate });
+            var invs = invContext.Inventories.Select(x => new { x.ProductId, x.Price }).ToList();
+
+            var query = context.Products
+                .Include(x => x.Category)
+                .Select(x => new ProductQM 
+                {
+                    Id = x.Id,
+                    Category = x.Category.Name,
+                    Name = x.Name,
+                    ShortDescription = x.ShortDescription,
+                    Slug = x.Slug,
+                    Picture = x.Picture,
+                    PictureAlt = x.PictureAlt,
+                    PictureTitle = x.PictureTitle,
+                    CategorySlug = x.Category.Slug
+                })
+                .AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(value))
+                query = query.Where(x => x.Name.Contains(value) || x.ShortDescription.Contains(value));
+
+            var products = query.OrderByDescending(x => x.Id).ToList();
+
+            foreach (var product in products)
+            {
+                var inv = invs.FirstOrDefault(x => x.ProductId == product.Id);
+                if (inv != null)
+                {
+                    product.Price = inv.Price;
+                    product.PriceString = inv.Price.ToMoney();
+                }
+
+                var disc = discounts.FirstOrDefault(x => x.ProductId == product.Id);
+                if (disc != null)
+                {
+                    product.Discount = disc.DiscountPercent;
+                    var discountw = (product.Price * product.Discount) / 100;
+                    product.EndDate = disc.EndDate.ToDiscountFormat();
+                    product.PriceWithDiscount = (product.Price - discountw).ToMoney();
+                    product.HasDiscount = product.Discount > 0;
+                }
+            }
+
+            return products;
+        }
+
+        public ProductQM GetProduct(string slug)
+        {
+            var discounts = disContext.CustomerDiscounts.Where(x => x.IsActive).Select(x => new { x.ProductId, x.DiscountPercent, x.EndDate });
+            var invs = invContext.Inventories.Select(x => new { x.ProductId, x.Price }).ToList();
+
+            var product = context.Products
+                .Include(x => x.Category)
+                .Select(x => new ProductQM 
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Code = x.Code,
+                    Picture = x.Picture,
+                    PictureAlt = x.PictureAlt,
+                    PictureTitle = x.PictureTitle,
+                    Slug = x.Slug,
+                    ShortDescription = x.ShortDescription,
+                    Category = x.Category.Name,
+                    CategorySlug = x.Category.Slug,
+                    Keywords = x.Keywords,
+                    pictures = x.Pictures
+                })
+                .FirstOrDefault(x => x.Slug == slug);
+
+            if (product == null)
+            {
+                return new ProductQM();
+            }
+
+            var pics = context.ProductPictures.Where(x => x.ProductId == product.Id).ToList();
+            if (pics != null)
+            {
+                product.pictures = pics;
+            }
+
+            var inv = invs.FirstOrDefault(x => x.ProductId == product.Id);
+            if (inv != null)
+            {
+                product.Price = inv.Price;
+                product.PriceString = inv.Price.ToMoney();
+            }
+
+            var disc = discounts.FirstOrDefault(x => x.ProductId == product.Id);
+            if (disc != null)
+            {
+                product.Discount = disc.DiscountPercent;
+                var discountw = (product.Price * product.Discount) / 100;
+                product.EndDate = disc.EndDate.ToDiscountFormat();
+                product.PriceWithDiscount = (product.Price - discountw).ToMoney();
+                product.HasDiscount = product.Discount > 0;
+            }
+
+            return product;
         }
     }
 }

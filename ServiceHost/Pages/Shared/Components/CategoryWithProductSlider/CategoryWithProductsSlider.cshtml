@@ -28,7 +28,7 @@
                             @foreach (var category in Model)
                             {
                                 <a class="nav-item nav-link @(Model.First() == category ? "active" : "")" id="product-tab-@category.Id" data-toggle="tab"
-                                   href="#product-series-@category.Id" role="tab" aria-selected="true">@category.Name</a>
+                                   asp-page="/ProductCategory" asp-route-id="@category.Slug" role="tab" aria-selected="true">@category.Name</a>
                             }
 
                         </div>
@@ -75,7 +75,7 @@
                                                                 <span class="sale">-@product.Discount%</span>
                                                             </div>
                                                         }
-                                                        <a href="single-product.html">
+                                                        <a asp-page="/Product" asp-route-id="@product.Slug">
                                                             <img src="@product.Picture" class="img-fluid" title="@product.PictureTitle" alt="@product.PictureAlt">
                                                         </a>
 
@@ -83,7 +83,7 @@
                                                     <div class="single-grid-product__content">
                                                         <div class="single-grid-product__category-rating">
                                                             <span class="category">
-                                                                <a href="shop-left-sidebar.html">@product.Category</a>
+                                                                <a asp-page="/ProductCategory" asp-route-id="@category.Slug">@product.Category</a>
                                                             </span>
                                                             <span class="rating">
                                                                 <i class="ion-android-star active"></i>
@@ -95,7 +95,7 @@
                                                         </div>
 
                                                         <h3 class="single-grid-product__title">
-                                                            <a href="single-product.html">
+                                                            <a asp-page="/Product" asp-route-id="@product.Slug">
                                                                 @product.Name
                                                             </a>
                                                         </h3>
