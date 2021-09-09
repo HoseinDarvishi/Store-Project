@@ -14,6 +14,13 @@ namespace ShopManagement.Application
             this.commentRepository = commentRepository;
         }
 
+        public GenerateResult Add(CreateComment comment)
+        {
+            commentRepository.Create(new Comment(comment.Name, comment.Email, comment.Message, comment.ProductId));
+            commentRepository.Save();
+            return new GenerateResult().Succedded();
+        }
+
         public GenerateResult InPublish(long id)
         {
             var comment = commentRepository.Get(id);
@@ -24,6 +31,7 @@ namespace ShopManagement.Application
             }
 
             comment.Cancel();
+            commentRepository.Save();
             return new GenerateResult().Succedded();
         }
 
@@ -37,6 +45,7 @@ namespace ShopManagement.Application
             }
 
             comment.Publish();
+            commentRepository.Save();
             return new GenerateResult().Succedded();
         }
 

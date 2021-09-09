@@ -1,4 +1,6 @@
-﻿namespace ShopManagement.Application.Constract.Comment
+﻿using UtilityFreamwork.Application;
+
+namespace ShopManagement.Application.Constract.Comment
 {
     public class CommentVM
     {
@@ -15,5 +17,7 @@
         public string CreationDate { get; set; }
 
         public string Product { get; set; }
+
+        public StatusComment StatusComment { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ShopManagement.Domain.ProductAgg;
 using System;
+using UtilityFreamwork.Application;
 
 namespace ShopManagement.Domain.CommentAgg
 {
@@ -19,7 +20,7 @@ namespace ShopManagement.Domain.CommentAgg
 
         public Product Prodcut { get;private set; }
 
-        public bool IsPublished { get; private set; }
+        public StatusComment Status { get; private set; }
 
 
 
@@ -30,19 +31,19 @@ namespace ShopManagement.Domain.CommentAgg
             Message = message;
             ProductId = productId;
             CreationDate = DateTime.Now;
-            IsPublished = false;
+            Status = StatusComment.Wait;
         }
 
 
         public void Cancel()
         {
-            IsPublished = false;
+            Status = StatusComment.Canceled;
         }
         
 
         public void Publish()
         {
-            IsPublished = true;
+            Status = StatusComment.Confirmed;
         }
     }
 }

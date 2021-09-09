@@ -5,10 +5,12 @@ namespace ShopManagement.Application.Constract.Comment
 {
     public interface ICommentApplication
     {
-        List<CommentVM> Search(CommentSearchModel searchModel);
-
+        GenerateResult Add(CreateComment comment);
+    
         GenerateResult Publish(long id);
 
         GenerateResult InPublish(long id);
+
+        List<CommentVM> Search(CommentSearchModel searchModel);
     }
 }

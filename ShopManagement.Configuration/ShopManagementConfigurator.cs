@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ShopManagement.Application;
+using ShopManagement.Application.Constract.Comment;
 using ShopManagement.Application.Constract.Product;
 using ShopManagement.Application.Constract.ProductCategory;
 using ShopManagement.Application.Constract.ProductPicture;
 using ShopManagement.Application.Constract.Slide;
+using ShopManagement.Domain.CommentAgg;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
@@ -33,6 +35,9 @@ namespace ShopManagement.Configuration
 
             services.AddTransient<ISlideRepository, SlideRepository>();
             services.AddTransient<ISlideApplication, SlideApplication>();
+
+            services.AddTransient<ICommentApplication, CommentApplication>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
 
             //Query
             services.AddTransient<ISlideQuery, SlideQuery>();

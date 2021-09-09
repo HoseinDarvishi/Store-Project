@@ -29,7 +29,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                     Message = x.Message,
                     CreationDate = x.CreationDate.ToFarsi(),
                     ProductId = x.ProductId,
-                    Product = x.Prodcut.Name
+                    Product = x.Prodcut.Name,
+                    StatusComment = x.Status
                 }).AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
@@ -42,7 +43,12 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 query = query.Where(x => x.Email.Contains(searchModel.Email)).AsNoTracking();
             }
 
-            var comments = query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
+            if (searchModel.StatusComment > 0)
+            {
+                query = query.Where(x => x.StatusComment == searchModel.StatusComment).AsNoTracking();
+            }
+
+            var comments = query.OrderByDescending(x => x.Id).ToList();
 
             return comments;
         }
