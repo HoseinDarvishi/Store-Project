@@ -1,5 +1,4 @@
-﻿using ShopManagement.Domain.ProductPictureAgg;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace StoreQuery.Product
 {
@@ -13,7 +12,7 @@ namespace StoreQuery.Product
 
         public string Picture { get; set; }
 
-        public List<ProductPicture> pictures { get; set; }
+        public List<ProductPictureQM> pictures { get; set; }
 
         public string PictureAlt { get; set; }
 
@@ -42,5 +41,18 @@ namespace StoreQuery.Product
         public string CategorySlug { get; set; }
 
         public bool HasDiscount { get; set; }
+    }
+
+    public class ProductPictureQM
+    {
+        public string Picture { get; set; }
+
+        public string PictureAlt { get;set; }
+
+        public string PictureTitle { get; set; }
+
+        public long ProductId { get; set; }
+
+        public bool IsRemoved { get; set; }
     }
 }

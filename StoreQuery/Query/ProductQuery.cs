@@ -1,6 +1,7 @@
 ﻿using DiscountManagement.Infrastructure;
 using InventoryManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
+using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Infrastructure.EFCore;
 using StoreQuery.Product;
 using System.Collections.Generic;
@@ -122,6 +123,7 @@ namespace StoreQuery.Query
 
             var product = context.Products
                 .Include(x => x.Category)
+                .Include(x=>x.Pictures)
                 .Select(x => new ProductQM 
                 {
                     Id = x.Id,
@@ -135,7 +137,7 @@ namespace StoreQuery.Query
                     Category = x.Category.Name,
                     CategorySlug = x.Category.Slug,
                     Keywords = x.Keywords,
-                    pictures = x.Pictures
+                    pictures = PictureMapping(x.Pictures)
                 })
                 .FirstOrDefault(x => x.Slug == slug);
 
@@ -144,11 +146,6 @@ namespace StoreQuery.Query
                 return new ProductQM();
             }
 
-            var pics = context.ProductPictures.Where(x => x.ProductId == product.Id).ToList();
-            if (pics != null)
-            {
-                product.pictures = pics;
-            }
 
             var inv = invs.FirstOrDefault(x => x.ProductId == product.Id);
             if (inv != null)
@@ -168,6 +165,20 @@ namespace StoreQuery.Query
             }
 
             return product;
+        }
+
+
+        private static List<ProductPictureQM> PictureMapping(List<ProductPicture> pictures)
+        {
+            return pictures.Where(x => !x.IsRemoved).Select(x => new ProductPictureQM
+            {
+                Picture = x.Picture,
+                PictureAlt = x.PictureAlt,
+                PictureTitle = x.PictureTitle,
+                ProductId = x.ProductId,
+                IsRemoved = x.IsRemoved
+            })
+            .ToList();
         }
     }
 }

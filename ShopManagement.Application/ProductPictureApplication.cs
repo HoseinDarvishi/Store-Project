@@ -20,9 +20,6 @@ namespace ShopManagement.Application
         {
             var res = new GenerateResult();
 
-            if (pictureRepository.IsExists(x=>x.Picture == productPicture.Picture && x.ProductId == productPicture.ProductId))
-                return res.Failed("این عکس قبلا برای این محصول استفاده شده است");
-
             pictureRepository.Create(new ProductPicture(productPicture.Picture, productPicture.PictureAlt, productPicture.PictureTitle, productPicture.ProductId));
             pictureRepository.Save();
             return res.Succedded();
