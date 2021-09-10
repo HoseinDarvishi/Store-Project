@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Application.Constract.Comment;
@@ -40,6 +41,18 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Comments
         {
             Comments = commentApplication.Search(commentSearch);
             StatusesComment = new SelectList(statuses, "Code", "Text");
+        }
+
+        public IActionResult OnGetInPublish(long id)
+        {
+            commentApplication.InPublish(id);
+            return RedirectToPage("./Index");
+        }
+
+        public IActionResult OnGetPublish(long id)
+        {
+            commentApplication.Publish(id);
+            return RedirectToPage("./Index");
         }
     }
 }

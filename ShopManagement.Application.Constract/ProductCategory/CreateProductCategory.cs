@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace ShopManagement.Application.Constract.ProductCategory
+namespace ShopManagement.Application.Consract.ProductCategory
 {
     public class CreateProductCategory
     {

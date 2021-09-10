@@ -56,8 +56,8 @@
                                     <th>ایمیل</th>
                                     <th>پیام</th>
                                     <th>محصول</th>
-                                    <th>تاریخ </th>
-                                    <th>وضعیت </th>
+                                    <th>تاریخ</th>
+                                    <th>وضعیت</th>
                                     <th>عملیات</th>
                                 </tr>
                             </thead>
@@ -98,7 +98,7 @@
 
                                             @if (comment.StatusComment == UtilityFreamwork.Application.StatusComment.Wait || comment.StatusComment == UtilityFreamwork.Application.StatusComment.Canceled)
                                             {
-                                                <a href="#showmodal=@Url.Page("./Index", "InPublish" ,new {id = comment.Id})" class="btn btn-success pull-right mx-2">
+                                                <a href="#showmodal=@Url.Page("./Index", "Publish" ,new {id = comment.Id})" class="btn btn-success pull-right mx-2">
                                                     <i class="fa fa-edit"></i> تایید
                                                 </a>
                                             }
