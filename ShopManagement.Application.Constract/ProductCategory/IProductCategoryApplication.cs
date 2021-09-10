@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ShopManagement.Application.Constract.ProductCategory;
+using System.Collections.Generic;
 using UtilityFreamwork.Application;
 
 namespace ShopManagement.Application.Constract.ProductCategory

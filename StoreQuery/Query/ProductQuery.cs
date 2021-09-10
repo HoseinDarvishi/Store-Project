@@ -23,6 +23,19 @@ namespace StoreQuery.Query
             this.disContext = discountContext;
         }
 
+        private static List<ProductPictureQM> PictureMapping(List<ProductPicture> pictures)
+        {
+            return pictures.Where(x => !x.IsRemoved).Select(x => new ProductPictureQM
+            {
+                Picture = x.Picture,
+                PictureAlt = x.PictureAlt,
+                PictureTitle = x.PictureTitle,
+                ProductId = x.ProductId,
+                IsRemoved = x.IsRemoved
+            })
+            .ToList();
+        }
+
         public List<ProductQM> GetLatestProducts()
         {
             var invs = invContext.Inventories.Select(x => new { x.ProductId, x.Price }).ToList();
@@ -30,7 +43,7 @@ namespace StoreQuery.Query
 
             var products = context.Products
                 .Include(x => x.Category)
-                .Select(x => new ProductQM 
+                .Select(x => new ProductQM
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -42,7 +55,7 @@ namespace StoreQuery.Query
                     Slug = x.Slug,
                     CategorySlug = x.Category.Slug
                 })
-                .OrderByDescending(x=>x.Id)
+                .OrderByDescending(x => x.Id)
                 .ToList();
 
             foreach (var product in products)
@@ -69,12 +82,12 @@ namespace StoreQuery.Query
 
         public List<ProductQM> Search(string value)
         {
-            var discounts = disContext.CustomerDiscounts.Where(x=>x.IsActive).Select(x => new { x.ProductId, x.DiscountPercent,x.EndDate });
+            var discounts = disContext.CustomerDiscounts.Where(x => x.IsActive).Select(x => new { x.ProductId, x.DiscountPercent, x.EndDate });
             var invs = invContext.Inventories.Select(x => new { x.ProductId, x.Price }).ToList();
 
             var query = context.Products
                 .Include(x => x.Category)
-                .Select(x => new ProductQM 
+                .Select(x => new ProductQM
                 {
                     Id = x.Id,
                     Category = x.Category.Name,
@@ -123,8 +136,8 @@ namespace StoreQuery.Query
 
             var product = context.Products
                 .Include(x => x.Category)
-                .Include(x=>x.Pictures)
-                .Select(x => new ProductQM 
+                .Include(x => x.Pictures)
+                .Select(x => new ProductQM
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -164,21 +177,26 @@ namespace StoreQuery.Query
                 product.HasDiscount = product.Discount > 0;
             }
 
-            return product;
-        }
+            var coms = context.Comments
+                .Where(x => x.ProductId == product.Id && x.Status == StatusComment.Confirmed)
+                .Select(x => new ProductCommentQM
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Email = x.Email,
+                    CreationDate = x.CreationDate.ToFarsi(),
+                    Message = x.Message,
+                    Product = product.Name,
+                    ProductId = x.ProductId
+                })
+                .AsNoTracking().OrderByDescending(x=>x.Id).ToList();
 
-
-        private static List<ProductPictureQM> PictureMapping(List<ProductPicture> pictures)
-        {
-            return pictures.Where(x => !x.IsRemoved).Select(x => new ProductPictureQM
+            if (coms != null)
             {
-                Picture = x.Picture,
-                PictureAlt = x.PictureAlt,
-                PictureTitle = x.PictureTitle,
-                ProductId = x.ProductId,
-                IsRemoved = x.IsRemoved
-            })
-            .ToList();
+                product.Comments = coms;
+            }
+
+            return product;
         }
     }
 }

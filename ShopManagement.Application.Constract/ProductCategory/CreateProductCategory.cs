@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace ShopManagement.Application.Consract.ProductCategory
+namespace ShopManagement.Application.Constract.ProductCategory
 {
     public class CreateProductCategory
     {

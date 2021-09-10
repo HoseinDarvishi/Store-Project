@@ -41,7 +41,10 @@ namespace StoreQuery.Product
         public string CategorySlug { get; set; }
 
         public bool HasDiscount { get; set; }
+
+        public List<ProductCommentQM> Comments { get; set; }
     }
+
 
     public class ProductPictureQM
     {
@@ -54,5 +57,23 @@ namespace StoreQuery.Product
         public long ProductId { get; set; }
 
         public bool IsRemoved { get; set; }
+    }
+
+
+    public class ProductCommentQM
+    {
+        public long Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Email { get; set; }
+
+        public string Message { get; set; }
+
+        public long ProductId { get; set; }
+
+        public string CreationDate { get; set; }
+
+        public string Product { get; set; }
     }
 }

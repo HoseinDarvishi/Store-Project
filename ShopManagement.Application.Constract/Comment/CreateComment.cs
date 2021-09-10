@@ -10,5 +10,7 @@
         public string Message { get;   set; }
 
         public long ProductId { get;   set; }
+
+        public string ProductSlug { get; set; }
     }
 }

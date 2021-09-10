@@ -1,13 +1,9 @@
 ﻿@page
 @model ServiceHost.Areas.Administration.Pages.Shop.Comments.IndexModel
 @{
-}
-
-@{
     Layout = "Shared/_AdminLayout";
     ViewData["title"] = "مدیریت نظرات";
 }
-
 
 <div class="row">
     <div class="col-md-12">
@@ -92,13 +88,16 @@
                                         </td>
 
                                         <td>
-                                            <a href="#showmodal=@Url.Page("./Index", "InPublish" ,new {id = comment.Id})" class="btn btn-danger pull-right mx-2">
-                                                <i class="fa fa-edit"></i> رد کردن
-                                            </a>
+                                            @if (comment.StatusComment == UtilityFreamwork.Application.StatusComment.Wait || comment.StatusComment == UtilityFreamwork.Application.StatusComment.Confirmed)
+                                            {
+                                                <a asp-page="./Index" asp-page-handler="InPublish" asp-route-id="@comment.Id" class="btn btn-danger pull-right mx-2">
+                                                    <i class="fa fa-edit"></i> رد کردن
+                                                </a>
+                                            }
 
                                             @if (comment.StatusComment == UtilityFreamwork.Application.StatusComment.Wait || comment.StatusComment == UtilityFreamwork.Application.StatusComment.Canceled)
                                             {
-                                                <a href="#showmodal=@Url.Page("./Index", "Publish" ,new {id = comment.Id})" class="btn btn-success pull-right mx-2">
+                                                <a asp-page="./Index" asp-page-handler="Publish" asp-route-id="@comment.Id" class="btn btn-success pull-right mx-2">
                                                     <i class="fa fa-edit"></i> تایید
                                                 </a>
                                             }
