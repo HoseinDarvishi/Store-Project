@@ -1,4 +1,5 @@
-﻿using ShopManagement.Domain.ProductCategoryAgg;
+﻿using ShopManagement.Application.Constract.ProductCategory;
+using ShopManagement.Domain.ProductCategoryAgg;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,6 +20,22 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 return context.ProductCategories.Where(x => x.Name.Contains(name)).ToList();
 
             return context.ProductCategories.ToList();
+        }
+
+        public EditProductCategory GetDetails(long id)
+        {
+            return context.ProductCategories.Select(x => new EditProductCategory()
+            {
+                Id = x.Id,
+                Description = x.Description,
+                Name = x.Name,
+                Keywords = x.Keywords,
+                MetaDescription = x.MetaDescription,
+                //Picture = x.Picture,
+                PictureAlt = x.PictureAlt,
+                PictureTitle = x.PictureTitle,
+                Slug = x.Slug
+            }).FirstOrDefault(x => x.Id == id);
         }
     }
 }

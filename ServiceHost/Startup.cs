@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopManagement.Configuration;
+using UtilityFreamwork.Application;
 
 namespace ServiceHost
 {
@@ -27,6 +28,7 @@ namespace ServiceHost
             DiscountManagementConfigurator.Configure(services, connection);
             InventoryManagementConfigurator.Configure(services, connection);
 
+            services.AddTransient<IFileUploader, FileUploader>();
             services.AddRazorPages();
         }
 

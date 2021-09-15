@@ -1,6 +1,10 @@
-﻿using ShopManagement.Application.Constract.ProductCategory;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
+using ShopManagement.Application.Constract.ProductCategory;
 using ShopManagement.Domain.ProductCategoryAgg;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UtilityFreamwork.Application;
 
@@ -10,10 +14,12 @@ namespace ShopManagement.Application
     {
 
         private readonly IProductCategoryRepository productCategoryRepository;
+        private readonly IFileUploader _fileUploader;
 
-        public ProductCategoryApplication(IProductCategoryRepository productCategoryRepository)
+        public ProductCategoryApplication(IProductCategoryRepository productCategoryRepository , IFileUploader fileUploader)
         {
             this.productCategoryRepository = productCategoryRepository;
+            this._fileUploader = fileUploader;
         }
 
 
@@ -26,8 +32,9 @@ namespace ShopManagement.Application
                 return result.Failed("امکان ایجاد گروه های محصولی همنام وجود ندارد");
 
             var chengedSlug = GenerateSlug.Slugify(category.Name);
+            var fileName = _fileUploader.Uploader(category.Picture, category.Slug);
 
-            var newCategory = new ProductCategory(category.Name, category.Description, category.Picture,
+            var newCategory = new ProductCategory(category.Name, category.Description, fileName,
                 category.PictureTitle, category.PictureAlt, category.Keywords,
                 category.MetaDescription, chengedSlug);
 
@@ -47,8 +54,9 @@ namespace ShopManagement.Application
                 return result.Failed("امکان ایجاد گروه های محصولی همنام وجود ندارد");
 
             var chengedSlug = category.Slug.Slugify();
+            var fileName = _fileUploader.Uploader(category.Picture , category.Slug);
 
-            cat.Edit(category.Name, category.Description, category.Picture,
+            cat.Edit(category.Name, category.Description, fileName,
                 category.PictureTitle, category.PictureAlt, category.Keywords,
                 category.MetaDescription, chengedSlug);
 
@@ -59,20 +67,7 @@ namespace ShopManagement.Application
 
         public EditProductCategory GetBy(long id)
         {
-            var pro = productCategoryRepository.Get(id);
-
-            return new EditProductCategory
-            {
-                Id = pro.Id,
-                Name = pro.Name,
-                Picture = pro.Picture,
-                PictureTitle = pro.PictureTitle,
-                PictureAlt = pro.PictureAlt,
-                Description = pro.Description,
-                Keywords = pro.Keywords,
-                MetaDescription = pro.MetaDescription,
-                Slug = pro.Slug
-            };
+            return productCategoryRepository.GetDetails(id);
         }
 
         public List<ProductCategoryVM> GetSelectList()

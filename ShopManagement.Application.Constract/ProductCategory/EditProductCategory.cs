@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using UtilityFreamwork.Application;
 
 namespace ShopManagement.Application.Constract.ProductCategory
 {
-   public class EditProductCategory
+    public class EditProductCategory
     {
         public long Id { get; set; }
 
@@ -15,7 +14,10 @@ namespace ShopManagement.Application.Constract.ProductCategory
 
         public string Description { get; set; }
 
-        public string Picture { get; set; }
+        [Required(ErrorMessage = " این مقدار الزامی است")]
+        [FileExtention(new string[] { ".jpeg", ".jpg", ".png" }, ErrorMessage = "فرمت فابل پشتیبانی نمی شود")]
+        [MaxFileSizeAttribute(2 * 1024 * 1024, ErrorMessage = "حجم فایل بیشتر از حد مجاز است")]
+        public IFormFile Picture { get; set; }
 
         public string PictureTitle { get; set; }
 

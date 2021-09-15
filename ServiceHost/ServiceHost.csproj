@@ -170,4 +170,8 @@
     <ProjectReference Include="..\ShopManagement.Configuration\ShopManagement.Configuration.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\ProductPictures\دکور\" />
+  </ItemGroup>
+
 </Project>
