@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
-using ShopManagement.Application.Constract.ProductCategory;
+﻿using ShopManagement.Application.Constract.ProductCategory;
 using ShopManagement.Domain.ProductCategoryAgg;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UtilityFreamwork.Application;
 

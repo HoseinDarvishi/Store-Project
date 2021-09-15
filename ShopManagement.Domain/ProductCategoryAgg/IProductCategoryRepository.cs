@@ -7,5 +7,6 @@ namespace ShopManagement.Domain.ProductCategoryAgg
     {
         List<ProductCategory> Search(string name);
         EditProductCategory GetDetails(long id);
+        string GetSlug(long id);
     }
 }

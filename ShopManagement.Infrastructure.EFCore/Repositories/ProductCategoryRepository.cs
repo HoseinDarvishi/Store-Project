@@ -37,5 +37,10 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                 Slug = x.Slug
             }).FirstOrDefault(x => x.Id == id);
         }
+
+        public string GetSlug(long id)
+        {
+            return context.ProductCategories.Select(x => new { x.Id, x.Slug }).FirstOrDefault(x => x.Id == id).Slug;
+        }
     }
 }

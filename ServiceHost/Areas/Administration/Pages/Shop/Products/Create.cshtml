@@ -49,7 +49,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label asp-for="@Model.Picture" class="control-label">عکس</label>
-                    <input type="text" class="form-control" asp-for="@Model.Picture">
+                    <input type="file" class="form-control" asp-for="@Model.Picture" accept="Image/*">
                     <span asp-validation-for="@Model.Picture" class="error"></span>
                 </div>
             </div>
