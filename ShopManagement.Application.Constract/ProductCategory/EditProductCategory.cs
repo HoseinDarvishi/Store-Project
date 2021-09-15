@@ -14,9 +14,8 @@ namespace ShopManagement.Application.Constract.ProductCategory
 
         public string Description { get; set; }
 
-        [Required(ErrorMessage = " این مقدار الزامی است")]
         [FileExtention(new string[] { ".jpeg", ".jpg", ".png" }, ErrorMessage = "فرمت فابل پشتیبانی نمی شود")]
-        [MaxFileSizeAttribute(2 * 1024 * 1024, ErrorMessage = "حجم فایل بیشتر از حد مجاز است")]
+        [MaxFileSize(2 * 1024 * 1024, ErrorMessage = "حجم فایل بیشتر از حد مجاز است")]
         public IFormFile Picture { get; set; }
 
         public string PictureTitle { get; set; }

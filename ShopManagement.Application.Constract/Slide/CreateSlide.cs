@@ -1,11 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using UtilityFreamwork.Application;
 
 namespace ShopManagement.Application.Constract.Slide
 {
     public class CreateSlide
     {
         [Required(ErrorMessage = "مسیر عکس الزامی است")]
-        public string Picture { get; set; }
+        [FileExtention(new string[] { ".jpeg", ".jpg", ".png" }, ErrorMessage = "فرمت فابل پشتیبانی نمی شود")]
+        [MaxFileSize(2 * 1024 * 1024, ErrorMessage = "حجم فایل بیشتر از حد مجاز است")]
+        public IFormFile Picture { get; set; }
 
         [Required(ErrorMessage = "متن جایگزین عکس الزامی است")]
         public string PictureAlt { get; set; }

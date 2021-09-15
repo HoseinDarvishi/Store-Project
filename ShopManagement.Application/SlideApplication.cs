@@ -10,18 +10,18 @@ namespace ShopManagement.Application
     public class SlideApplication : ISlideApplication
     {
         private readonly ISlideRepository slideRepository;
+        private readonly IFileUploader _fileUploader;
 
-        public SlideApplication(ISlideRepository slideRepository)
+        public SlideApplication(ISlideRepository slideRepository , IFileUploader fileUploader)
         {
             this.slideRepository = slideRepository;
+            this._fileUploader = fileUploader;
         }
 
         public GenerateResult Create(CreateSlide slide)
         {
-            if (slideRepository.IsExists(x => x.Picture == slide.Picture && x.Heading == slide.Heading && x.Title == slide.Title && x.Text == slide.Text))
-                return new GenerateResult().Failed("این اسلاید با مشخصات وارد شده قبلا ایجاد شده است");
-
-            slideRepository.Create(new Slide(slide.Picture, slide.PictureAlt, slide.PictureTitle, slide.Heading,slide.Title, slide.Text, slide.BtnText , slide.Link));
+            var picturePath = _fileUploader.Uploader(slide.Picture, slide.Heading, "Sliders");
+            slideRepository.Create(new Slide(picturePath, slide.PictureAlt, slide.PictureTitle, slide.Heading,slide.Title, slide.Text, slide.BtnText , slide.Link));
             slideRepository.Save();
             return new GenerateResult().Succedded();
     
@@ -29,10 +29,9 @@ namespace ShopManagement.Application
 
         public GenerateResult Edit(EditSlide slide)
         {
-            if (slideRepository.IsExists(x => x.Picture == slide.Picture && x.Heading == slide.Heading && x.Title == slide.Title && x.Text == slide.Text && x.Id != slide.Id))
-                return new GenerateResult().Failed("این اسلاید با مشخصات وارد شده قبلا ایجاد شده است");
-
-            slideRepository.Edit(slide);
+            var picturePath = _fileUploader.Uploader(slide.Picture, slide.Heading, "Sliders");
+            var slid = slideRepository.GetSlide(slide.Id);
+            slid.Edit(picturePath, slide.PictureAlt, slide.PictureTitle, slide.Heading, slide.Title, slide.Text, slide.BtnText, slide.Link);
             slideRepository.Save();
             return new GenerateResult().Succedded();
         }

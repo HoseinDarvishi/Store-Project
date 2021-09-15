@@ -15,11 +15,11 @@ namespace ServiceHost
             _webHostEnvironment = webHost;
         }
 
-        public string Uploader(IFormFile file , string path)
+        public string Uploader(IFormFile file , string path , string folder = "ProductPictures")
         {
             if (file == null) return "";
 
-            var directoryPath = $"{_webHostEnvironment.WebRootPath}//ProductPictures//{path}";
+            var directoryPath = $"{_webHostEnvironment.WebRootPath}//{folder}//{path}";
 
             if (!Directory.Exists(directoryPath))
                 Directory.CreateDirectory(directoryPath);

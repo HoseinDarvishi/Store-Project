@@ -15,6 +15,8 @@ namespace ShopManagement.Domain.SlideAgg
 
         List<SlideVM> GetAll();
 
+        Slide GetSlide(long id);
+
         EditSlide GetDetail(long id);
 
         void Remove(long id);

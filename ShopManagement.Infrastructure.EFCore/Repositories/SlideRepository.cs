@@ -17,8 +17,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
 
         public void Edit(EditSlide slide)
         {
-            var s = context.Slides.Find(slide.Id);
-            s.Edit(slide.Picture, slide.PictureAlt, slide.PictureTitle, slide.Heading, slide.Title, slide.Text, slide.BtnText ,slide.Link);
+            
         }
 
         public List<SlideVM> GetAll()
@@ -42,7 +41,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
             {
                 Title = x.Title,
                 Heading = x.Heading,
-                Picture = x.Picture,
+                PicturePath = x.Picture,
                 Text = x.Text,
                 CreationDate = x.CreationDate.ToFarsi(),
                 BtnText =x.BtnText,
@@ -60,7 +59,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
             {
                 Title = x.Title,
                 Heading = x.Heading,
-                Picture = x.Picture,
+                PicturePath = x.Picture,
                 Text = x.Text,
                 CreationDate = x.CreationDate.ToFarsi(),
                 BtnText = x.BtnText,
@@ -95,6 +94,11 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
                     IsRemoved = x.IsRemoved
                 })
                 .FirstOrDefault(x=>x.Id == id);
+        }
+
+        public Slide GetSlide(long id)
+        {
+            return context.Slides.Find(id);
         }
     }
 }

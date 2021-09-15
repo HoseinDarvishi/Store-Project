@@ -4,6 +4,6 @@ namespace UtilityFreamwork.Application
 {
     public interface IFileUploader
     {
-        string Uploader(IFormFile file , string path);
+        string Uploader(IFormFile file , string path , string folder = "ProductPictures");
     }
 }
