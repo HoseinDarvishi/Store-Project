@@ -1,8 +1,5 @@
 ﻿using ShopManagement.Application.Constract.ProductPicture;
-using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
 
 namespace ShopManagement.Domain.ProductPictureAgg
 {
@@ -17,6 +14,11 @@ namespace ShopManagement.Domain.ProductPictureAgg
         List<ProductPictureVM> Search(ProductPictureSearchModel searchModel);
 
         void Remove(long id);
+
         void Restore(long id);
+
+        ProductPicture GetPictureWithProductAndCategory(long id);
+
+        ProductPicture GetPicture(long id);
     }
 }

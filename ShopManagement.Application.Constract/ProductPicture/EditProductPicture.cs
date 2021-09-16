@@ -1,6 +1,8 @@
-﻿using ShopManagement.Application.Constract.Product;
+﻿using Microsoft.AspNetCore.Http;
+using ShopManagement.Application.Constract.Product;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using UtilityFreamwork.Application;
 
 namespace ShopManagement.Application.Constract.ProductPicture
 {
@@ -9,7 +11,11 @@ namespace ShopManagement.Application.Constract.ProductPicture
         public long Id { get; set; }
 
         [Required(ErrorMessage = " عکس الزامی است")]
-        public string Picture { get;  set; }
+        [FileExtention(new string[] { ".jpeg", ".jpg", ".png" }, ErrorMessage = "فرمت فابل پشتیبانی نمی شود")]
+        [MaxFileSize(2 * 1024 * 1024, ErrorMessage = "حجم فایل بیشتر از حد مجاز است")]
+        public IFormFile Picture { get;  set; }
+
+        public string PicturePath { get; set; }
 
         [Required(ErrorMessage = "متن جایگزین عکس الزامی است")]
         public string PictureAlt { get;  set; }

@@ -47,7 +47,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
 
         public Product GetProductWithCategory(long id)
         {
-            return context.Products.Find(id);
+            return context.Products.Include(x=>x.Category).FirstOrDefault(x=>x.Id == id);
         }
 
         public List<ProductVM> Search(ProductSearchModel searchModel)

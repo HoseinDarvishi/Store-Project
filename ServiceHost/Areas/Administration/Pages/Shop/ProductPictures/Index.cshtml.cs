@@ -40,15 +40,16 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductPictures
             return Partial("./Create", productPicture);
         }
 
-        public JsonResult OnPostCreate(IFormCollection form)
+        public JsonResult OnPostCreate(IFormFileCollection picture , IFormCollection infos)
         {
-            CreateProductPicture pic = new CreateProductPicture();
-            pic.Picture = form["Picture"];
-            pic.PictureAlt = form["PictureAlt"];
-            pic.PictureTitle = form["PictureTitle"];
-            pic.ProductId = Convert.ToInt64(form["ProductId"]);
-
-            var result = _pictureApplication.Create(pic);
+            var create = new CreateProductPicture
+            {
+                Picture = picture[0],
+                PictureAlt = infos["PictureAlt"],
+                PictureTitle = infos["PictureTitle"],
+                ProductId =Convert.ToInt64(infos["ProductId"])
+            };
+            var result = _pictureApplication.Create(create);
             return new JsonResult(result);
         }
 

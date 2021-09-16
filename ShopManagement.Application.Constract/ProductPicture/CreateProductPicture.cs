@@ -1,15 +1,18 @@
-﻿using ShopManagement.Application.Constract.Product;
+﻿using Microsoft.AspNetCore.Http;
+using ShopManagement.Application.Constract.Product;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using UtilityFreamwork.Application;
 
 namespace ShopManagement.Application.Constract.ProductPicture
 {
     public class CreateProductPicture
     {
-        [Required(ErrorMessage = "عکس الزامی است")]
-        public string Picture { get; set; }
+        [Required(ErrorMessage = " عکس الزامی است")]
+        [FileExtention(new string[] { ".jpeg", ".jpg", ".png" }, ErrorMessage = "فرمت فابل پشتیبانی نمی شود")]
+        [MaxFileSize(2 * 1024 * 1024, ErrorMessage = "حجم فایل بیشتر از حد مجاز است")]
+        public IFormFile Picture { get; set; }
 
         [Required(ErrorMessage = "متن جایگزین عکس الزامی است")]
         public string PictureAlt { get; set; }

@@ -4,7 +4,7 @@ using UtilityFreamwork.Application;
 
 namespace ShopManagement.Application.Constract.ProductCategory
 {
-    public interface IProductCategoryApplication
+    public interface IArticleCategoryApplication
     {
         GenerateResult Create(CreateProductCategory category);
 

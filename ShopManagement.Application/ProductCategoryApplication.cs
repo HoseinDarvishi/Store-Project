@@ -6,7 +6,7 @@ using UtilityFreamwork.Application;
 
 namespace ShopManagement.Application
 {
-    public class ProductCategoryApplication : IProductCategoryApplication
+    public class ProductCategoryApplication : IArticleCategoryApplication
     {
 
         private readonly IProductCategoryRepository productCategoryRepository;

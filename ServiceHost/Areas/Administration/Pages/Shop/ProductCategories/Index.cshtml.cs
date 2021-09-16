@@ -12,9 +12,9 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
 {
     public class IndexModel : PageModel
     {
-        private readonly IProductCategoryApplication categoryApplication;
+        private readonly IArticleCategoryApplication categoryApplication;
 
-        public IndexModel( IProductCategoryApplication categoryApplication)
+        public IndexModel( IArticleCategoryApplication categoryApplication)
         {
             this.categoryApplication = categoryApplication;
         }

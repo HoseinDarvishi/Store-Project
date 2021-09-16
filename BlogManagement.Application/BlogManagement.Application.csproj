@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlogManagement.Application.Constract\BlogManagement.Application.Constract.csproj" />
+    <ProjectReference Include="..\BlogManagement.Domain\BlogManagement.Domain.csproj" />
+    <ProjectReference Include="..\UtilityFreamwork\UtilityFreamwork.csproj" />
+  </ItemGroup>
+
+</Project>

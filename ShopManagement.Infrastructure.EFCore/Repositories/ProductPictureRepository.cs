@@ -1,8 +1,6 @@
 ﻿using ShopManagement.Application.Constract.ProductPicture;
 using ShopManagement.Domain.ProductPictureAgg;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using UtilityFreamwork.Application;
@@ -20,8 +18,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
 
         public void Edit(EditProductPicture productPicture)
         {
-            var pro = context.ProductPictures.Find(productPicture.Id);
-            pro.Edit(productPicture.Picture, productPicture.PictureAlt, productPicture.PictureTitle, productPicture.ProductId);
+
         }
 
         public EditProductPicture GetDetail(long id)
@@ -29,7 +26,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
             return context.ProductPictures.Select(x=> new EditProductPicture 
             {
                 Id = x.Id,
-                Picture = x.Picture,
+                PicturePath = x.Picture,
                 PictureAlt = x.PictureAlt,
                 PictureTitle = x.PictureTitle,
                 ProductId = x.ProductId
@@ -78,5 +75,15 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
 
             return query.OrderBy(x => x.Id).ToList();
        }
+
+        public ProductPicture GetPictureWithProductAndCategory(long id)
+        {
+            return context.ProductPictures.Include(x => x.Product).ThenInclude(x => x.Category).FirstOrDefault(x => x.Id == id);
+        }
+
+        public ProductPicture GetPicture(long id)
+        {
+            return context.ProductPictures.FirstOrDefault(x => x.Id == id);
+        }
     }
 }
