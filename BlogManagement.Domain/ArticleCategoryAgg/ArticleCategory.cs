@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlogManagement.Domain.ArticleAgg;
+using System;
 using System.Collections.Generic;
 
 namespace BlogManagement.Domain.ArticleCategoryAgg
@@ -11,9 +12,9 @@ namespace BlogManagement.Domain.ArticleCategoryAgg
 
         public string Picture { get; private set; }
 
-        public string PictureAlt { get; set; }
+        public string PictureAlt { get;private set; }
 
-        public string PictureTitle { get; set; }
+        public string PictureTitle { get;private set; }
 
         public string Description { get; private set; }
 
@@ -29,7 +30,7 @@ namespace BlogManagement.Domain.ArticleCategoryAgg
 
         public DateTime CreationDate { get; private set; }
 
-        //public List<Article> Articles { get; private set; }
+        public List<Article> Articles { get; private set; }
 
         public ArticleCategory(string name, string picture ,string pictureAlt , string pictureTitle , string description, int showOrder,
             string metaDescription, string slug, string keyWords, string canonicalAddress)

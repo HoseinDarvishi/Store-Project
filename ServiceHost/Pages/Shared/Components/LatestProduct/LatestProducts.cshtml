@@ -53,7 +53,7 @@
                                                 <span class="new">New</span>
                                             </div>
                                             <a asp-page="/Product" asp-route-id="@Model[i].Slug">
-                                                <img src="@Model[i].Picture" class="img-fluid" alt="@Model[i].PictureAlt" title="@Model[i].PictureTitle">
+                                                <img src="~/ProductPictures/@Model[i].Picture" class="img-fluid" alt="@Model[i].PictureAlt" title="@Model[i].PictureTitle">
                                             </a>
 
                                         </div>

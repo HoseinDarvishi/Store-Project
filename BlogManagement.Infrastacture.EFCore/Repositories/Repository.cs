@@ -1,4 +1,4 @@
-﻿using BlogManagement.Domain.ArticleCategoryAgg;
+﻿using BlogManagement.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

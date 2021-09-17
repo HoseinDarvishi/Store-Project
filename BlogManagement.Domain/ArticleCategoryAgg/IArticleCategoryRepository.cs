@@ -8,6 +8,5 @@ namespace BlogManagement.Domain.ArticleCategoryAgg
         EditArticleCategory GetDetails(int id);
 
         List<ArticleCategoryVM> Search(ArticleCategorySearchModel command);
-
     }
 }

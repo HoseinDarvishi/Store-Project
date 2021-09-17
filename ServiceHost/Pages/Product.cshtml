@@ -64,14 +64,14 @@
             {"breakpoint":479, "settings": {"slidesToShow": 1, "arrows": false, "slidesToScroll": 1} }
         ]'>
                                                 <div class="single-image">
-                                                    <img src="@Model.Product.Picture" class="img-fluid"
+                                                    <img src="~/ProductPictures/@Model.Product.Picture" class="img-fluid"
                                                          alt="@Model.Product.PictureAlt" title="@Model.Product.PictureTitle">
                                                 </div>
 
                                                 @foreach (var pic in Model.Product.pictures)
                                                 {
                                                     <div class="single-image">
-                                                        <img src="@pic.Picture" class="img-fluid"
+                                                        <img src="~/ProductPictures/@pic.Picture" class="img-fluid"
                                                              alt="@pic.PictureAlt" title="@pic.PictureTitle">
                                                     </div>
                                                 }

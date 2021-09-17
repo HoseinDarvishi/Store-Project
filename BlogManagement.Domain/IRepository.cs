@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 //
 
 
-namespace BlogManagement.Domain.ArticleCategoryAgg
+namespace BlogManagement.Domain
 {
     public interface IRepository<TKey, TModel> where TModel : class
     {
