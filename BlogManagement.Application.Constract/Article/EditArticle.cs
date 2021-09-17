@@ -13,6 +13,7 @@ namespace BlogManagement.Application.Constract.Article
         public new IFormFile Picture { get; set; }
 
         public string Category { get; set; }
+
     }
 
 

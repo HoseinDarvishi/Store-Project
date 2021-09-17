@@ -75,15 +75,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BM.Application", "BM.Applic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BM.Infrastracture", "BM.Infrastracture", "{B3525F06-A145-4782-A12F-84B6EB3F721A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogManagement.Domain", "BlogManagement.Domain\BlogManagement.Domain.csproj", "{B6280E77-7B15-4372-8570-F80B97E50A75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogManagement.Domain", "BlogManagement.Domain\BlogManagement.Domain.csproj", "{B6280E77-7B15-4372-8570-F80B97E50A75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogManagement.Application.Constract", "BlogManagement.Application.Constract\BlogManagement.Application.Constract.csproj", "{3E63C084-DD0B-4DF9-A8EC-E50B0CE0F279}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogManagement.Application.Constract", "BlogManagement.Application.Constract\BlogManagement.Application.Constract.csproj", "{3E63C084-DD0B-4DF9-A8EC-E50B0CE0F279}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogManagement.Application", "BlogManagement.Application\BlogManagement.Application.csproj", "{E52BC44E-C3F6-4B1D-88ED-B2A92ECE160E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogManagement.Application", "BlogManagement.Application\BlogManagement.Application.csproj", "{E52BC44E-C3F6-4B1D-88ED-B2A92ECE160E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogManagement.Infrastacture.EFCore", "BlogManagement.Infrastacture.EFCore\BlogManagement.Infrastacture.EFCore.csproj", "{769ECF37-9DF8-4FBC-89F6-AA8563A08A0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogManagement.Infrastacture.EFCore", "BlogManagement.Infrastacture.EFCore\BlogManagement.Infrastacture.EFCore.csproj", "{769ECF37-9DF8-4FBC-89F6-AA8563A08A0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogManagement.Infrastracture.Configuration", "BlogManagement.Infrastracture.Configuration\BlogManagement.Infrastracture.Configuration.csproj", "{8A1125A5-88AA-4A2D-A230-75C137817080}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogManagement.Infrastracture.Configuration", "BlogManagement.Infrastracture.Configuration\BlogManagement.Infrastracture.Configuration.csproj", "{8A1125A5-88AA-4A2D-A230-75C137817080}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

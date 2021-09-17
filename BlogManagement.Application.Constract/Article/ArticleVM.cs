@@ -9,5 +9,6 @@
         public string Category { get; set; }
         public int CategoryId { get; set; }
         public string Picture { get; set; }
+        public bool IsRemoved { get; set; }
     }
 }

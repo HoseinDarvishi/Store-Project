@@ -12,5 +12,7 @@ namespace BlogManagement.Application.Constract.ArticleCategory
         List<ArticleCategoryVM> Search(ArticleCategorySearchModel command);
 
         EditArticleCategory GetDetails(int id);
+
+        List<ArticleCategoryVM> GetCategoryDropDown();
     }
 }

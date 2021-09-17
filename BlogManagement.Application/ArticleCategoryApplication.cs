@@ -52,6 +52,11 @@ namespace BlogManagement.Application
             return new GenerateResult().Succedded();
         }
 
+        public List<ArticleCategoryVM> GetCategoryDropDown()
+        {
+            return _articleCategoryRepository.GetCtegoriesDropDown();
+        }
+
         public EditArticleCategory GetDetails(int id)
         {
             return _articleCategoryRepository.GetDetails(id);

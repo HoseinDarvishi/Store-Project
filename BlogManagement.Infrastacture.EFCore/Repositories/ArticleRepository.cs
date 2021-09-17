@@ -15,6 +15,11 @@ namespace BlogManagement.Infrastacture.EFCore.Repositories
             _blogContext = blogContext;
         }
 
+        public Article GetArticleWithCategory(long id)
+        {
+            return _blogContext.Articles.Include(x => x.Category).FirstOrDefault(X => X.Id == id);
+        }
+
         public EditArticle GetDetails(long id)
         {
             return _blogContext.Articles.Include(x=>x.Category).Select(x => new EditArticle 
@@ -40,7 +45,7 @@ namespace BlogManagement.Infrastacture.EFCore.Repositories
 
         public List<ArticleVM> Search(ArticleSearchModel command)
         {
-            var query = _blogContext.Articles.Include(X=>X.Category).Select(x => new ArticleVM 
+            var query = _blogContext.Articles.Include(X=>X.Category).Where(x=>!x.IsRemove).Select(x => new ArticleVM 
             {
                 Id = x.Id,
                 Category = x.Category.Name,
@@ -48,7 +53,8 @@ namespace BlogManagement.Infrastacture.EFCore.Repositories
                 PublishDate = x.PublishDate.ToFarsi(),
                 ShortDescription = x.ShortDescription,
                 Title = x.Title,
-                CategoryId = x.CategoryId
+                CategoryId = x.CategoryId,
+                IsRemoved = x.IsRemove
             })
             .AsNoTracking();
 
