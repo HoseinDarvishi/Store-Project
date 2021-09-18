@@ -45,7 +45,7 @@ namespace BlogManagement.Infrastacture.EFCore.Repositories
 
         public List<ArticleVM> Search(ArticleSearchModel command)
         {
-            var query = _blogContext.Articles.Include(X=>X.Category).Where(x=>!x.IsRemove).Select(x => new ArticleVM 
+            var query = _blogContext.Articles.Include(X=>X.Category).Select(x => new ArticleVM 
             {
                 Id = x.Id,
                 Category = x.Category.Name,
