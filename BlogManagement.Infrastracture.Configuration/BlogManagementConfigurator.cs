@@ -7,6 +7,8 @@ using BlogManagement.Infrastacture.EFCore;
 using BlogManagement.Infrastacture.EFCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using StoreQuery.Article;
+using StoreQuery.Query;
 
 namespace BlogManagement.Infrastracture.Configuration
 {
@@ -19,6 +21,8 @@ namespace BlogManagement.Infrastracture.Configuration
 
             services.AddTransient<IArticleRepository, ArticleRepository>();
             services.AddTransient<Application.Constract.Article.IArticleApplication, ArticleApplication>();
+
+            services.AddTransient<IArticleQuery, ArticleQuery>();
 
             services.AddDbContext<BlogContext>(x => x.UseSqlServer(connectionString, b => b.MigrationsAssembly("ServiceHost")));
         }
