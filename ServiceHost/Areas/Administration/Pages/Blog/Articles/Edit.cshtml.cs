@@ -1,5 +1,6 @@
 using BlogManagement.Application.Constract.Article;
 using BlogManagement.Application.Constract.ArticleCategory;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,7 +18,7 @@ namespace ServiceHost.Areas.Administration.Pages.Blog.Articles
             _articleCategoryApplication = articleCategoryApplication;
         }
 
-        public EditArticle command;
+        public EditArticle command { get; set;}
         public SelectList categories;
 
         public void OnGet(long id)
@@ -26,9 +27,9 @@ namespace ServiceHost.Areas.Administration.Pages.Blog.Articles
             categories = new SelectList(_articleCategoryApplication.GetCategoryDropDown(),"Id","Name");
         }
 
-        public IActionResult OnPost(EditArticle article)
+        public IActionResult OnPost(EditArticle command)
         {
-            _articleApplication.Edit(article);
+            _articleApplication.Edit(command);
             return RedirectToPage("./Index");
         }
     }
