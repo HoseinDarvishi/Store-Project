@@ -287,7 +287,7 @@
                                             @foreach (var cat in Model.categories)
                                             {
                                                 <li class="has-children">
-                                                    <a href="#" class="@CheckCategory(cat.Slug)">
+                                                    <a asp-page="/ArticleCategories" asp-route-id="@cat.Slug" class="@CheckCategory(cat.Slug)">
                                                         @cat.Name <span class="counter">@cat.ArticleCount</span>
                                                     </a>
                                                 </li>

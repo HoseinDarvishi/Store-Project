@@ -7,8 +7,7 @@ namespace StoreQuery.Article
     {
         List<ArticleQM> GetLatestArticles(int count);
 
-        List<ArticleQM> GetArticelsByCategory(int id);
-        List<ArticleQM> GetArticelsByCategory(string slug);
+        ArticleCategoryQM GetCategoryWithArticlesBy(string slug);
 
         ArticleQM GetArticle(string slug);
 

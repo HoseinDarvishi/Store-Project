@@ -1,4 +1,7 @@
-﻿namespace StoreQuery.ArticleCategory
+﻿using StoreQuery.Article;
+using System.Collections.Generic;
+
+namespace StoreQuery.ArticleCategory
 {
     public class ArticleCategoryQM
     {
@@ -25,5 +28,9 @@
         public string CanonicalAddress { get; set; }
 
         public long ArticleCount { get; set; }
+
+        public List<ArticleQM> Articles { get; set; }
+
+        public List<string> KeywordsList { get; set; }
     }
 }
