@@ -8,7 +8,7 @@ namespace ShopManagement.Infrastructure.EFCore.Mapping
     {
         public void Configure(EntityTypeBuilder<Comment> b)
         {
-            b.ToTable("Comments");
+            b.ToTable("ProductComments");
             b.HasKey(x => x.Id);
 
             b.Property(x => x.Name).HasMaxLength(50).IsRequired();

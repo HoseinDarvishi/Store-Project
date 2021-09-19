@@ -1,5 +1,7 @@
 ﻿using BlogManagement.Domain.ArticleCategoryAgg;
+using BlogManagement.Domain.ArticleCommentAgg;
 using System;
+using System.Collections.Generic;
 
 namespace BlogManagement.Domain.ArticleAgg
 {
@@ -36,6 +38,8 @@ namespace BlogManagement.Domain.ArticleAgg
         public string CanonicalAddress { get; private set; }
 
         public DateTime CreationDate { get;private set; }
+
+        public List<ArticleComment> Comments { get; private set; }
 
 
         public Article(string title, string shortDescription, int categoryId, string description,

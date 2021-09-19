@@ -1,9 +1,6 @@
 ﻿using BlogManagement.Domain.ArticleAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BlogManagement.Infrastacture.EFCore.Mapping
 {
@@ -26,6 +23,7 @@ namespace BlogManagement.Infrastacture.EFCore.Mapping
             builder.Property(x => x.CanonicalAddress).HasMaxLength(1000);
 
             builder.HasOne(x => x.Category).WithMany(x => x.Articles).HasForeignKey(x => x.CategoryId);
+            builder.HasMany(x => x.Comments).WithOne(x => x.Article).HasForeignKey(x => x.ArticleId);
         }
     }
 }
