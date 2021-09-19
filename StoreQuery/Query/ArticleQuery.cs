@@ -20,7 +20,7 @@ namespace StoreQuery.Query
 
         public ArticleQM GetArticle(string slug)
         {
-            return _blogContext.Articles
+            var article = _blogContext.Articles
                 .Include(x => x.Category)
                 .Select(x => new ArticleQM
                 {
@@ -41,6 +41,10 @@ namespace StoreQuery.Query
                 })
                 .AsNoTracking()
                 .FirstOrDefault(x=>x.Slug == slug);
+
+            article.KeywordsList = article.Keywords.Split("   ").ToList();
+
+            return article;
         }
 
         public List<ArticleQM> GetArticelsByCategory(int id)
@@ -131,6 +135,20 @@ namespace StoreQuery.Query
                 .AsNoTracking()
                 .OrderByDescending(x => x.Id)
                 .Take(count)
+                .ToList();
+        }
+
+        public List<ArticleCategoryQM> GetCategoriesAsShort()
+        {
+            return _blogContext.ArticleCategories
+                .Select(x => new ArticleCategoryQM
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Slug = x.Slug,
+                })
+                .OrderBy(x => x.Id)
+                .AsNoTracking()
                 .ToList();
         }
     }

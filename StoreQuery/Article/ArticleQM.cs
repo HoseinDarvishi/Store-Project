@@ -1,4 +1,6 @@
-﻿namespace StoreQuery.Article
+﻿using System.Collections.Generic;
+
+namespace StoreQuery.Article
 {
     public class ArticleQM
     {
@@ -29,6 +31,8 @@
         public string Slug { get; set; }
 
         public string Keywords { get; set; }
+
+        public List<string> KeywordsList { get; set; }
 
         public string CanonicalAddress { get; set; }
     }

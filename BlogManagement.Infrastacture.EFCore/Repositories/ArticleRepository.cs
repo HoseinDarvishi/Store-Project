@@ -1,6 +1,7 @@
 ﻿using BlogManagement.Application.Constract.Article;
 using BlogManagement.Domain.ArticleAgg;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -51,7 +52,7 @@ namespace BlogManagement.Infrastacture.EFCore.Repositories
                 Category = x.Category.Name,
                 Picture = x.Picture,
                 PublishDate = x.PublishDate.ToFarsi(),
-                ShortDescription = x.ShortDescription,
+                ShortDescription = x.ShortDescription.Substring(0,Math.Min(x.ShortDescription.Length , 50)) + " ...",
                 Title = x.Title,
                 CategoryId = x.CategoryId,
                 IsRemoved = x.IsRemove

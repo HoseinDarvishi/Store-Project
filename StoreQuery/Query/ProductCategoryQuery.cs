@@ -25,6 +25,18 @@ namespace StoreQuery.Query
             this.disContext = discountContext;
         }
 
+        public List<ProductCategoryQM> GetCategoriesAsShort()
+        {
+            return context.ProductCategories
+                .Select(x => new ProductCategoryQM
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Slug = x.Slug
+                })
+                .ToList();
+        }
+
         public List<ProductCategoryQM> GetCategories()
         {
             return context.ProductCategories

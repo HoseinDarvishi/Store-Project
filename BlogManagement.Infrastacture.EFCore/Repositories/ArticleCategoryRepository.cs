@@ -42,7 +42,7 @@ namespace BlogManagement.Infrastacture.EFCore.Repositories
 
         public List<ArticleCategoryVM> Search(ArticleCategorySearchModel command)
         {
-            var query = _blogContext.ArticleCategories.Select(x => new ArticleCategoryVM
+            var query = _blogContext.ArticleCategories.Include(x=>x.Articles).Select(x => new ArticleCategoryVM
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -51,7 +51,8 @@ namespace BlogManagement.Infrastacture.EFCore.Repositories
                 PictureAlt = x.PictureAlt,
                 PictureTitle = x.PictureTitle,
                 ShowOrder = x.ShowOrder,
-                CreationDate = x.CreationDate.ToFarsi()
+                CreationDate = x.CreationDate.ToFarsi(),
+                ArticleCount = x.Articles.Where(x=>!x.IsRemove).Count()
             }).AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(command.Name))

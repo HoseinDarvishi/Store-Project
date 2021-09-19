@@ -13,5 +13,6 @@ namespace StoreQuery.Article
         ArticleQM GetArticle(string slug);
 
         List<ArticleCategoryQM> GetCategories();
+        List<ArticleCategoryQM> GetCategoriesAsShort();
     }
 }
