@@ -1,14 +1,15 @@
 ﻿using BlogManagement.Application.Constract.ArticleComment;
 using BlogManagement.Domain.ArticleCommentAgg;
+using System.Collections.Generic;
 using UtilityFreamwork.Application;
 
 namespace BlogManagement.Application
 {
     public class ArticleCommentApplication : IArticleCommentApplication
     {
-        private readonly IArticleCommentRepository _articleCommentRepository;
+        private readonly Domain.ArticleCommentAgg.IArticleCommentRepository _articleCommentRepository;
 
-        public ArticleCommentApplication(IArticleCommentRepository articleCommentRepository)
+        public ArticleCommentApplication(Domain.ArticleCommentAgg.IArticleCommentRepository articleCommentRepository)
         {
             _articleCommentRepository = articleCommentRepository;
         }
@@ -41,6 +42,7 @@ namespace BlogManagement.Application
             return new GenerateResult().Succedded();
         }
 
+
         public GenerateResult Wait(long id)
         {
             var com = _articleCommentRepository.Get(id);
@@ -49,6 +51,11 @@ namespace BlogManagement.Application
 
             com.Wait();
             return new GenerateResult().Succedded();
+        }
+
+        public List<ArticleCommentVM> Search(ArticleCommentSearchModel command)
+        {
+            return _articleCommentRepository.Search(command);
         }
     }
 }

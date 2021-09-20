@@ -70,6 +70,11 @@ namespace BlogManagement.Application
             return _articleRepository.GetDetails(id);
         }
 
+        public List<ArticleVM> GetDropDownLsit()
+        {
+            return _articleRepository.GetDropDownList();
+        }
+
         public GenerateResult Remove(long id)
         {
             if (!_articleRepository.IsExists(x => x.Id == id))

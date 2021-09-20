@@ -17,6 +17,7 @@ namespace BlogManagement.Infrastacture.EFCore.Mapping
             b.Property(x => x.Website).HasMaxLength(500);
 
             b.HasOne(x => x.Article).WithMany(X => X.Comments).HasForeignKey(x => x.ArticleId);
+            b.HasOne(x => x.Parent).WithMany(x => x.Children).HasForeignKey(x => x.ParentId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

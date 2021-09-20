@@ -24,8 +24,8 @@ namespace BlogManagement.Infrastracture.Configuration
             services.AddTransient<IArticleRepository, ArticleRepository>();
             services.AddTransient<Application.Constract.Article.IArticleApplication, ArticleApplication>();
 
-            services.AddTransient<IArticleCommentApplication, ArticleCommentApplication>();
-            services.AddTransient<IArticleCommentRepository, ArticleCommentRepository>();
+            services.AddTransient<Application.Constract.ArticleComment.IArticleCommentApplication, ArticleCommentApplication>();
+            services.AddTransient<Domain.ArticleCommentAgg.IArticleCommentRepository, ArticleCommentRepository>();
 
             services.AddTransient<IArticleQuery, ArticleQuery>();
 

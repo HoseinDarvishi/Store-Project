@@ -14,5 +14,7 @@ namespace BlogManagement.Application.Constract.Article
         List<ArticleVM> Search(ArticleSearchModel command);
 
         EditArticle GetDetails(long id);
+
+        List<ArticleVM> GetDropDownLsit();
     }
 }

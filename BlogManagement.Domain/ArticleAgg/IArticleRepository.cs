@@ -10,5 +10,7 @@ namespace BlogManagement.Domain.ArticleAgg
         EditArticle GetDetails(long id);
 
         Article GetArticleWithCategory(long id);
+
+        List<ArticleVM> GetDropDownList();
     }
 }

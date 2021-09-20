@@ -44,6 +44,17 @@ namespace BlogManagement.Infrastacture.EFCore.Repositories
             .FirstOrDefault(X => X.Id == id);
         }
 
+        public List<ArticleVM> GetDropDownList()
+        {
+           return _blogContext.Articles.Select(x => new ArticleVM
+           {
+                Id = x.Id,
+                Title = x.Title
+           })
+           .AsNoTracking()
+           .ToList();
+        }
+
         public List<ArticleVM> Search(ArticleSearchModel command)
         {
             var query = _blogContext.Articles.Include(X=>X.Category).Select(x => new ArticleVM 
