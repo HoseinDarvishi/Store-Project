@@ -59,7 +59,7 @@ namespace BlogManagement.Infrastacture.EFCore.Repositories
                 .AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(command.Name))
-                query = query.Where(x => x.Name.Contains(command.Name)).Where(x=>x.Message.Contains(command.Name));
+                query = query.Where(x => x.Name.Contains(command.Name) || x.Message.Contains(command.Name));
 
             if (command.Status > 0)
                 query = query.Where(X => X.Status == command.Status);

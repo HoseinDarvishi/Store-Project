@@ -29,6 +29,7 @@ namespace BlogManagement.Application
                 return new GenerateResult().Failed("چنین نظری وجود ندارد");
 
             com.Cancel();
+            _articleCommentRepository.Save();
             return new GenerateResult().Succedded();
         }   
 
@@ -39,6 +40,7 @@ namespace BlogManagement.Application
                 return new GenerateResult().Failed("چنین نظری وجود ندارد");
 
             com.Confirm();
+            _articleCommentRepository.Save();
             return new GenerateResult().Succedded();
         }
 
@@ -50,6 +52,7 @@ namespace BlogManagement.Application
                 return new GenerateResult().Failed("چنین نظری وجود ندارد");
 
             com.Wait();
+            _articleCommentRepository.Save();
             return new GenerateResult().Succedded();
         }
 

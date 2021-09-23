@@ -12,12 +12,12 @@ namespace ServiceHost.Areas.Administration.Pages.Blog.ArticleComments
         private readonly IArticleCommentApplication _commentApplication;
         private readonly IArticleApplication _articleApplication;
 
-        private class statusComment 
+        private class statusComment
         {
             public int Id { get; set; }
             public string Text { get; set; }
 
-            public statusComment(int id , string text)
+            public statusComment(int id, string text)
             {
                 Id = id;
                 Text = text;
@@ -30,14 +30,15 @@ namespace ServiceHost.Areas.Administration.Pages.Blog.ArticleComments
             new statusComment(3 , "تایید شده")
         };
 
-        public IndexModel(IArticleCommentApplication commentRepository)
+        public IndexModel(IArticleCommentApplication commentRepository , IArticleApplication articleApplication)
         {
             _commentApplication = commentRepository;
+            _articleApplication = articleApplication;
         }
 
         public ArticleCommentSearchModel searchModel;
         public List<ArticleCommentVM> comments;
-        public SelectList articles;
+        public SelectList articles { get; set; }
         public SelectList statuses;
 
         public void OnGet(ArticleCommentSearchModel searchModel)
