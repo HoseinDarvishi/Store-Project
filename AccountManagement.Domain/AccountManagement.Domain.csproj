@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DiscountManagement.Application.Constracts\DiscountManagement.Application.Constracts.csproj" />
+    <ProjectReference Include="..\AccountManagement.Application.Constracts\AccountManagement.Application.Constracts.csproj" />
     <ProjectReference Include="..\UtilityFreamwork\UtilityFreamwork.csproj" />
   </ItemGroup>
 

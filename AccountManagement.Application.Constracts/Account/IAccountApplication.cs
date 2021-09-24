@@ -1,0 +1,15 @@
+﻿using System.Collections.Generic;
+using UtilityFreamwork.Application;
+
+namespace AccountManagement.Application.Constracts.Account
+{
+   public interface IAccountApplication
+   {
+      GenerateResult Create(CreateAccount command);
+      GenerateResult ChangePassword(ChangePassword command);
+      GenerateResult ChangeUserName(ChangeUserName command);
+      GenerateResult Upgrade(UpgradeRole command);
+      List<AccountVM> Search(AccountSearchModel command);
+      EditAccount GetDetails(long id);
+   }
+}
