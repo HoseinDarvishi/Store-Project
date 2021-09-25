@@ -1,4 +1,5 @@
 ﻿using AccountManagement.Domain.AccountAgg;
+using AccountManagement.Infrastructure.EFCore.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace AccountManagement.Infrastructure.EFCore

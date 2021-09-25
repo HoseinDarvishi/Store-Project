@@ -6,6 +6,7 @@ namespace AccountManagement.Application.Constracts.Account
    public interface IAccountApplication
    {
       GenerateResult Create(CreateAccount command);
+      GenerateResult Edit(EditAccount command);
       GenerateResult ChangePassword(ChangePassword command);
       GenerateResult ChangeUserName(ChangeUserName command);
       GenerateResult Upgrade(UpgradeRole command);
