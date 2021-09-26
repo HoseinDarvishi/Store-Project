@@ -32,6 +32,18 @@ namespace AccountManagement.Infrastructure.EFCore.Repositories
             .FirstOrDefault(x => x.Id == id);
       }
 
+      public UpgradeRole GetRole(long id)
+      {
+         return _context.Accounts
+            .Select(x => new UpgradeRole
+            {
+               Id = x.Id,
+               Role = x.Role
+            })
+            .AsNoTracking()
+            .FirstOrDefault(x => x.Id == id);
+      }
+
       public List<AccountVM> Search(AccountSearchModel command)
       {
          var query = _context.Accounts

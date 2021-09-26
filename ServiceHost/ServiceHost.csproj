@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Account.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\Admin\assets\bootstrap-inputmask\bootstrap-inputmask.min.js" />
     <None Include="wwwroot\Admin\assets\bootstrap-wysihtml5\bootstrap-wysihtml5.js" />
     <None Include="wwwroot\Admin\assets\bootstrap-wysihtml5\wysihtml5-0.3.0.js" />
@@ -174,6 +178,14 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\ProductPictures\دکور\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Account.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Account.cshtml" />
   </ItemGroup>
 
 </Project>

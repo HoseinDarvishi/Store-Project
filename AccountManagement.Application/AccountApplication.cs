@@ -26,6 +26,11 @@ namespace AccountManagement.Application
          var pass = _passwordHasher.Hash(command.Password);
          var picPath = _fileUploader.Uploader(command.Picture, "ProfilePhotos", "ProfilePhotos");
 
+         if (picPath == null)
+         {
+            picPath = "ProfilePhotos/User-Icon.png";
+         }
+
          var acc = new Account(command.Fullname, command.Username, pass, command.Mobile, picPath, command.Role);
 
          _accountRepository.Create(acc);
@@ -40,13 +45,12 @@ namespace AccountManagement.Application
          if (acc == null)
             return new GenerateResult().Failed("کاربری با این مشخصه وجود ندارد");
 
-         if (_accountRepository.IsExists(x => x.Username == command.Username || x.Mobile == command.Mobile))
+         if (_accountRepository.IsExists(x=>(x.Username == command.Username || x.Mobile == command.Mobile) && x.Id != command.Id))
             return new GenerateResult().Failed("کاربری با همین نام کاربری یا موبایل قبلا ثبت نام کرده است");
 
-         var pass = _passwordHasher.Hash(command.Password);
          var picPath = _fileUploader.Uploader(command.Picture, "ProfilePhotos", "ProfilePhotos");
 
-         acc.Edit(command.Fullname, command.Username, pass, command.Mobile, picPath, command.Role);
+         acc.Edit(command.Fullname, command.Username, command.Mobile, picPath, command.Role);
          _accountRepository.Save();
          return new GenerateResult().Succedded();
       }
@@ -99,6 +103,11 @@ namespace AccountManagement.Application
          acc.Upgrade(command.Role);
          _accountRepository.Save();
          return new GenerateResult().Succedded();
+      }
+
+      public UpgradeRole GetRole(long id)
+      {
+         return _accountRepository.GetRole(id);
       }
    }
 }

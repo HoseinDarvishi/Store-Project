@@ -38,11 +38,10 @@ namespace AccountManagement.Domain.AccountAgg
          CreationDate = DateTime.Now;
       }
 
-      public void Edit(string fullname, string username, string password, string mobile, string picture, UserRole role)
+      public void Edit(string fullname, string username, string mobile, string picture, UserRole role)
       {
          Fullname = fullname;
          Username = username;
-         Password = password;
          Mobile = mobile;
 
          if (!string.IsNullOrWhiteSpace(picture))
