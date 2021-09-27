@@ -31,7 +31,7 @@ namespace AccountManagement.Application
             picPath = "ProfilePhotos/User-Icon.png";
          }
 
-         var acc = new Account(command.Fullname, command.Username, pass, command.Mobile, picPath, command.Role);
+         var acc = new Account(command.Fullname, command.Username, pass, command.Mobile, picPath,command.RoleId);
 
          _accountRepository.Create(acc);
          _accountRepository.Save();
@@ -50,7 +50,7 @@ namespace AccountManagement.Application
 
          var picPath = _fileUploader.Uploader(command.Picture, "ProfilePhotos", "ProfilePhotos");
 
-         acc.Edit(command.Fullname, command.Username, command.Mobile, picPath, command.Role);
+         acc.Edit(command.Fullname, command.Username, command.Mobile, picPath,command.RoleId);
          _accountRepository.Save();
          return new GenerateResult().Succedded();
       }
@@ -100,14 +100,9 @@ namespace AccountManagement.Application
          if (acc == null)
             return new GenerateResult().Failed("کاربری با چنین مشخصات یافت نشد");
 
-         acc.Upgrade(command.Role);
+         acc.Upgrade(command.RoleId);
          _accountRepository.Save();
          return new GenerateResult().Succedded();
-      }
-
-      public UpgradeRole GetRole(long id)
-      {
-         return _accountRepository.GetRole(id);
       }
    }
 }

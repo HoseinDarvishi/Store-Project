@@ -16,7 +16,8 @@ namespace AccountManagement.Infrastructure.EFCore.Mapping
          b.Property(x => x.Password).HasMaxLength(1000).IsRequired();
          b.Property(x => x.Picture).HasMaxLength(1000).IsRequired();
          b.Property(x => x.Mobile).HasMaxLength(20).IsRequired();
-         b.Property(x => x.Role).IsRequired();
+
+         b.HasOne(x => x.Role).WithMany(X => X.Accounts).HasForeignKey(x => x.RoleId);
       }
    }
 }

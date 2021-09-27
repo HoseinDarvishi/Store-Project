@@ -1,12 +1,29 @@
-﻿using System;
+﻿using AccountManagement.Domain.AccountAgg;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AccountManagement.Domain.Role
+namespace AccountManagement.Domain.RoleAgg
 {
-   class Role
+   public class Role
    {
+      public sbyte Id { get; set; }
+
+      public string Name { get; set; }
+
+      public DateTime CreationDate { get; set; }
+
+      public List<Account> Accounts { get; set; }
+
+
+      public Role(string name)
+      {
+         Name = name;
+         CreationDate = DateTime.Now;
+      }
+
+      public void Edit(string name)
+      {
+         Name = name;
+      }
    }
 }

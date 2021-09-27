@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AccountManagement.Application.Constracts.Role;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using UtilityFreamwork.Application;
 
@@ -25,10 +27,14 @@ namespace AccountManagement.Application.Constracts.Account
       public IFormFile Picture { get; set; }
 
       [Range(1, 4)]
-      public UserRole Role { get; set; }
+      public sbyte RoleId { get; set; }
+
+      public string RoleName { get; set; }
 
       public string PicturePath  { get; set; }
 
       public string SignInDate { get; set; }
+
+      public List<EditRole> Roles { get; set; }
    }
 }

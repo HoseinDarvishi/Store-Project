@@ -9,8 +9,6 @@ namespace AccountManagement.Application.Constracts.Account
       GenerateResult Edit(EditAccount command);
       GenerateResult ChangePassword(ChangePassword command);
       GenerateResult ChangeUserName(ChangeUserName command);
-      GenerateResult Upgrade(UpgradeRole command);
-      UpgradeRole GetRole(long id);
       List<AccountVM> Search(AccountSearchModel command);
       EditAccount GetDetails(long id);
    }

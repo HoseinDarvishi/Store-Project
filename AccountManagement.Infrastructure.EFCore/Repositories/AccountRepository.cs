@@ -19,34 +19,24 @@ namespace AccountManagement.Infrastructure.EFCore.Repositories
 
       public EditAccount GetDetails(long id)
       {
-         return _context.Accounts.Select(x => new EditAccount
+         return _context.Accounts.Include(x=>x.Role).Select(x => new EditAccount
          {
             Id = x.Id,
             Fullname = x.Fullname,
             Mobile = x.Mobile,
             Username = x.Username,
-            Role = x.Role,
+            RoleId = x.RoleId,
+            RoleName = x.Role.Name,
             PicturePath = x.Picture,
             SignInDate = x.CreationDate.ToFarsi()
          })
             .FirstOrDefault(x => x.Id == id);
       }
 
-      public UpgradeRole GetRole(long id)
-      {
-         return _context.Accounts
-            .Select(x => new UpgradeRole
-            {
-               Id = x.Id,
-               Role = x.Role
-            })
-            .AsNoTracking()
-            .FirstOrDefault(x => x.Id == id);
-      }
-
       public List<AccountVM> Search(AccountSearchModel command)
       {
          var query = _context.Accounts
+            .Include(x=>x.Role)
             .Select(x => new AccountVM 
             {
                Id = x.Id,
@@ -55,7 +45,8 @@ namespace AccountManagement.Infrastructure.EFCore.Repositories
                Mobile = x.Mobile,
                Picture = x.Picture,
                SignInDate = x.CreationDate.ToFarsi(),
-               Role = x.Role
+               RoleId = x.RoleId,
+               RoleName = x.Role.Name
             })
             .AsNoTracking();
 
@@ -68,8 +59,8 @@ namespace AccountManagement.Infrastructure.EFCore.Repositories
          if (!string.IsNullOrWhiteSpace(command.Username))
             query = query.Where(x => x.Username.Contains(command.Username));
 
-         if (command.Role > 0)
-            query = query.Where(x => x.Role == command.Role);
+         if (command.RoleId > 0)
+            query = query.Where(x => x.RoleId == command.RoleId);
 
          return query.OrderByDescending(x => x.Id).ToList();
       }

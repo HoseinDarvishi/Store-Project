@@ -1,24 +1,30 @@
 using System.Collections.Generic;
 using AccountManagement.Application.Constracts.Account;
+using AccountManagement.Application.Constracts.Role;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ServiceHost.Areas.Administration.Pages.Account.Users
 {
    public class IndexModel : PageModel
    {
       private readonly IAccountApplication _accountApplication;
+      private readonly IRoleApplication _roleApplication;
 
-      public IndexModel(IAccountApplication accountApplication)
+      public IndexModel(IAccountApplication accountApplication , IRoleApplication roleApplication)
       {
          _accountApplication = accountApplication;
+         _roleApplication = roleApplication;
       }
 
       public AccountSearchModel searchModel;
       public List<AccountVM> users;
+      public SelectList roles;
 
       public void OnGet(AccountSearchModel searchModel)
       {
+         roles = new SelectList(_roleApplication.List(), "Id", "Name");
          users = _accountApplication.Search(searchModel);
       }
 
@@ -26,6 +32,7 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Users
       public IActionResult OnGetCreate()
       {
          var create = new CreateAccount();
+         create.Roles = _roleApplication.List();
          return Partial("./Create" , create);
       }
 
@@ -39,6 +46,7 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Users
       public IActionResult OnGetEdit(long id)
       {
          var user = _accountApplication.GetDetails(id);
+         user.Roles = _roleApplication.List();
          return Partial("./Edit", user);
       }
 
@@ -59,19 +67,6 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Users
       public IActionResult OnPostChangePassword(ChangePassword changePassword)
       {
          var res = _accountApplication.ChangePassword(changePassword);
-         return new JsonResult(res);
-      }
-
-      //Upgrade User
-      public IActionResult OnGetUpgrade(long id)
-      {
-         var role = _accountApplication.GetRole(id);
-         return Partial("./Upgrade" , role);
-      }
-
-      public IActionResult OnPostUpgrade(UpgradeRole role)
-      {
-         var res = _accountApplication.Upgrade(role);
          return new JsonResult(res);
       }
    }

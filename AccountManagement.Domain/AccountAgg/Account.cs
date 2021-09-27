@@ -1,5 +1,5 @@
-﻿using System;
-using UtilityFreamwork.Application;
+﻿using AccountManagement.Domain.RoleAgg;
+using System;
 
 namespace AccountManagement.Domain.AccountAgg
 {
@@ -17,12 +17,14 @@ namespace AccountManagement.Domain.AccountAgg
 
       public string Picture { get; private set; }
 
-      public UserRole Role { get; private set; }
+      public sbyte RoleId { get;private set; }
+
+      public Role Role { get; private set; }
 
       public DateTime CreationDate { get; private set; }
 
 
-      public Account(string fullname, string username, string password, string mobile, string picture, UserRole role)
+      public Account(string fullname, string username, string password, string mobile, string picture, sbyte roleId)
       {
          Fullname = fullname;
          Username = username;
@@ -32,13 +34,13 @@ namespace AccountManagement.Domain.AccountAgg
          if (!string.IsNullOrWhiteSpace(picture))
             Picture = picture;
          else
-            Picture = "";
+            Picture = "ProfilePhotos/User-Icon.png";
 
-         Role = role;
+         RoleId = roleId;
          CreationDate = DateTime.Now;
       }
 
-      public void Edit(string fullname, string username, string mobile, string picture, UserRole role)
+      public void Edit(string fullname, string username, string mobile, string picture, sbyte roleId)
       {
          Fullname = fullname;
          Username = username;
@@ -47,13 +49,13 @@ namespace AccountManagement.Domain.AccountAgg
          if (!string.IsNullOrWhiteSpace(picture))
             Picture = picture;
 
-         Role = role;
+         RoleId = roleId;
          CreationDate = DateTime.Now;
       }
 
-      public void Upgrade(UserRole role)
+      public void Upgrade(sbyte roleId)
       {
-         Role = role;
+         RoleId = roleId;
       }
 
       public void ChangePassword(string password)

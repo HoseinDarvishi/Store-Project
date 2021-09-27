@@ -1,7 +1,4 @@
-﻿
-using UtilityFreamwork.Application;
-
-namespace AccountManagement.Application.Constracts.Account
+﻿namespace AccountManagement.Application.Constracts.Account
 {
    public class AccountVM
    {
@@ -13,11 +10,12 @@ namespace AccountManagement.Application.Constracts.Account
 
       public string Picture { get; set; }
 
-      public UserRole Role { get; set; }
+      public sbyte RoleId { get; set; }
 
       public string RoleName { get; set; }
 
       public string SignInDate { get; set; }
+
       public long Id { get; set; }
    }
 }
