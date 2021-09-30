@@ -26,7 +26,7 @@ namespace AccountManagement.Application.Constracts.Account
       [FileExtention(new string[] { ".jpg", ".jpeg", ".png" }, ErrorMessage = "فرمت فایل پشتیبانی نمیشود")]
       public IFormFile Picture { get; set; }
 
-      [Range(1, 4)]
+      [Range(1, 20)]
       public int RoleId { get; set; }
 
       public string RoleName { get; set; }

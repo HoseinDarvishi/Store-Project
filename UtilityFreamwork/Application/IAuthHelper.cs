@@ -5,5 +5,7 @@
       void SignIn(AuthVM account);
       void SignOut();
       bool IsAuthenticated();
+      string CurrentAccountRole();
+      AuthVM CurrentAccountInfo();
    }
 }

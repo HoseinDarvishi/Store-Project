@@ -33,7 +33,7 @@ namespace AccountManagement.Application
             picPath = "ProfilePhotos/User-Icon.png";
          }
 
-         var acc = new Account(command.Fullname, command.Username, pass, command.Mobile, picPath , 0);
+         var acc = new Account(command.Fullname, command.Username, pass, command.Mobile, picPath , command.RoleId);
 
          _accountRepository.Create(acc);
          _accountRepository.Save();
@@ -52,7 +52,7 @@ namespace AccountManagement.Application
 
          var picPath = _fileUploader.Uploader(command.Picture, "ProfilePhotos", "ProfilePhotos");
 
-         acc.Edit(command.Fullname, command.Username, command.Mobile, picPath);
+         acc.Edit(command.Fullname, command.Username, command.Mobile, picPath ,command.RoleId);
          _accountRepository.Save();
          return new GenerateResult().Succedded();
       }

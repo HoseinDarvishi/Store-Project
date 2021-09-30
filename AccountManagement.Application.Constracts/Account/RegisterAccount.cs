@@ -23,7 +23,6 @@ namespace AccountManagement.Application.Constracts.Account
       [Required(ErrorMessage = "این مقدار الزامی است")]
       public string Mobile { get; set; }
 
-      [Required(ErrorMessage = "این مقدار الزامی است")]
       [MaxFileSize(1 * 1024 * 1024, ErrorMessage = "حجم تصویر بیشتر از 2 مگابایت است")]
       [FileExtention(new string[] { ".jpg", ".jpeg", ".png" } , ErrorMessage = "فرمت فایل پشتیبانی نمیشود")]
       public IFormFile Picture { get; set; }

@@ -38,11 +38,13 @@ namespace AccountManagement.Domain.AccountAgg
 
          if (roleId == 0)
             RoleId = 1;
+         else
+            RoleId = roleId;
 
          CreationDate = DateTime.Now;
       }
 
-      public void Edit(string fullname, string username, string mobile, string picture)
+      public void Edit(string fullname, string username, string mobile, string picture , int roleId)
       {
          Fullname = fullname;
          Username = username;
@@ -51,6 +53,7 @@ namespace AccountManagement.Domain.AccountAgg
          if (!string.IsNullOrWhiteSpace(picture))
             Picture = picture;
 
+         RoleId = roleId;
          CreationDate = DateTime.Now;
       }
 

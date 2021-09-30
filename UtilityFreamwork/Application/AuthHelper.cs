@@ -28,7 +28,7 @@ namespace UtilityFreamwork.Application
                 new Claim(ClaimTypes.Role, account.RoleId.ToString()),
                 new Claim("Username", account.Username), // Or Use ClaimTypes.NameIdentifier
                 //new Claim("permissions", permissions),
-                new Claim("Mobile", account.Fullname)
+                new Claim("Mobile", account.Mobile)
             };
 
          var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -46,16 +46,13 @@ namespace UtilityFreamwork.Application
 
       public AuthVM CurrentAccountInfo()
       {
-         var result = new AuthVM();
-         if (!IsAuthenticated())
-            return result;
+         var res = new AuthVM();
 
-         var claims = _contextAccessor.HttpContext.User.Claims.ToList();
-         result.Id = long.Parse(claims.FirstOrDefault(x => x.Type == "AccountId").Value);
-         result.Username = claims.FirstOrDefault(x => x.Type == "Username").Value;
-         result.RoleId = int.Parse(claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value);
-         result.Fullname = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
-         return result;
+         //if (IsAuthenticated())
+            return res;
+
+         //res.Id = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x=>x.)
+         
       }
 
       public List<int> GetPermissions()
@@ -96,8 +93,6 @@ namespace UtilityFreamwork.Application
          var claims = _contextAccessor.HttpContext.User.Claims.ToList();
          return claims.Count > 0;
       }
-
-
 
       public void SignOut()
       {

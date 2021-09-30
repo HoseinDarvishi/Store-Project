@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopManagement.Configuration;
+using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using UtilityFreamwork.Application;
@@ -43,7 +44,6 @@ namespace ServiceHost
          services.AddTransient<IFileUploader, FileUploader>();
          services.AddSingleton<IPasswordHasher, PasswordHasher>();
          services.AddTransient<IAuthHelper, AuthHelper>();
-         services.AddRazorPages();
 
          //Coockies
          services.Configure<CookiePolicyOptions>(options =>
@@ -57,8 +57,29 @@ namespace ServiceHost
          {
             o.LoginPath = new PathString("/Account");
             o.LogoutPath = new PathString("/Account");
-            o.AccessDeniedPath = new PathString("/AccessDenied");
+            o.AccessDeniedPath = new PathString("/NotFound");
          });
+
+         //Authorize
+         services.AddAuthorization(opt =>
+         {
+            opt.AddPolicy("AdminArea", user => user.RequireRole(new List<string> { AccountRoles.Manager, AccountRoles.ContentUploader }));
+            opt.AddPolicy("Shop", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
+            opt.AddPolicy("Inventory", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
+            opt.AddPolicy("Discount", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
+            opt.AddPolicy("Users", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
+         });
+
+         services.AddRazorPages().AddRazorPagesOptions(opt =>
+         {
+            opt.Conventions.AuthorizeAreaFolder("Administration", "/", "AdminArea");
+            opt.Conventions.AuthorizeAreaFolder("Administration", "/Shop", "Shop");
+            opt.Conventions.AuthorizeAreaFolder("Administration", "/Inventory", "Inventory");
+            opt.Conventions.AuthorizeAreaFolder("Administration", "/Discounts", "Discount");
+            opt.Conventions.AuthorizeAreaFolder("Administration", "/Account", "Users");
+         });
+
+         services.AddRazorPages();
       }
 
 
