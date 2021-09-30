@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ServiceHost.Migrations.Account
 {
     [DbContext(typeof(AccountContext))]
-    [Migration("20210927065928_adding-Tables")]
-    partial class addingTables
+    [Migration("20210927152632_EditingSetting")]
+    partial class EditingSetting
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,8 +51,8 @@ namespace ServiceHost.Migrations.Account
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<short>("RoleId")
-                        .HasColumnType("smallint");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -68,10 +68,10 @@ namespace ServiceHost.Migrations.Account
 
             modelBuilder.Entity("AccountManagement.Domain.RoleAgg.Role", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.None);
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");

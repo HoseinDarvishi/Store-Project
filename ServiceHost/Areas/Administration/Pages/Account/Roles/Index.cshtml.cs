@@ -37,7 +37,7 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Roles
 
 
       //Edit
-      public IActionResult OnGetEdit(sbyte id)
+      public IActionResult OnGetEdit(int id)
       {
          var user = _roleApplication.GetDetails(id);
          return Partial("./Edit", user);

@@ -6,6 +6,6 @@ namespace AccountManagement.Application.Constracts.Account
    {
       public long Id { get; set; }
 
-      public sbyte RoleId { get; set; }
+      public int RoleId { get; set; }
    }
 }

@@ -31,14 +31,14 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Users
       // Create
       public IActionResult OnGetCreate()
       {
-         var create = new CreateAccount();
+         var create = new RegisterAccount();
          create.Roles = _roleApplication.List();
          return Partial("./Create" , create);
       }
 
-      public IActionResult OnPostCreate(CreateAccount create)
+      public IActionResult OnPostCreate(RegisterAccount create)
       {
-         var res = _accountApplication.Create(create);
+         var res = _accountApplication.Register(create);
          return new JsonResult(res);
       }
 

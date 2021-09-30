@@ -10,15 +10,17 @@ namespace AccountManagement.Application
       private readonly IAccountRepository _accountRepository;
       private readonly IFileUploader _fileUploader;
       private readonly IPasswordHasher _passwordHasher;
+      private readonly IAuthHelper _authHelper;
 
-      public AccountApplication(IAccountRepository accountRepository , IPasswordHasher passwordHasher , IFileUploader fileUploader)
+      public AccountApplication(IAccountRepository accountRepository , IPasswordHasher passwordHasher , IFileUploader fileUploader , IAuthHelper authHelper)
       {
          _accountRepository = accountRepository;
          _fileUploader = fileUploader;
          _passwordHasher = passwordHasher;
+         _authHelper = authHelper;
       }
 
-      public GenerateResult Create(CreateAccount command)
+      public GenerateResult Register(RegisterAccount command)
       {
          if (_accountRepository.IsExists(x => x.Username == command.Username || x.Mobile == command.Mobile))
             return new GenerateResult().Failed("کاربری با همین نام کاربری یا موبایل قبلا ثبت نام کرده است");
@@ -31,7 +33,7 @@ namespace AccountManagement.Application
             picPath = "ProfilePhotos/User-Icon.png";
          }
 
-         var acc = new Account(command.Fullname, command.Username, pass, command.Mobile, picPath,command.RoleId);
+         var acc = new Account(command.Fullname, command.Username, pass, command.Mobile, picPath , 0);
 
          _accountRepository.Create(acc);
          _accountRepository.Save();
@@ -50,7 +52,7 @@ namespace AccountManagement.Application
 
          var picPath = _fileUploader.Uploader(command.Picture, "ProfilePhotos", "ProfilePhotos");
 
-         acc.Edit(command.Fullname, command.Username, command.Mobile, picPath,command.RoleId);
+         acc.Edit(command.Fullname, command.Username, command.Mobile, picPath);
          _accountRepository.Save();
          return new GenerateResult().Succedded();
       }
@@ -103,6 +105,28 @@ namespace AccountManagement.Application
          acc.Upgrade(command.RoleId);
          _accountRepository.Save();
          return new GenerateResult().Succedded();
+      }
+
+      public GenerateResult Login(Login command)
+      {
+         var acc = _accountRepository.GetBy(command.Username);
+
+         if (acc == null)
+            return new GenerateResult().Failed("رمز یا نام کاربری اشتباه است");
+
+         (bool Verified , bool NeedsUpgrade) result = _passwordHasher.Check(acc.Password, command.Password);
+
+         if (!result.Verified)
+            return new GenerateResult().Failed("رمز یا نام کاربری اشتباه است");
+
+         var auth = new AuthVM {Id=acc.Id , Fullname=acc.Fullname , Username=acc.Username , RoleId=acc.RoleId};
+         _authHelper.SignIn(auth);
+         return new GenerateResult().Succedded();
+      }
+
+      public void Logout()
+      {
+         _authHelper.SignOut();
       }
    }
 }

@@ -8,6 +8,6 @@ namespace AccountManagement.Application.Constracts.Role
       GenerateResult Create(CreateRole command);
       GenerateResult Edit(EditRole command);
       List<EditRole> List();
-      EditRole GetDetails(sbyte id);
+      EditRole GetDetails(int id);
    }
 }

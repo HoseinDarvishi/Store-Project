@@ -31,8 +31,12 @@
                <div class="page-content-wrapper">
                   <div class="row">
                      <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6">
-                        <form action="#">
+                        <form method="post" asp-page-handler="Login">
                            <div class="login-form">
+                              @if (TempData["Login"] != null)
+                              {
+                              <div class="alert alert-danger p-3">@TempData["Login"]</div>
+                              }
                               <h4 class="login-title">ورود</h4>
                               <div class="row">
                                  <div class="col-md-12 col-12">
@@ -41,7 +45,7 @@
                                  </div>
                                  <div class="col-12">
                                     <label>رمز عبور</label>
-                                    <input type="password" name="username" placeholder="رمز عبور خود را وارد کنید">
+                                    <input type="password" name="password" placeholder="رمز عبور خود را وارد کنید">
                                  </div>
 
                                  @*<div class="col-sm-6">
@@ -65,31 +69,34 @@
                         </form>
                      </div>
                      <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
-                        <form action="#">
-
+                        <form method="post" asp-page-handler="Register">
+                           @if (TempData["Register"] != null)
+                           {
+                              <div class="alert alert-danger p-3">@TempData["Register"]</div>
+                           }
                            <div class="login-form">
                               <h4 class="login-title">ثبت نام</h4>
 
                               <div class="row">
                                  <div class="col-md-6 col-12 mb-20">
                                     <label>نام کامل</label>
-                                    <input type="text" placeholder="مثال : رضا رضایی">
+                                    <input name="fullname" type="text" placeholder="مثال : رضا رضایی">
                                  </div>
                                  <div class="col-md-6 col-12 mb-20">
                                     <label>نام کاربری</label>
-                                    <input type="text" placeholder="نام کاربری را وارد کنید">
+                                    <input name="username" type="text" placeholder="نام کاربری را وارد کنید">
                                  </div>
                                  <div class="col-md-12 mb-20">
                                     <label>موبایل</label>
-                                    <input type="number" placeholder="09*********">
+                                    <input name="mobile" type="number" placeholder="09*********">
                                  </div>
                                  <div class="col-md-6 mb-20">
                                     <label>رمز عبور</label>
-                                    <input type="password" placeholder=" رمز عبور">
+                                    <input name="password" type="password" placeholder=" رمز عبور">
                                  </div>
                                  <div class="col-md-6 mb-20">
                                     <label>تکرار رمز عبور</label>
-                                    <input type="password" placeholder="رمز عبور خود را دوباره وارد کنید">
+                                    <input name="repassword" type="password" placeholder="رمز عبور خود را دوباره وارد کنید">
                                  </div>
                                  <div class="col-12">
                                     <button class="register-button mt-0">ثبت نام</button>

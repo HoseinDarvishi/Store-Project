@@ -20,11 +20,10 @@ namespace AccountManagement.Application
             return new GenerateResult().Failed("قبلا با همین نام نقش دیگری اضافه شده است");
 
          var role = new Role(command.Name);
-         _repository.Create(role);
+         _repository.create(role);
          _repository.Save();
          return new GenerateResult().Succedded();
       }
-
       public GenerateResult Edit(EditRole command)
       {
          var role = _repository.Get(command.Id);
@@ -40,12 +39,10 @@ namespace AccountManagement.Application
          return new GenerateResult().Succedded();
 
       }
-
-      public EditRole GetDetails(sbyte id)
+      public EditRole GetDetails(int id)
       {
          return _repository.GetDetails(id);
       }
-
       public List<EditRole> List()
       {
          return _repository.List();

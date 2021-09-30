@@ -1,6 +1,7 @@
 ﻿using AccountManagement.Domain.RoleAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 namespace AccountManagement.Infrastructure.EFCore.Mapping
 {
    public class RoleMapping : IEntityTypeConfiguration<Role>

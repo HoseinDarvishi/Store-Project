@@ -10,7 +10,7 @@
 
       public string Picture { get; set; }
 
-      public sbyte RoleId { get; set; }
+      public int RoleId { get; set; }
 
       public string RoleName { get; set; }
 

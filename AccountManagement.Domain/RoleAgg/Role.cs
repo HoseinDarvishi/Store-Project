@@ -6,14 +6,13 @@ namespace AccountManagement.Domain.RoleAgg
 {
    public class Role
    {
-      public sbyte Id { get; set; }
+      public int Id { get; set; }
 
       public string Name { get; set; }
 
       public DateTime CreationDate { get; set; }
 
       public List<Account> Accounts { get; set; }
-
 
       public Role(string name)
       {

@@ -27,7 +27,7 @@ namespace AccountManagement.Application.Constracts.Account
       public IFormFile Picture { get; set; }
 
       [Range(1, 4)]
-      public sbyte RoleId { get; set; }
+      public int RoleId { get; set; }
 
       public string RoleName { get; set; }
 

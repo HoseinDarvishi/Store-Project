@@ -6,7 +6,7 @@ using UtilityFreamwork.Application;
 
 namespace AccountManagement.Application.Constracts.Account
 {
-   public class CreateAccount
+   public class RegisterAccount
    {
       [Required(ErrorMessage = "این مقدار الزامی است")]
       public string Fullname { get; set; }
@@ -18,16 +18,16 @@ namespace AccountManagement.Application.Constracts.Account
       public string Password { get; set; }
 
       [Required(ErrorMessage = "این مقدار الزامی است")]
+      public string RePassword { get; set; }
+
+      [Required(ErrorMessage = "این مقدار الزامی است")]
       public string Mobile { get; set; }
 
       [Required(ErrorMessage = "این مقدار الزامی است")]
       [MaxFileSize(1 * 1024 * 1024, ErrorMessage = "حجم تصویر بیشتر از 2 مگابایت است")]
       [FileExtention(new string[] { ".jpg", ".jpeg", ".png" } , ErrorMessage = "فرمت فایل پشتیبانی نمیشود")]
       public IFormFile Picture { get; set; }
-
-      [Range(1,10)]
-      public sbyte RoleId { get; set; }
-
+      public int RoleId { get; set; }
       public List<EditRole> Roles { get; set; }
    }
 }

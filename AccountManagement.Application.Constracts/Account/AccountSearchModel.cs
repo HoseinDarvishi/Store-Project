@@ -9,6 +9,6 @@ namespace AccountManagement.Application.Constracts.Account
 
       public string Mobile { get; set; }
 
-      public sbyte RoleId { get; set; }
+      public int RoleId { get; set; }
    }
 }

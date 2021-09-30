@@ -4,9 +4,10 @@ using UtilityFreamwork.Repository;
 
 namespace AccountManagement.Domain.RoleAgg
 {
-   public interface IRoleRepository : IRepository<sbyte , Role>
+   public interface IRoleRepository : IRepository<int, Role>
    {
       List<EditRole> List();
-      EditRole GetDetails(sbyte id);
+      EditRole GetDetails(int id);
+      void create(Role role);
    }
 }

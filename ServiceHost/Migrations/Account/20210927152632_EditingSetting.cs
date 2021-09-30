@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ServiceHost.Migrations.Account
 {
-    public partial class addingTables : Migration
+    public partial class EditingSetting : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,8 @@ namespace ServiceHost.Migrations.Account
                 name: "Roles",
                 columns: table => new
                 {
-                    Id = table.Column<short>(type: "smallint", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -31,7 +32,7 @@ namespace ServiceHost.Migrations.Account
                     Password = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     Mobile = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Picture = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    RoleId = table.Column<short>(type: "smallint", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

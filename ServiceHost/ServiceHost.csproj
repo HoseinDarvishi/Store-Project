@@ -185,8 +185,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Migrations\Account\20210927065928_adding-Tables.cs" />
-    <Compile Include="Migrations\Account\20210927065928_adding-Tables.Designer.cs" />
+    <Compile Include="Migrations\Account\20210927152632_EditingSetting.cs" />
+    <Compile Include="Migrations\Account\20210927152632_EditingSetting.Designer.cs" />
     <Compile Include="Migrations\Account\AccountContextModelSnapshot.cs" />
   </ItemGroup>
 

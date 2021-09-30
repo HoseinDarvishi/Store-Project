@@ -17,14 +17,14 @@ namespace AccountManagement.Domain.AccountAgg
 
       public string Picture { get; private set; }
 
-      public sbyte RoleId { get;private set; }
+      public int RoleId { get;private set; }
 
       public Role Role { get; private set; }
 
       public DateTime CreationDate { get; private set; }
 
 
-      public Account(string fullname, string username, string password, string mobile, string picture, sbyte roleId)
+      public Account(string fullname, string username, string password, string mobile, string picture,int roleId)
       {
          Fullname = fullname;
          Username = username;
@@ -36,11 +36,13 @@ namespace AccountManagement.Domain.AccountAgg
          else
             Picture = "ProfilePhotos/User-Icon.png";
 
-         RoleId = roleId;
+         if (roleId == 0)
+            RoleId = 1;
+
          CreationDate = DateTime.Now;
       }
 
-      public void Edit(string fullname, string username, string mobile, string picture, sbyte roleId)
+      public void Edit(string fullname, string username, string mobile, string picture)
       {
          Fullname = fullname;
          Username = username;
@@ -49,11 +51,10 @@ namespace AccountManagement.Domain.AccountAgg
          if (!string.IsNullOrWhiteSpace(picture))
             Picture = picture;
 
-         RoleId = roleId;
          CreationDate = DateTime.Now;
       }
 
-      public void Upgrade(sbyte roleId)
+      public void Upgrade(int roleId)
       {
          RoleId = roleId;
       }

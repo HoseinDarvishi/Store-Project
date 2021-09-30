@@ -8,7 +8,7 @@ using UtilityFreamwork.Repository;
 
 namespace AccountManagement.Infrastructure.EFCore.Repositories
 {
-   public class RoleRepository : Repository<sbyte, Role>, IRoleRepository
+   public class RoleRepository : Repository<int, Role>, IRoleRepository
    {
       private readonly AccountContext _context;
 
@@ -17,7 +17,13 @@ namespace AccountManagement.Infrastructure.EFCore.Repositories
          _context = context;
       }
 
-      public EditRole GetDetails(sbyte id)
+      public void create(Role role)
+      {
+         _context.Roles.Add(role);
+         Save();
+      }
+
+      public EditRole GetDetails(int id)
       {
          return _context.Roles.Select(x=> new EditRole 
          {
