@@ -45,7 +45,7 @@ namespace ServiceHost
          services.AddSingleton<IPasswordHasher, PasswordHasher>();
          services.AddTransient<IAuthHelper, AuthHelper>();
 
-         //Coockies
+         //Coockies ==> Authentication
          services.Configure<CookiePolicyOptions>(options =>
          {
             options.CheckConsentNeeded = context => true;
@@ -63,9 +63,9 @@ namespace ServiceHost
          //Authorize
          services.AddAuthorization(opt =>
          {
-            opt.AddPolicy("AdminArea", user => user.RequireRole(new List<string> { AccountRoles.Manager, AccountRoles.ContentUploader }));
+            opt.AddPolicy("AdminArea", user => user.RequireRole(new List<string> { AccountRoles.Manager, AccountRoles.ContentUploader,AccountRoles.Inventor }));
             opt.AddPolicy("Shop", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
-            opt.AddPolicy("Inventory", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
+            opt.AddPolicy("Inventory", user => user.RequireRole(new List<string> { AccountRoles.Manager , AccountRoles.Inventor}));
             opt.AddPolicy("Discount", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
             opt.AddPolicy("Users", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
          });

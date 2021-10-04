@@ -19,11 +19,12 @@ namespace AccountManagement.Application
          if (_repository.IsExists(x => x.Name == command.Name))
             return new GenerateResult().Failed("قبلا با همین نام نقش دیگری اضافه شده است");
 
-         var role = new Role(command.Name);
+         var role = new Role(command.Name , new List<Permission>());
          _repository.create(role);
          _repository.Save();
          return new GenerateResult().Succedded();
       }
+
       public GenerateResult Edit(EditRole command)
       {
          var role = _repository.Get(command.Id);
@@ -34,15 +35,17 @@ namespace AccountManagement.Application
          if (_repository.IsExists(x => x.Name == command.Name && x.Id != command.Id))
             return new GenerateResult().Failed("قبلا با همین نام نقش دیگری اضافه شده است");
 
-         role.Edit(command.Name);
+         role.Edit(command.Name, new List<Permission>());
          _repository.Save();
          return new GenerateResult().Succedded();
 
       }
+
       public EditRole GetDetails(int id)
       {
          return _repository.GetDetails(id);
       }
+
       public List<EditRole> List()
       {
          return _repository.List();

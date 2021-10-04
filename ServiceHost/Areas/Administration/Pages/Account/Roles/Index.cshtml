@@ -11,7 +11,7 @@
    <div class="col-sm-12">
       <h4 class=" page-title pull-right">@ViewData["title"]</h4>
       <p class="pull-left">
-         <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index" , "Create")">ایجاد نقش جدید</a>
+         <a class="btn btn-success btn-lg" asp-page="./Create">ایجاد نقش جدید</a>
       </p>
    </div>
 </div>
@@ -44,7 +44,7 @@
                               <td>@role.CreationDate</td>
                               <td>
 
-                                 <a href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = role.Id})" class="btn btn-warning mx-2">
+                                 <a asp-page="./Edit" asp-route-id="@role.Id" class="btn btn-warning mx-2">
                                     <i class="fa fa-edit"></i> ویرایش
                                  </a>
 

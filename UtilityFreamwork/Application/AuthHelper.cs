@@ -5,7 +5,6 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 
 namespace UtilityFreamwork.Application
 {
@@ -28,7 +27,7 @@ namespace UtilityFreamwork.Application
                 new Claim(ClaimTypes.Role, account.RoleId.ToString()),
                 new Claim("Username", account.Username), // Or Use ClaimTypes.NameIdentifier
                 //new Claim("permissions", permissions),
-                new Claim("Mobile", account.Mobile)
+                //new Claim("Mobile", account.Mobile.ToString())
             };
 
          var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -48,21 +47,17 @@ namespace UtilityFreamwork.Application
       {
          var res = new AuthVM();
 
-         //if (IsAuthenticated())
+         if (!IsAuthenticated())
             return res;
 
-         //res.Id = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x=>x.)
-         
-      }
+         res.Id =long.Parse(_contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "AccountId")?.Value);
+         res.Fullname = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
+         res.Username = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Username")?.Value;
+         res.RoleId = int.Parse(_contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value);
+         res.Mobile = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Mobile")?.Value;
+         res.Role = AccountRoles.GetRoleBy(res.RoleId);
 
-      public List<int> GetPermissions()
-      {
-         if (!IsAuthenticated())
-            return new List<int>();
-
-         var permissions = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "permissions")
-             ?.Value;
-         return JsonConvert.DeserializeObject<List<int>>(permissions);
+         return res;
       }
 
       public long CurrentAccountId()
@@ -70,13 +65,6 @@ namespace UtilityFreamwork.Application
          return IsAuthenticated()
              ? long.Parse(_contextAccessor.HttpContext.User.Claims.First(x => x.Type == "AccountId")?.Value)
              : 0;
-      }
-
-      public string CurrentAccountMobile()
-      {
-         return IsAuthenticated()
-             ? _contextAccessor.HttpContext.User.Claims.First(x => x.Type == "Mobile")?.Value
-             : "";
       }
 
       public string CurrentAccountRole()
