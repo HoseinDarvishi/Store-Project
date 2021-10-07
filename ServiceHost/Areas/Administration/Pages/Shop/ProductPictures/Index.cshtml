@@ -1,4 +1,5 @@
 ﻿@page
+@using UtilityFreamwork.Infra
 @model Areas.Administration.Pages.Shop.ProductPictures.IndexModel
 @{
 }
@@ -13,7 +14,7 @@
     <div class="col-sm-12">
         <h4 class=" page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index" , "Create")">ایجاد عکس محصول جدید</a>
+            <a permission="@ShopPermissions.CreateProductPictures" class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index" , "Create")">ایجاد عکس محصول جدید</a>
         </p>
     </div>
 </div>
@@ -40,7 +41,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div permission="@ShopPermissions.ListProductPictures" class="row" id="ProductCategoriesDiv">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -70,18 +71,18 @@
                                         <td>@picture.Product</td>
                                         <td>@picture.CreationDate</td>
                                         <td>
-                                            <a href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = picture.Id})" class="btn btn-warning mx-2">
+                                            <a permission="@ShopPermissions.EditProductPictures" href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = picture.Id})" class="btn btn-warning mx-2">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
                                             @if (picture.IsRemoved)
                                             {
-                                                <a href="@Url.Page("./Index", "Restore" ,new {id = picture.Id})" class="btn btn-success mx-2">
+                                                <a permission="@ShopPermissions.RestoreProductPictures" href="@Url.Page("./Index", "Restore" ,new {id = picture.Id})" class="btn btn-success mx-2">
                                                     <i class="fa fa-edit"></i> بازگردانی
                                                 </a>
                                             }
                                             else
                                             {
-                                                <a href="@Url.Page("./Index", "Remove" ,new {id = picture.Id})" class="btn btn-danger mx-2">
+                                                <a permission="@ShopPermissions.DeleteProductPictures" href="@Url.Page("./Index", "Remove" ,new {id = picture.Id})" class="btn btn-danger mx-2">
                                                     <i class="fa fa-edit"></i> حذف
                                                 </a>
                                             }

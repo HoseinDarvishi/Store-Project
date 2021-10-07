@@ -1,4 +1,5 @@
 ﻿@page
+@using UtilityFreamwork.Infra
 @model Areas.Administration.Pages.Shop.Products.IndexModel
 @{
 }
@@ -12,20 +13,20 @@
 <div class="row">
     <div class="col-sm-12">
         <h4 class=" page-title pull-right">@ViewData["title"]</h4>
-        <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index" , "Create")">ایجاد محصول جدید</a>
+        <p  class="pull-left">
+            <a permission="@ShopPermissions.CreateProduct" class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index" , "Create")">ایجاد محصول جدید</a>
         </p>
     </div>
 </div>
 
-<div class="row">
+<div permission="@ShopPermissions.SearchProduct" class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading ">
                 <h3 class="panel-title">جستجو در محصولات</h3>
             </div>
             <div class="panel-body">
-                <form class="form-inline" role="form" method="get">
+                <form  class="form-inline" role="form" method="get">
                     <div class="form-group">
                         <label class="sr-only" asp-for="@Model.searchModel.Name"></label>
                         <input class="form-control" asp-for="@Model.searchModel.Name" placeholder="نام محصول">
@@ -48,7 +49,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div permission="@ShopPermissions.ListProducts" class="row" id="ProductCategoriesDiv">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -81,8 +82,9 @@
                                         <td>@product.Code</td>
                                         <td>@product.Category</td>
                                         <td>@product.CreationDate</td>
-                                        <td>
-                                            <a href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = product.Id})" class="btn btn-warning pull-right mx-2">
+
+                                        <td permission="@ShopPermissions.EditProduct">
+                                            <a permission="@ShopPermissions.EditProduct" href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = product.Id})" class="btn btn-warning pull-right mx-2">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
                                         </td>

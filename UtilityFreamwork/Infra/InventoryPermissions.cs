@@ -8,5 +8,6 @@
       public const int EditInventory = 53;
       public const int IncreaseInventory = 54;
       public const int ReduceInventory = 55;
+      public const int OperationLog = 56;
    }
 }

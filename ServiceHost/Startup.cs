@@ -70,7 +70,9 @@ namespace ServiceHost
             opt.AddPolicy("Users", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
          });
 
-         services.AddRazorPages().AddRazorPagesOptions(opt =>
+         services.AddRazorPages()
+            .AddMvcOptions(opt=> opt.Filters.Add<SecurityPageFilter>())
+            .AddRazorPagesOptions(opt =>
          {
             opt.Conventions.AuthorizeAreaFolder("Administration", "/", "AdminArea");
             opt.Conventions.AuthorizeAreaFolder("Administration", "/Shop", "Shop");

@@ -18,7 +18,8 @@ namespace InventoryManagement.Infrastructure.Configuration
                   new PermissionDto(InventoryPermissions.CreateInventory , "ایجاد انبار "),
                   new PermissionDto(InventoryPermissions.EditInventory , "ویرایش انبار"),
                   new PermissionDto(InventoryPermissions.ReduceInventory , "کاهش موجودی انبار"),
-                  new PermissionDto(InventoryPermissions.IncreaseInventory , "افزایش موجودی انبار")
+                  new PermissionDto(InventoryPermissions.IncreaseInventory , "افزایش موجودی انبار"),
+                  new PermissionDto(InventoryPermissions.OperationLog , "مشاهده گردشهای انبار")
                }
             }
          };

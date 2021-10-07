@@ -1,11 +1,12 @@
 ﻿@page
+@using UtilityFreamwork.Infra
 @model ServiceHost.Areas.Administration.Pages.Shop.Comments.IndexModel
 @{
     Layout = "Shared/_AdminLayout";
     ViewData["title"] = "مدیریت نظرات";
 }
 
-<div class="row">
+<div permission="@ShopPermissions.ListComments" class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading ">
@@ -35,7 +36,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div permission="@ShopPermissions.ListComments" class="row" id="ProductCategoriesDiv">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -90,14 +91,14 @@
                                         <td>
                                             @if (comment.StatusComment == UtilityFreamwork.Application.StatusComment.Wait || comment.StatusComment == UtilityFreamwork.Application.StatusComment.Confirmed)
                                             {
-                                                <a asp-page="./Index" asp-page-handler="InPublish" asp-route-id="@comment.Id" class="btn btn-danger pull-right mx-2">
+                                                <a permission="@ShopPermissions.ChangeStatus" asp-page="./Index" asp-page-handler="InPublish" asp-route-id="@comment.Id" class="btn btn-danger pull-right mx-2">
                                                     <i class="fa fa-edit"></i> رد کردن
                                                 </a>
                                             }
 
                                             @if (comment.StatusComment == UtilityFreamwork.Application.StatusComment.Wait || comment.StatusComment == UtilityFreamwork.Application.StatusComment.Canceled)
                                             {
-                                                <a asp-page="./Index" asp-page-handler="Publish" asp-route-id="@comment.Id" class="btn btn-success pull-right mx-2">
+                                                <a permission="@ShopPermissions.ChangeStatus" asp-page="./Index" asp-page-handler="Publish" asp-route-id="@comment.Id" class="btn btn-success pull-right mx-2">
                                                     <i class="fa fa-edit"></i> تایید
                                                 </a>
                                             }

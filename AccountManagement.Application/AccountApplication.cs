@@ -1,6 +1,8 @@
 ﻿using AccountManagement.Application.Constracts.Account;
 using AccountManagement.Domain.AccountAgg;
+using AccountManagement.Domain.RoleAgg;
 using System.Collections.Generic;
+using System.Linq;
 using UtilityFreamwork.Application;
 
 namespace AccountManagement.Application
@@ -11,13 +13,15 @@ namespace AccountManagement.Application
       private readonly IFileUploader _fileUploader;
       private readonly IPasswordHasher _passwordHasher;
       private readonly IAuthHelper _authHelper;
+      private readonly IRoleRepository _roleRepository;
 
-      public AccountApplication(IAccountRepository accountRepository , IPasswordHasher passwordHasher , IFileUploader fileUploader , IAuthHelper authHelper)
+      public AccountApplication(IAccountRepository accountRepository , IPasswordHasher passwordHasher , IFileUploader fileUploader , IAuthHelper authHelper, IRoleRepository roleRepository)
       {
          _accountRepository = accountRepository;
          _fileUploader = fileUploader;
          _passwordHasher = passwordHasher;
          _authHelper = authHelper;
+         _roleRepository = roleRepository;
       }
 
       public GenerateResult Register(RegisterAccount command)
@@ -119,7 +123,9 @@ namespace AccountManagement.Application
          if (!result.Verified)
             return new GenerateResult().Failed("رمز یا نام کاربری اشتباه است");
 
-         var auth = new AuthVM {Id=acc.Id , Fullname=acc.Fullname , Username=acc.Username , RoleId=acc.RoleId};
+         var permissions = _roleRepository.Get(acc.RoleId).Permissions.Select(x=> x.Code).ToList();
+
+         var auth = new AuthVM {Id=acc.Id , Fullname=acc.Fullname , Username=acc.Username , RoleId=acc.RoleId , PermissionsCode = permissions};
          _authHelper.SignIn(auth);
          return new GenerateResult().Succedded();
       }

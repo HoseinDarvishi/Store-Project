@@ -12,39 +12,47 @@ namespace ShopManagement.Configuration.Permissions
             {
                "محصولات", new List<PermissionDto>
                {
-                  new PermissionDto(ProductPermissions.ListProducts , "مشاهده لیست"),
-                  new PermissionDto(ProductPermissions.SearchProduct , "جستجو در محصولات"),
-                  new PermissionDto(ProductPermissions.CreateProduct , "ایجاد محصول "),
-                  new PermissionDto(ProductPermissions.EditProduct , "ویرایش محصول")
+                  new PermissionDto(ShopPermissions.ListProducts , "مشاهده لیست"),
+                  new PermissionDto(ShopPermissions.SearchProduct , "جستجو در محصولات"),
+                  new PermissionDto(ShopPermissions.CreateProduct , "ایجاد محصول "),
+                  new PermissionDto(ShopPermissions.EditProduct , "ویرایش محصول")
                }
             },
 
             {
                "گروه محصولات", new List<PermissionDto>
                {
-                  new PermissionDto(ProductCategoryPermissions.List , "مشاهده لیست گروه محصولات"),
-                  new PermissionDto(ProductCategoryPermissions.Search , "جستجو در گروه ها"),
-                  new PermissionDto(ProductCategoryPermissions.Create, "ایجاد گروه"),
-                  new PermissionDto(ProductCategoryPermissions.Edit, "ویرایش گروه محصولات")
+                  new PermissionDto(ShopPermissions.ListProductCategories , "مشاهده لیست گروه محصولات"),
+                  new PermissionDto(ShopPermissions.SearchProductCategories , "جستجو در گروه ها"),
+                  new PermissionDto(ShopPermissions.CreateProductCategory, "ایجاد گروه"),
+                  new PermissionDto(ShopPermissions.EditProductCategory, "ویرایش گروه محصولات")
                }
             },
 
             {
                "اسلاید", new List<PermissionDto>
                {
-                  new PermissionDto(SlidePermissions.List , "مشاهده لیست اسلایدها"),
-                  new PermissionDto(SlidePermissions.Create, "ایجاد اسلاید"),
-                  new PermissionDto(SlidePermissions.Edit, "ویرایش اسلاید"),
-                  new PermissionDto(SlidePermissions.Delete, "حذف اسلاید")
+                  new PermissionDto(ShopPermissions.ListSlides , "مشاهده لیست اسلایدها"),
+                  new PermissionDto(ShopPermissions.CreateSlide, "ایجاد اسلاید"),
+                  new PermissionDto(ShopPermissions.EditSlide, "ویرایش اسلاید"),
+                  new PermissionDto(ShopPermissions.DeleteSlide, "حذف اسلاید"),
+                  new PermissionDto(ShopPermissions.RestoreSlide, "بازگردانی اسلاید")
                }
             },
             {
                "عکس محصولات", new List<PermissionDto>
                {
-                  new PermissionDto(ProductPicturePermissions.List , "مشاهده لیست عکسها"),
-                  new PermissionDto(ProductPicturePermissions.Create, "ایجاد عکس"),
-                  new PermissionDto(ProductPicturePermissions.Edit, "ویرایش عکس"),
-                  new PermissionDto(ProductPicturePermissions.Delete, "حذف عکس")
+                  new PermissionDto(ShopPermissions.ListProductPictures , "مشاهده لیست عکسها"),
+                  new PermissionDto(ShopPermissions.CreateProductPictures, "ایجاد عکس"),
+                  new PermissionDto(ShopPermissions.EditProductPictures, "ویرایش عکس"),
+                  new PermissionDto(ShopPermissions.DeleteProductPictures, "حذف عکس")
+               }
+            },
+            {
+               "نظرات", new List<PermissionDto>
+               {
+                  new PermissionDto(ShopPermissions.ListComments , "مشاهده لیست نظرات محصولات"),
+                  new PermissionDto(ShopPermissions.ChangeStatus, "تایید یا رد نظرات محصول")
                }
             }
          };

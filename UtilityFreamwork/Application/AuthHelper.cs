@@ -5,6 +5,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace UtilityFreamwork.Application
 {
@@ -19,14 +20,14 @@ namespace UtilityFreamwork.Application
 
       public void SignIn(AuthVM account)
       {
-         //var permissions = JsonConvert.SerializeObject(account.Permissions);
+         var permissions = JsonConvert.SerializeObject(account.PermissionsCode);
          var claims = new List<Claim>
             {
                 new Claim("AccountId", account.Id.ToString()),
                 new Claim(ClaimTypes.Name, account.Fullname),
                 new Claim(ClaimTypes.Role, account.RoleId.ToString()),
-                new Claim("Username", account.Username), // Or Use ClaimTypes.NameIdentifier
-                //new Claim("permissions", permissions),
+                new Claim("Username", account.Username),                      // Or Use ClaimTypes.NameIdentifier
+                new Claim("permissions", permissions),
                 //new Claim("Mobile", account.Mobile.ToString())
             };
 
@@ -76,15 +77,20 @@ namespace UtilityFreamwork.Application
 
       public bool IsAuthenticated()
       {
-         //return _contextAccessor.HttpContext.User.Identity.IsAuthenticated;
-
-         var claims = _contextAccessor.HttpContext.User.Claims.ToList();
-         return claims.Count > 0;
+         return _contextAccessor.HttpContext.User.Identity.IsAuthenticated;
       }
 
       public void SignOut()
       {
          _contextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+      }
+
+      public List<int> GetPermissionCodes()
+      {
+         if (!IsAuthenticated())
+            return new List<int>();
+         var permission = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "permissions")?.Value;
+         return JsonConvert.DeserializeObject<List<int>>(permission);
       }
    }
 }
