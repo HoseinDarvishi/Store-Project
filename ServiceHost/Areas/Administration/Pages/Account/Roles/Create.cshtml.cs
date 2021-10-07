@@ -10,12 +10,12 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Roles
    public class CreateModel : PageModel
    {
       private readonly IRoleApplication _roleApplication;
-      private readonly IEnumerable<IPermissionExposer> _permissionExposers;
+      private readonly IEnumerable<IPermissionExposer> _exposers;
 
       public CreateModel(IRoleApplication roleApplication , IEnumerable<IPermissionExposer> permissionExposers)
       {
          _roleApplication = roleApplication;
-         _permissionExposers = permissionExposers;
+         _exposers = permissionExposers;
       }
 
       public CreateRole Command { get; set; }
@@ -23,6 +23,29 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Roles
 
       public void OnGet()
       {
+         // Get Permissions
+         var permissions = new List<PermissionDto>();
+         foreach (var exposer in _exposers)
+         {
+            var exposedPer = exposer.Expose();
+
+            foreach (var (key, value) in exposedPer)
+            {
+               permissions.AddRange(value);
+
+               var group = new SelectListGroup() { Name = key };
+
+               foreach (var permission in value)
+               {
+                  var item = new SelectListItem(permission.Name, permission.Code.ToString())
+                  {
+                     Group = group
+                  };
+
+                  Permissions.Add(item);
+               }
+            }
+         }
       }
 
       public RedirectToPageResult OnPost(CreateRole Command)
