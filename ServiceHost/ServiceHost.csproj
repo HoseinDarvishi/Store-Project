@@ -189,6 +189,8 @@
     <Compile Include="Migrations\Account\20210927152632_EditingSetting.Designer.cs" />
     <Compile Include="Migrations\Account\20211001122405_Adding-RolePermissions.cs" />
     <Compile Include="Migrations\Account\20211001122405_Adding-RolePermissions.Designer.cs" />
+    <Compile Include="Migrations\Account\20211007083515_IgnoreNameFromRolePermissions.cs" />
+    <Compile Include="Migrations\Account\20211007083515_IgnoreNameFromRolePermissions.Designer.cs" />
     <Compile Include="Migrations\Account\AccountContextModelSnapshot.cs" />
   </ItemGroup>
 

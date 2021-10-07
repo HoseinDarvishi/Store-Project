@@ -6,6 +6,7 @@ using ShopManagement.Application.Constract.Product;
 using ShopManagement.Application.Constract.ProductCategory;
 using ShopManagement.Application.Constract.ProductPicture;
 using ShopManagement.Application.Constract.Slide;
+using ShopManagement.Configuration.Permissions;
 using ShopManagement.Domain.CommentAgg;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
@@ -17,34 +18,38 @@ using StoreQuery.Product;
 using StoreQuery.ProductCategory;
 using StoreQuery.Query;
 using StoreQuery.Slide;
+using UtilityFreamwork.Infra;
 
 namespace ShopManagement.Configuration
 {
-    public class ShopManagementConfigurator
-    {
-        public static void Configure(IServiceCollection services , string connectionString)
-        {
-            services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
-            services.AddTransient<IArticleCategoryApplication, ProductCategoryApplication>();
+   public class ShopManagementConfigurator
+   {
+      public static void Configure(IServiceCollection services, string connectionString)
+      {
+         services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
+         services.AddTransient<IArticleCategoryApplication, ProductCategoryApplication>();
 
-            services.AddTransient<IProductApplication, ProductAppliation>();
-            services.AddTransient<IProductRepository, ProductRepository>();
+         services.AddTransient<IProductApplication, ProductAppliation>();
+         services.AddTransient<IProductRepository, ProductRepository>();
 
-            services.AddTransient<IProductPictureApplication , ProductPictureApplication>();
-            services.AddTransient<IProductPictureRepository, ProductPictureRepository>();
+         services.AddTransient<IProductPictureApplication, ProductPictureApplication>();
+         services.AddTransient<IProductPictureRepository, ProductPictureRepository>();
 
-            services.AddTransient<ISlideRepository, SlideRepository>();
-            services.AddTransient<ISlideApplication, SlideApplication>();
+         services.AddTransient<ISlideRepository, SlideRepository>();
+         services.AddTransient<ISlideApplication, SlideApplication>();
 
-            services.AddTransient<ICommentApplication, CommentApplication>();
-            services.AddTransient<ICommentRepository, CommentRepository>();
+         services.AddTransient<ICommentApplication, CommentApplication>();
+         services.AddTransient<ICommentRepository, CommentRepository>();
 
-            //Query
-            services.AddTransient<ISlideQuery, SlideQuery>();
-            services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
-            services.AddTransient<IProductQuery, ProductQuery>();
+         //Query
+         services.AddTransient<ISlideQuery, SlideQuery>();
+         services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
+         services.AddTransient<IProductQuery, ProductQuery>();
 
-            services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString , b => b.MigrationsAssembly("ServiceHost")));
-        }
-    }
+         //Permission
+         services.AddTransient<IPermissionExposer, ShopPermissionExposer>();
+
+         services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString, b => b.MigrationsAssembly("ServiceHost")));
+      }
+   }
 }

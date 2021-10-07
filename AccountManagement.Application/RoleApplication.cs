@@ -35,7 +35,10 @@ namespace AccountManagement.Application
          if (_repository.IsExists(x => x.Name == command.Name && x.Id != command.Id))
             return new GenerateResult().Failed("قبلا با همین نام نقش دیگری اضافه شده است");
 
-         role.Edit(command.Name, new List<Permission>());
+         var permission = new List<Permission>();
+         command.PermissionsCode.ForEach(code => permission.Add(new Permission(code)));
+
+         role.Edit(command.Name, permission);
          _repository.Save();
          return new GenerateResult().Succedded();
 

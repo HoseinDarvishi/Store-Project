@@ -18,6 +18,7 @@ namespace AccountManagement.Infrastructure.EFCore.Mapping
          b.OwnsMany(x => x.Permissions, builder =>
          {
             builder.HasKey(x => x.Id);
+            builder.Ignore(x => x.Name);
             builder.ToTable("RolePermissions");
             builder.WithOwner(x => x.Role);
          });

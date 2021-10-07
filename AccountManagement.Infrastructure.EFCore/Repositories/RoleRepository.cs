@@ -1,9 +1,11 @@
 ﻿using AccountManagement.Application.Constracts.Role;
 using AccountManagement.Domain.RoleAgg;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UtilityFreamwork.Application;
+using UtilityFreamwork.Infra;
 using UtilityFreamwork.Repository;
 
 namespace AccountManagement.Infrastructure.EFCore.Repositories
@@ -39,8 +41,14 @@ namespace AccountManagement.Infrastructure.EFCore.Repositories
          {
             Id = x.Id,
             Name = x.Name,
+            MappedPermissions = MapPermissions(x.Permissions),
             CreationDate = x.CreationDate.ToFarsi()
          }).AsNoTracking().OrderBy(x=>x.Id).ToList();
+      }
+
+      private static List<PermissionDto> MapPermissions(List<Permission> permissions)
+      {
+         return permissions.Select(x => new PermissionDto(x.Code, x.Name)).ToList();
       }
    }
 }
