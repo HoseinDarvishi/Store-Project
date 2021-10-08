@@ -1,4 +1,5 @@
 ﻿@page
+@using UtilityFreamwork.Infra
 @model Areas.Administration.Pages.Inventory.IndexModel
 @{
 }
@@ -13,12 +14,12 @@
     <div class="col-sm-12">
         <h4 class=" page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index" , "Create")">ایجاد انبار محصولی جدید</a>
+            <a permission="@InventoryPermissions.CreateInventory" class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index" , "Create")">ایجاد انبار محصولی جدید</a>
         </p>
     </div>
 </div>
 
-<div class="row">
+<div permission="@InventoryPermissions.ListInventories" class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading ">
@@ -46,7 +47,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div permission="@InventoryPermissions.ListInventories" class="row" id="ProductCategoriesDiv">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -75,16 +76,16 @@
                                         <td>@inv.Count</td>
                                         <td>@inv.CreationDate</td>
                                         <td>
-                                            <a href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = inv.Id})" class="btn btn-warning mx-1">
+                                            <a permission="@InventoryPermissions.EditInventory" href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = inv.Id})" class="btn btn-warning mx-1">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
-                                            <a href="#showmodal=@Url.Page("./Index", "Increase" ,new {id = inv.Id})" class="btn btn-success mx-1">
+                                            <a permission="@InventoryPermissions.IncreaseInventory" href="#showmodal=@Url.Page("./Index", "Increase" ,new {id = inv.Id})" class="btn btn-success mx-1">
                                                 <i class="fa fa-plus"></i> افزایش
                                             </a>
-                                            <a href="#showmodal=@Url.Page("./Index", "Reduce" ,new {id = inv.Id})" class="btn btn-danger mx-1">
+                                            <a permission="@InventoryPermissions.ReduceInventory" href="#showmodal=@Url.Page("./Index", "Reduce" ,new {id = inv.Id})" class="btn btn-danger mx-1">
                                                 <i class="fa fa-minus"></i> کاهش
                                             </a>
-                                            <a href="#showmodal=@Url.Page("./Index", "Log" ,new {id = inv.Id})" class="btn btn-primary mx-1">
+                                            <a permission="@InventoryPermissions.OperationLog" href="#showmodal=@Url.Page("./Index", "Log" ,new {id = inv.Id})" class="btn btn-primary mx-1">
                                                 <i class="fa fa-recycle"></i> گردشهای انبار
                                             </a>
                                         </td>
