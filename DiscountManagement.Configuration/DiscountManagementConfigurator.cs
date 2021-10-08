@@ -6,20 +6,23 @@ using DiscountManagement.Infrastructure;
 using DiscountManagement.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using UtilityFreamwork.Infra;
 
 namespace DiscountManagement.Configuration
 {
-    public class DiscountManagementConfigurator
-    {
-        public static void Configure(IServiceCollection services , string connectionString)
-        {
-            services.AddTransient<ICustomerDiscountApplication , CustomerDiscountApplication>();
-            services.AddTransient<ICustomerDiscoutRepository, CustomerDiscountRepository>();
+   public class DiscountManagementConfigurator
+   {
+      public static void Configure(IServiceCollection services, string connectionString)
+      {
+         services.AddTransient<ICustomerDiscountApplication, CustomerDiscountApplication>();
+         services.AddTransient<ICustomerDiscoutRepository, CustomerDiscountRepository>();
 
-            services.AddTransient<IColleagueDiscountApplication, ColleagueDiscountApplication>();
-            services.AddTransient<IColleagueDiscountRepository, ColleagueDiscountRepository>();
+         services.AddTransient<IColleagueDiscountApplication, ColleagueDiscountApplication>();
+         services.AddTransient<IColleagueDiscountRepository, ColleagueDiscountRepository>();
 
-            services.AddDbContext<DiscountContext>(x => x.UseSqlServer(connectionString , b => b.MigrationsAssembly("ServiceHost")));
-        }
-    }
+         services.AddTransient<IPermissionExposer, DiscountPermissionExposer>();
+
+         services.AddDbContext<DiscountContext>(x => x.UseSqlServer(connectionString, b => b.MigrationsAssembly("ServiceHost")));
+      }
+   }
 }

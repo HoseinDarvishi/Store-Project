@@ -11,25 +11,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using StoreQuery.Article;
 using StoreQuery.Query;
+using UtilityFreamwork.Infra;
 
 namespace BlogManagement.Infrastracture.Configuration
 {
-    public class BlogManagementConfigurator
-    {
-        public static void Configure(IServiceCollection services , string connectionString)
-        {
-            services.AddTransient<IArticleCategoryRepository, ArticleCategoryRepository>();
-            services.AddTransient<Application.Constract.ArticleCategory.IArticleCategoryApplication, ArticleCategoryApplication>();
+   public class BlogManagementConfigurator
+   {
+      public static void Configure(IServiceCollection services, string connectionString)
+      {
+         services.AddTransient<IArticleCategoryRepository, ArticleCategoryRepository>();
+         services.AddTransient<Application.Constract.ArticleCategory.IArticleCategoryApplication, ArticleCategoryApplication>();
 
-            services.AddTransient<IArticleRepository, ArticleRepository>();
-            services.AddTransient<Application.Constract.Article.IArticleApplication, ArticleApplication>();
+         services.AddTransient<IArticleRepository, ArticleRepository>();
+         services.AddTransient<Application.Constract.Article.IArticleApplication, ArticleApplication>();
 
-            services.AddTransient<Application.Constract.ArticleComment.IArticleCommentApplication, ArticleCommentApplication>();
-            services.AddTransient<Domain.ArticleCommentAgg.IArticleCommentRepository, ArticleCommentRepository>();
+         services.AddTransient<Application.Constract.ArticleComment.IArticleCommentApplication, ArticleCommentApplication>();
+         services.AddTransient<Domain.ArticleCommentAgg.IArticleCommentRepository, ArticleCommentRepository>();
 
-            services.AddTransient<IArticleQuery, ArticleQuery>();
+         services.AddTransient<IArticleQuery, ArticleQuery>();
 
-            services.AddDbContext<BlogContext>(x => x.UseSqlServer(connectionString, b => b.MigrationsAssembly("ServiceHost")));
-        }
-    }
+         services.AddTransient<IPermissionExposer, BlogPermissionExposer>();
+
+         services.AddDbContext<BlogContext>(x => x.UseSqlServer(connectionString, b => b.MigrationsAssembly("ServiceHost")));
+      }
+   }
 }

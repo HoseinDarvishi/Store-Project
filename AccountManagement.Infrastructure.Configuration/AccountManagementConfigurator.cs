@@ -7,6 +7,7 @@ using AccountManagement.Infrastructure.EFCore;
 using AccountManagement.Infrastructure.EFCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using UtilityFreamwork.Infra;
 
 namespace AccountManagement.Infrastructure.Configuration
 {
@@ -19,6 +20,8 @@ namespace AccountManagement.Infrastructure.Configuration
 
          services.AddTransient<IRoleApplication, RoleApplication>();
          services.AddTransient<IRoleRepository, RoleRepository>();
+
+         services.AddTransient<IPermissionExposer, AccountPermissionExposer>();
 
          services.AddDbContext<AccountContext>(x => x.UseSqlServer(connectionString , b=> b.MigrationsAssembly("ServiceHost")));
       }

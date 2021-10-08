@@ -38,6 +38,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Comments
       public CommentSearchModel SearchModel { get; set; }
       public SelectList StatusesComment;
 
+      
       [NeedPermission(ShopPermissions.ListProductComments)]
       public void OnGet(CommentSearchModel commentSearch)
       {
