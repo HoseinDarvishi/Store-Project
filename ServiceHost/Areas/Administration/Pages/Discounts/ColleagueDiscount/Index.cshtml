@@ -1,4 +1,5 @@
 ﻿@page
+@using UtilityFreamwork.Infra
 @model Areas.Administration.Pages.Discounts.ColleagueDiscount.IndexModel
 @{
 }
@@ -13,12 +14,12 @@
     <div class="col-sm-12">
         <h4 class=" page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index" , "Create")">تعریف تخفیف جدید</a>
+            <a permission="@ShopPermissions.DefineDiscount" class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index" , "Create")">تعریف تخفیف جدید</a>
         </p>
     </div>
 </div>
 
-<div class="row">
+<div permission="@ShopPermissions.ListDiscount" class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading ">
@@ -40,7 +41,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div permission="@ShopPermissions.ListDiscount" class="row" id="ProductCategoriesDiv">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -66,18 +67,18 @@
                                         <td>@dis.DiscountPercent%</td>
                                         <td>@dis.Product</td>
                                         <td>
-                                            <a href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = dis.Id})" class="btn btn-warning mx-1">
+                                            <a permission="@ShopPermissions.EditDiscount" href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = dis.Id})" class="btn btn-warning mx-1">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
                                             @if (dis.IsActive)
                                             {
-                                                <a href="@Url.Page("./Index", "DeActive" ,new {id = dis.Id})" class="btn btn-danger mx-1">
+                                                <a permission="@ShopPermissions.DeActiveDiscount" href="@Url.Page("./Index", "DeActive" ,new {id = dis.Id})" class="btn btn-danger mx-1">
                                                     <i class="fa fa-edit"></i> غیر فعالسازی
                                                 </a>
                                             }
                                             else
                                             {
-                                                <a href="@Url.Page("./Index", "Active" ,new {id = dis.Id})" class="btn btn-success mx-1">
+                                                <a permission="@ShopPermissions.ActiveDiscount" href="@Url.Page("./Index", "Active" ,new {id = dis.Id})" class="btn btn-success mx-1">
                                                     <i class="fa fa-edit"></i> فعالسازی
                                                 </a>
                                             }
