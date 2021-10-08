@@ -39,6 +39,7 @@ namespace ShopManagement.Configuration.Permissions
                   new PermissionDto(ShopPermissions.RestoreSlide, "بازگردانی اسلاید")
                }
             },
+
             {
                "عکس محصولات", new List<PermissionDto>
                {
@@ -48,11 +49,12 @@ namespace ShopManagement.Configuration.Permissions
                   new PermissionDto(ShopPermissions.DeleteProductPictures, "حذف عکس")
                }
             },
+
             {
                "نظرات", new List<PermissionDto>
                {
-                  new PermissionDto(ShopPermissions.ListComments , "مشاهده لیست نظرات محصولات"),
-                  new PermissionDto(ShopPermissions.ChangeStatus, "تایید یا رد نظرات محصول")
+                  new PermissionDto(ShopPermissions.ListProductComments , "مشاهده لیست نظرات محصولات"),
+                  new PermissionDto(ShopPermissions.ChangeStatusProductComments, "تایید یا رد نظرات محصول")
                }
             }
          };

@@ -1,4 +1,5 @@
 ﻿@page
+@using UtilityFreamwork.Infra
 @model Areas.Administration.Pages.Blog.Articles.IndexModel
 @{
 }
@@ -13,12 +14,12 @@
     <div class="col-sm-12">
         <h4 class=" page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" asp-page="./Create">ایجاد مقاله جدید</a>
+            <a permission="@ShopPermissions.CreateArticle" class="btn btn-success btn-lg" asp-page="./Create">ایجاد مقاله جدید</a>
         </p>
     </div>
 </div>
 
-<div class="row">
+<div permission="@ShopPermissions.ListArticles" class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading ">
@@ -44,7 +45,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div permission="@ShopPermissions.ListArticles" class="row" id="ProductCategoriesDiv">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -79,19 +80,19 @@
                                         <td>@art.PublishDate</td>
 
                                         <td>
-                                            <a asp-page="./Edit" asp-route-id="@art.Id" class="btn btn-warning pull-right mx-2">
+                                            <a permission="@ShopPermissions.EditArticle" asp-page="./Edit" asp-route-id="@art.Id" class="btn btn-warning pull-right mx-2">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
 
                                             @if (art.IsRemoved)
                                             {
-                                                <a asp-page="./Index" asp-page-handler="Restore" asp-route-id="@art.Id" class="btn btn-success mx-2">
+                                                <a permission="@ShopPermissions.RestoreArticle" asp-page="./Index" asp-page-handler="Restore" asp-route-id="@art.Id" class="btn btn-success mx-2">
                                                     <i class="fa fa-edit"></i> بازگردانی
                                                 </a>
                                             }
                                             else
                                             {
-                                                <a asp-page="./Index" asp-page-handler="Remove" asp-route-id="@art.Id" class="btn btn-danger mx-2">
+                                                <a permission="@ShopPermissions.RemoveArticle" asp-page="./Index" asp-page-handler="Remove" asp-route-id="@art.Id" class="btn btn-danger mx-2">
                                                     <i class="fa fa-edit"></i> حذف
                                                 </a>
                                             }

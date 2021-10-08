@@ -4,6 +4,7 @@ using AccountManagement.Application.Constracts.Role;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using UtilityFreamwork.Infra;
 
 namespace ServiceHost.Areas.Administration.Pages.Account.Users
 {
@@ -22,6 +23,7 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Users
       public List<AccountVM> users;
       public SelectList roles;
 
+      [NeedPermission(ShopPermissions.ListAccounts)]
       public void OnGet(AccountSearchModel searchModel)
       {
          roles = new SelectList(_roleApplication.List(), "Id", "Name");
@@ -29,13 +31,14 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Users
       }
 
       // Create
+      [NeedPermission(ShopPermissions.CreateAccount)]
       public IActionResult OnGetCreate()
       {
          var create = new RegisterAccount();
          create.Roles = _roleApplication.List();
          return Partial("./Create" , create);
       }
-
+      [NeedPermission(ShopPermissions.CreateAccount)]
       public IActionResult OnPostCreate(RegisterAccount create)
       {
          var res = _accountApplication.Register(create);
@@ -43,6 +46,7 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Users
       }
 
       //Edit
+      [NeedPermission(ShopPermissions.EditAccount)]
       public IActionResult OnGetEdit(long id)
       {
          var user = _accountApplication.GetDetails(id);
@@ -50,6 +54,7 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Users
          return Partial("./Edit", user);
       }
 
+      [NeedPermission(ShopPermissions.EditAccount)]
       public IActionResult OnPostEdit(EditAccount account)
       {
          var res = _accountApplication.Edit(account);
@@ -57,6 +62,7 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Users
       }
 
       //Change Password
+      [NeedPermission(ShopPermissions.ChangePasswordAccount)]
       public IActionResult OnGetChangePassword(long id)
       {
          var pass = new ChangePassword();
@@ -64,6 +70,7 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Users
          return Partial("./ChangePassword", pass);
       }
 
+      [NeedPermission(ShopPermissions.ChangePasswordAccount)]
       public IActionResult OnPostChangePassword(ChangePassword changePassword)
       {
          var res = _accountApplication.ChangePassword(changePassword);

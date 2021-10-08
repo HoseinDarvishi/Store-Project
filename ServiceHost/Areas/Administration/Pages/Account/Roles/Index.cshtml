@@ -1,4 +1,5 @@
 ﻿@page
+@using UtilityFreamwork.Infra
 @model ServiceHost.Areas.Administration.Pages.Account.Roles.IndexModel
 
 @{
@@ -11,13 +12,13 @@
    <div class="col-sm-12">
       <h4 class=" page-title pull-right">@ViewData["title"]</h4>
       <p class="pull-left">
-         <a class="btn btn-success btn-lg" asp-page="./Create">ایجاد نقش جدید</a>
+         <a permission="@ShopPermissions.CreateRole" class="btn btn-success btn-lg" asp-page="./Create">ایجاد نقش جدید</a>
       </p>
    </div>
 </div>
 
 
-<div class="row" id="ProductCategoriesDiv">
+<div permission="@ShopPermissions.ListRoles" class="row" id="ProductCategoriesDiv">
    <div class="col-md-12">
       <div class="panel panel-default">
          <div class="panel-heading">
@@ -42,7 +43,7 @@
                               <td>@role.Id</td>
                               <td>@role.Name</td>
                               <td>@role.CreationDate</td>
-                              <td>
+                              <td permission="@ShopPermissions.EditRole">
 
                                  <a asp-page="./Edit" asp-route-id="@role.Id" class="btn btn-warning mx-2">
                                     <i class="fa fa-edit"></i> ویرایش

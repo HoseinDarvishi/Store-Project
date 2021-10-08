@@ -22,6 +22,7 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Roles
       public EditRole command;
       public List<SelectListItem> Permissions = new List<SelectListItem>();
 
+      [NeedPermission(ShopPermissions.EditRole)]
       public void OnGet(int id)
       {
          command = _roleApplication.GetDetails(id);
@@ -54,7 +55,8 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Roles
          }
 
       }
-      
+
+      [NeedPermission(ShopPermissions.EditRole)]
       public RedirectToPageResult OnPost(EditRole command)
       {
          _roleApplication.Edit(command);

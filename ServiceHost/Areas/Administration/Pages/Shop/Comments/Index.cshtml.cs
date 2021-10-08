@@ -38,21 +38,21 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Comments
       public CommentSearchModel SearchModel { get; set; }
       public SelectList StatusesComment;
 
-      [NeedPermission(ShopPermissions.ListComments)]
+      [NeedPermission(ShopPermissions.ListProductComments)]
       public void OnGet(CommentSearchModel commentSearch)
       {
          Comments = commentApplication.Search(commentSearch);
          StatusesComment = new SelectList(statuses, "Code", "Text");
       }
 
-      [NeedPermission(ShopPermissions.ChangeStatus)]
+      [NeedPermission(ShopPermissions.ChangeStatusProductComments)]
       public IActionResult OnGetInPublish(long id)
       {
          commentApplication.InPublish(id);
          return RedirectToPage("./Index");
       }
 
-      [NeedPermission(ShopPermissions.ChangeStatus)]
+      [NeedPermission(ShopPermissions.ChangeStatusProductComments)]
       public IActionResult OnGetPublish(long id)
       {
          commentApplication.Publish(id);

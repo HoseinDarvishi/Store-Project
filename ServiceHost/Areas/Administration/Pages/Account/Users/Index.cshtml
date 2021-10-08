@@ -1,4 +1,5 @@
 ﻿@page
+@using UtilityFreamwork.Infra
 @model ServiceHost.Areas.Administration.Pages.Account.Users.IndexModel
 
 @{
@@ -11,12 +12,12 @@
    <div class="col-sm-12">
       <h4 class=" page-title pull-right">@ViewData["title"]</h4>
       <p class="pull-left">
-         <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index" , "Create")">ایجاد کاربر جدید</a>
+         <a permission="@ShopPermissions.CreateAccount" class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index" , "Create")">ایجاد کاربر جدید</a>
       </p>
    </div>
 </div>
 
-<div class="row">
+<div permission="@ShopPermissions.ListAccounts" class="row">
    <div class="col-md-12">
       <div class="panel panel-default">
          <div class="panel-heading ">
@@ -46,7 +47,7 @@
    </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div permission="@ShopPermissions.ListAccounts" class="row" id="ProductCategoriesDiv">
    <div class="col-md-12">
       <div class="panel panel-default">
          <div class="panel-heading">
@@ -83,10 +84,10 @@
                               <td>@user.SignInDate</td>
                               <td>
 
-                                 <a href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = user.Id})" class="btn btn-warning mx-2">
+                                 <a permission="@ShopPermissions.EditAccount" href="#showmodal=@Url.Page("./Index", "Edit" ,new {id = user.Id})" class="btn btn-warning mx-2">
                                     <i class="fa fa-edit"></i> ویرایش
                                  </a>
-                                 <a href="#showmodal=@Url.Page("./Index", "ChangePassword" ,new {id = user.Id})" class="btn btn-secondary mx-2">
+                                 <a permission="@ShopPermissions.ChangePasswordAccount" href="#showmodal=@Url.Page("./Index", "ChangePassword" ,new {id = user.Id})" class="btn btn-secondary mx-2">
                                     <i class="fa fa-key"></i> تغییر رمز عبور
                                  </a>
 

@@ -21,6 +21,8 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Roles
       public CreateRole Command { get; set; }
       public List<SelectListItem> Permissions;
 
+
+      [NeedPermission(ShopPermissions.CreateRole)]
       public void OnGet()
       {
          // Get Permissions
@@ -48,6 +50,7 @@ namespace ServiceHost.Areas.Administration.Pages.Account.Roles
          }
       }
 
+      [NeedPermission(ShopPermissions.CreateRole)]
       public RedirectToPageResult OnPost(CreateRole Command)
       {
          _roleApplication.Create(Command);

@@ -1,4 +1,5 @@
 ﻿@page
+@using UtilityFreamwork.Infra
 @model ServiceHost.Areas.Administration.Pages.Blog.ArticleComments.IndexModel
 @{
     ViewData["Title"] = "مدیریت نظرات مقالات";
@@ -11,7 +12,7 @@
     <h3>مدیریت نظرات مقالات</h3>
 </div>
 
-<div class="row">
+<div permission="@ShopPermissions.ListArticleComments" class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading ">
@@ -89,21 +90,21 @@
                                             }
                                         </td>
                                         <td>@com.CreationDate</td>
-                                        <td>
+                                        <td permission="@ShopPermissions.ChangeStatusArticleComments">
                                             @if (com.Status == UtilityFreamwork.Application.StatusComment.Wait)
                                             {
-                                                <a class="btn btn-danger p-2" asp-page="./Index" asp-page-handler="Cancel" asp-route-id="@com.Id">رد کردن</a>
-                                                <a class="btn btn-success p-2" asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@com.Id">تایید</a>
+                                                <a permission="@ShopPermissions.ChangeStatusArticleComments" class="btn btn-danger p-2" asp-page="./Index" asp-page-handler="Cancel" asp-route-id="@com.Id">رد کردن</a>
+                                                <a permission="@ShopPermissions.ChangeStatusArticleComments" class="btn btn-success p-2" asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@com.Id">تایید</a>
                                             }
                                             else if (com.Status == UtilityFreamwork.Application.StatusComment.Canceled)
                                             {
-                                                <a class="btn btn-warning p-2" asp-page="./Index" asp-page-handler="Wait" asp-route-id="@com.Id">انتظار</a>
-                                                <a class="btn btn-success p-2" asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@com.Id">تایید</a>
+                                                <a permission="@ShopPermissions.ChangeStatusArticleComments" class="btn btn-warning p-2" asp-page="./Index" asp-page-handler="Wait" asp-route-id="@com.Id">انتظار</a>
+                                                <a permission="@ShopPermissions.ChangeStatusArticleComments" class="btn btn-success p-2" asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@com.Id">تایید</a>
                                             }
                                             else if (com.Status == UtilityFreamwork.Application.StatusComment.Confirmed)
                                             {
-                                                <a class="btn btn-danger p-2" asp-page="./Index" asp-page-handler="Cancel" asp-route-id="@com.Id">رد کردن</a>
-                                                <a class="btn btn-warning p-2" asp-page="./Index" asp-page-handler="Wait" asp-route-id="@com.Id">انتظار</a>
+                                                <a permission="@ShopPermissions.ChangeStatusArticleComments" class="btn btn-danger p-2" asp-page="./Index" asp-page-handler="Cancel" asp-route-id="@com.Id">رد کردن</a>
+                                                <a permission="@ShopPermissions.ChangeStatusArticleComments" class="btn btn-warning p-2" asp-page="./Index" asp-page-handler="Wait" asp-route-id="@com.Id">انتظار</a>
                                             }
                                         </td>
                                     </tr>
