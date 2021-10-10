@@ -24,47 +24,57 @@
 </head>
 
 <body>
-    
-    @await Component.InvokeAsync("Header")
 
-    @RenderBody()
+   @await Component.InvokeAsync("Header")
 
-    @await Component.InvokeAsync("Footer")
+   @RenderBody()
 
-
-
-
-    <div class="search-overlay" id="search-overlay">
-        <a href="javascript:void(0)" class="close-search-overlay" id="close-search-overlay">
-            <i class="ion-ios-close-empty"></i>
-        </a>
-
-        <!--=======  search form  =======-->
-
-        <div class="search-form">
-            <form method="get" asp-page="/Search">
-                <input type="search" name="value" id="value" placeholder="جستجو کنید ...">
-                <button type="submit">
-                    <i class="ion-android-search"></i>
-                </button>
-            </form>
-        </div>
-
-        <!--=======  End of search form  =======-->
-    </div>
+   @await Component.InvokeAsync("Footer")
 
 
 
-    <div id="scroll-top">
-        <span>Back to top</span><i class="ion-chevron-right"></i><i class="ion-chevron-right"></i>
-    </div>
+
+   <div class="search-overlay" id="search-overlay">
+      <a href="javascript:void(0)" class="close-search-overlay" id="close-search-overlay">
+         <i class="ion-ios-close-empty"></i>
+      </a>
+
+      <!--=======  search form  =======-->
+
+      <div class="search-form">
+         <form method="get" asp-page="/Search">
+            <input type="search" name="value" id="value" placeholder="جستجو کنید ...">
+            <button type="submit">
+               <i class="ion-android-search"></i>
+            </button>
+         </form>
+      </div>
+
+      <!--=======  End of search form  =======-->
+   </div>
 
 
-    <!-- Vendor JS -->
-    <script src="~/Theme/assets/js/vendors.js"></script>
 
-    <!-- Active JS -->
-    <script src="~/Theme/assets/js/active.js"></script>
+   <div id="scroll-top">
+      <span>Back to top</span><i class="ion-chevron-right"></i><i class="ion-chevron-right"></i>
+   </div>
+
+
+   <script src="~/lib/jquery/dist/jquery.min.js"></script>
+   <!-- Vendor JS -->
+   <script src="~/Theme/assets/js/vendors.js"></script>
+
+   <!-- Active JS -->
+   <script src="~/Theme/assets/js/active.js"></script>
+
+   @RenderSection("Scripts", false)
+   <script src="~/Theme/assets/js/plugins.js"></script>
+   <script src="~/Theme/assets/js/custom.js"></script>
+   <script>
+      $(document).ready(function () {
+         UpdateCart();
+      });
+   </script>
 
 </body>
 
