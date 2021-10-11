@@ -13,5 +13,7 @@
       public double Price { get; set; }
 
       public double TotalPrice => Price * Count;
+
+      public bool IsInStock { get; set; }
    }
 }

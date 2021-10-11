@@ -29,9 +29,22 @@
       <div class="row">
          <div class="col-lg-12">
             <!--=======  page wrapper  =======-->
-            <div class="page-wrapper">
-               <div class="page-content-wrapper">
-                  <form asp-page="/Checkout">
+            @if (Model.CartItems != null)
+            {
+               <div class="page-wrapper">
+
+                  @if (Model.CartItems.Any(x => !x.IsInStock))
+                  {
+                     <div class="alert alert-warning">
+                        <i class="fas fa-warning"></i>
+                        تعداد موجودی @foreach (var item in Model.CartItems.Where(x => !x.IsInStock))
+                        {
+                           <strong>@item.Name , </strong>
+                        } کمتر از تعداد درخواستی است
+                     </div>
+                  }
+
+                  <div class="page-content-wrapper">
                      <div class="cart-table table-responsive">
                         <table class="table">
                            <thead>
@@ -57,7 +70,7 @@
                                        <a href="single-product.html">@product.Name</a>
                                     </td>
                                     <td class="pro-price">
-                                       <span>@product.Price</span>
+                                       <span>@product.Price.ToString("#,#")</span>
                                     </td>
                                     <td class="pro-quantity">
                                        <div class="quantity-selection">
@@ -65,10 +78,10 @@
                                        </div>
                                     </td>
                                     <td class="pro-subtotal">
-                                       <span>@product.TotalPrice</span>
+                                       <span>@product.TotalPrice.ToString("#,#")</span>
                                     </td>
                                     <td class="pro-remove">
-                                       <a class="p-2 bg-danger text-white rounded-md" asp-page="/Cart" asp-page-handler="Remove" asp-route-id="@product.Id">
+                                       <a class="py-1 bg-danger text-white rounded" asp-page="/Cart" asp-page-handler="Remove" asp-route-id="@product.Id">
                                           X
                                        </a>
                                     </td>
@@ -76,13 +89,33 @@
                               }
                            </tbody>
                         </table>
-                        <div class="cart-summary-button">
-                           <button type="submit" class="checkout-btn border-0 p-3 btn-success m-3">تکمیل خرید</button>
+                        <div class="cart-summary-button d-flex align-items-center">
+                           <a asp-page="/Payment" class="checkout-btn border-0 p-3 btn-success m-3 rounded">تکمیل خرید</a>
+
+                           @if (Model.CartItems.Any(x => !x.IsInStock))
+                           {
+                              <div class="alert alert-danger m-0 flex-grow-1">
+                                 <i class="fas fa-warning"></i>
+                                 تعداد موجودی @foreach (var item in Model.CartItems.Where(x => !x.IsInStock))
+                                 {
+                                    <strong>@item.Name , </strong>
+                                 } کمتر از تعداد درخواستی است
+                              </div>
+                           }
+
+
                         </div>
                      </div>
-                  </form>
+                  </div>
                </div>
-            </div>
+            }
+            else
+            {
+               <div class="text-center border-1 rounded bx-shadow d-flex flex-column justify-content-center align-items-center">
+                  <i class="fas fa-shopping-cart"></i>
+                  <h4>سبد خرید شما خالی است !!</h4>
+               </div>
+            }
          </div>
       </div>
    </div>

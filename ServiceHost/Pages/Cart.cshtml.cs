@@ -6,40 +6,53 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Nancy.Json;
 using ShopManagement.Application.Constract.Order;
+using StoreQuery.Product;
 
 namespace ServiceHost.Pages
 {
    public class CartModel : PageModel
    {
-      public List<CartItem> CartItems { get; set; }
+      private readonly IProductQuery _productQuery;
+
+      public CartModel(IProductQuery productQuery)
+      {
+         _productQuery = productQuery;
+      }
+
+      public List<CartItem> CartItems;
 
       public void OnGet()
       {
          var serilizer = new JavaScriptSerializer();
-         var value = Request.Cookies["cart"];
-         CartItems = serilizer.Deserialize<List<CartItem>>(value);
+         var val = Request.Cookies["cart"];
+         var cartitems = serilizer.Deserialize<List<CartItem>>(val);
+
+         if (cartitems.Count != 0 && cartitems != null)
+            CartItems = _productQuery.CheckInventoryStatus(cartitems);
       }
 
       public IActionResult OnGetRemove(long id)
       {
+         var serializer = new JavaScriptSerializer();
+
          var value = Request.Cookies["cart"];
 
-         // Delete Old Cookie
+         var cartItems = serializer.Deserialize<List<CartItem>>(value);
+         var itemToRemove = cartItems.FirstOrDefault(x => x.Id == id);
+         cartItems.Remove(itemToRemove);
+
+         var options = new CookieOptions 
+         { 
+            Expires = DateTime.Now.AddDays(2),
+            Path="/",
+            HttpOnly=false,
+            IsEssential=true,
+            SameSite = SameSiteMode.None,
+            Secure = true
+         };
+
          Response.Cookies.Delete("cart");
-
-         // Deserilize Coockie
-         var serilizer = new JavaScriptSerializer();
-         var cartItems = serilizer.Deserialize<List<CartItem>>(value);
-
-         // Removing Selected Product
-         var itemForDel = cartItems.FirstOrDefault(x => x.Id == id);
-         cartItems.Remove(itemForDel);
-
-         // Setting Option For Cookie
-         var option = new CookieOptions { Expires = DateTime.Now.AddDays(5), Path = "/" };
-
-         // Add Cookie
-         Response.Cookies.Append("cart", serilizer.Serialize(cartItems), option);
+         Response.Cookies.Append("cart", serializer.Serialize(cartItems), options);
 
          return RedirectToPage("/Cart");
       }

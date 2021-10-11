@@ -1,6 +1,4 @@
-﻿const { debug } = require("console");
-
-function addToCart(id, name, picture, price) {
+﻿function addToCart(id, name, picture, price) {
    let products = $.cookie("cart");
 
    if (products === undefined) {
