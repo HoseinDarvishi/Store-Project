@@ -15,5 +15,11 @@
       public double TotalPrice => Price * Count;
 
       public bool IsInStock { get; set; }
+
+      public int DiscountRate { get; set; }
+
+      public double PriceWithDiscount { get; set; }
+
+      public double TotalPaymentPrice { get; set; }
    }
 }

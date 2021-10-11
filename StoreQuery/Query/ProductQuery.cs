@@ -5,6 +5,7 @@ using ShopManagement.Application.Constract.Order;
 using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Infrastructure.EFCore;
 using StoreQuery.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UtilityFreamwork.Application;
@@ -132,7 +133,7 @@ namespace StoreQuery.Query
 
       public ProductQM GetProduct(string slug)
       {
-         var discounts = disContext.CustomerDiscounts.Where(x => x.IsActive).Select(x => new { x.ProductId, x.DiscountPercent, x.EndDate });
+         var discounts = disContext.CustomerDiscounts.Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now).Select(x => new { x.ProductId, x.DiscountPercent, x.EndDate });
          var invs = invContext.Inventories.Select(x => new { x.ProductId, x.Price }).ToList();
 
          var product = context.Products

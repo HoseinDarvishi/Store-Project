@@ -14,7 +14,7 @@ namespace DiscountManagement.Domain.CustomerDiscountAgg
 
         public string Reason { get; private set; }
 
-        public bool IsActive { get; private set; }
+      public bool IsActive => StartDate < DateTime.Now && EndDate > DateTime.Now;
 
         public DateTime StartDate { get; private set; }
 
