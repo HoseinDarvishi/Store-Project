@@ -1,4 +1,6 @@
-﻿function addToCart(id, name, picture, price) {
+﻿const { parse } = require("path/posix");
+
+function addToCart(id, name, picture, price) {
    let products = $.cookie("cart");
 
    if (products === undefined) {
@@ -67,5 +69,25 @@ function RemoveFromCart(id) {
    let product = products.findIndex(x => x.id === id);
    products.splice(product, 1);                                            // az products , product ra 1 bar hazf kon
    $.cookie("cart", JSON.stringify(products), { expires: 3, path: "/" });
+   UpdateCart();
+}
+
+function ChangeCount(id, TotalId, count) {
+   //Get Cookie
+   var products = $.cookie("cart");
+   products = JSON.parse(products);
+
+   // Find Index of CHanged item
+   var proIndex = products.findIndex(x => x.id == id);
+
+   // Change its Count
+   products[proIndex].count = parseInt(count);
+
+   // Change Total price Element value
+   var totalPrice = parseInt(count) * parseInt(products[proIndex].price);
+   $(`#${TotalId}`).text(totalPrice);
+
+   // Set New cookie
+   $.cookie("cart", JSON.stringify(products), { expires: 2, path: "/" });
    UpdateCart();
 }

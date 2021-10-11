@@ -35,12 +35,15 @@ namespace ServiceHost.Pages
       {
          var serializer = new JavaScriptSerializer();
 
+         // Get Cookie
          var value = Request.Cookies["cart"];
 
+         // Remove Selected Item
          var cartItems = serializer.Deserialize<List<CartItem>>(value);
          var itemToRemove = cartItems.FirstOrDefault(x => x.Id == id);
          cartItems.Remove(itemToRemove);
 
+         // Setting Cookie Options
          var options = new CookieOptions 
          { 
             Expires = DateTime.Now.AddDays(2),
@@ -51,10 +54,27 @@ namespace ServiceHost.Pages
             Secure = true
          };
 
+         // Delete Old Cookie
          Response.Cookies.Delete("cart");
+
+         // Append New Cookie
          Response.Cookies.Append("cart", serializer.Serialize(cartItems), options);
 
          return RedirectToPage("/Cart");
+      }
+
+      public RedirectToPageResult OnGetPayment()
+      {
+         var serilizer = new JavaScriptSerializer();
+         var val = Request.Cookies["cart"];
+         var cartitems = serilizer.Deserialize<List<CartItem>>(val);
+
+         if (cartitems.Count != 0 && cartitems != null)
+            CartItems = _productQuery.CheckInventoryStatus(cartitems);
+         else
+            return RedirectToPage("/Cart");
+
+         return CartItems.Any(x => !x.IsInStock) ? RedirectToPage("/Cart") : RedirectToPage("/Payment");
       }
    }
 }

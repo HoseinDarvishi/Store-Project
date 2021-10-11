@@ -13,7 +13,7 @@
                   <h2 class="breadcrumb-content__title">سبد خرید شما</h2>
                   <ul class="breadcrumb-content__page-map">
                      <li>
-                        <a href="index.html">صفحه اصلی</a>
+                        <a asp-page="/Index">صفحه اصلی</a>
                      </li>
                      <li class="active">سبد خرید</li>
                   </ul>
@@ -74,11 +74,11 @@
                                     </td>
                                     <td class="pro-quantity">
                                        <div class="quantity-selection">
-                                          <input type="number" value="@product.Count" min="1">
+                                          <input type="number" value="@product.Count" min="1" onchange="ChangeCount('@product.Id','total-price-@product.Id',this.value)">
                                        </div>
                                     </td>
                                     <td class="pro-subtotal">
-                                       <span>@product.TotalPrice.ToString("#,#")</span>
+                                       <span id="total-price-@product.Id">@product.TotalPrice.ToString("#,#")</span>
                                     </td>
                                     <td class="pro-remove">
                                        <a class="py-1 bg-danger text-white rounded" asp-page="/Cart" asp-page-handler="Remove" asp-route-id="@product.Id">
@@ -90,7 +90,7 @@
                            </tbody>
                         </table>
                         <div class="cart-summary-button d-flex align-items-center">
-                           <a asp-page="/Payment" class="checkout-btn border-0 p-3 btn-success m-3 rounded">تکمیل خرید</a>
+                           <a asp-page-handler="Payment" class="checkout-btn border-0 p-3 btn-success m-3 rounded">تکمیل خرید</a>
 
                            @if (Model.CartItems.Any(x => !x.IsInStock))
                            {
@@ -102,7 +102,6 @@
                                  } کمتر از تعداد درخواستی است
                               </div>
                            }
-
 
                         </div>
                      </div>
