@@ -10,5 +10,6 @@ namespace UtilityFreamwork.Application
       string CurrentAccountRole();
       AuthVM CurrentAccountInfo();
       List<int> GetPermissionCodes();
+      long CurrentAccountId();
    }
 }

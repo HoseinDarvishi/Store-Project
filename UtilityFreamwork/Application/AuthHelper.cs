@@ -63,9 +63,9 @@ namespace UtilityFreamwork.Application
 
       public long CurrentAccountId()
       {
-         return IsAuthenticated()
-             ? long.Parse(_contextAccessor.HttpContext.User.Claims.First(x => x.Type == "AccountId")?.Value)
-             : 0;
+         if (IsAuthenticated())
+            return long.Parse(_contextAccessor.HttpContext.User.Claims.First(x => x.Type == "AccountId")?.Value);
+         return 0;
       }
 
       public string CurrentAccountRole()

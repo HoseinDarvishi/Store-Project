@@ -2,12 +2,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using ShopManagement.Application;
 using ShopManagement.Application.Constract.Comment;
+using ShopManagement.Application.Constract.Order;
 using ShopManagement.Application.Constract.Product;
 using ShopManagement.Application.Constract.ProductCategory;
 using ShopManagement.Application.Constract.ProductPicture;
 using ShopManagement.Application.Constract.Slide;
 using ShopManagement.Configuration.Permissions;
 using ShopManagement.Domain.CommentAgg;
+using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
@@ -41,6 +43,9 @@ namespace ShopManagement.Configuration
          services.AddTransient<ICommentApplication, CommentApplication>();
          services.AddTransient<ICommentRepository, CommentRepository>();
 
+         services.AddTransient<IOrderApplication, OrderApplication>();
+         services.AddTransient<IOrderRepository, OrderRepository>();
+
          //Query
          services.AddTransient<ISlideQuery, SlideQuery>();
          services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
@@ -51,6 +56,7 @@ namespace ShopManagement.Configuration
 
          //Cart
          services.AddTransient<IComputCart, ComputCart>();
+         services.AddSingleton<ICartHolder, CartHolder>();
 
          services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString, b => b.MigrationsAssembly("ServiceHost")));
       }
