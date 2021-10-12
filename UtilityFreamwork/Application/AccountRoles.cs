@@ -6,7 +6,7 @@
       public const string Manager = "2";
       public const string ContentUploader = "3";
       public const string Inventor = "5";
-      public const string Colleague = "6";
+      public const string Colleague = "7";
 
       public static string GetRoleBy(long id)
       {
@@ -20,7 +20,7 @@
                return "محتواگذار";
             case 5:
                return "انباردار";
-            case 6:
+            case 7:
                return "کاربر همکار";
             default:
                return"";

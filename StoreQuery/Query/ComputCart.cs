@@ -7,7 +7,7 @@ using UtilityFreamwork.Application;
 
 namespace StoreQuery.Query
 {
-   public class ComputCart
+   public class ComputCart : IComputCart
    {
       private readonly DiscountContext _discountContext;
       private readonly IAuthHelper _authHelper;
@@ -18,7 +18,7 @@ namespace StoreQuery.Query
          _discountContext = discountContext;
       }
 
-      public static Cart CalcCart(List<CartItem> cartItems)
+      public Cart CalcCart(List<CartItem> cartItems)
       {
          var cart = new Cart();
 
@@ -39,9 +39,9 @@ namespace StoreQuery.Query
             foreach (var item in cartItems)
             {
                var discount = colDiscounts.FirstOrDefault(x => x.ProductId == item.Id);
-               if (discount == null) continue;
+               if (discount != null)
+                  item.DiscountRate = discount.DiscountPercent;
 
-               item.DiscountRate = discount.DiscountPercent;
                item.PriceWithDiscount = ((item.TotalPrice * item.DiscountRate) / 100);
                item.TotalPaymentPrice = item.TotalPrice - item.PriceWithDiscount;
 
@@ -53,9 +53,9 @@ namespace StoreQuery.Query
             foreach (var item in cartItems)
             {
                var discount = userDiscounts.FirstOrDefault(x => x.ProductId == item.Id);
-               if (discount == null) continue;
+               if (discount != null)
+                  item.DiscountRate = discount.DiscountPercent;
 
-               item.DiscountRate = discount.DiscountPercent;
                item.PriceWithDiscount = ((item.TotalPrice * item.DiscountRate) / 100);
                item.TotalPaymentPrice = item.TotalPrice - item.PriceWithDiscount;
 
@@ -65,5 +65,10 @@ namespace StoreQuery.Query
 
          return cart;
       }
+   }
+
+   public interface IComputCart
+   {
+      Cart CalcCart(List<CartItem> cartItems);
    }
 }

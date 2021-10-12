@@ -49,6 +49,9 @@ namespace ShopManagement.Configuration
          //Permission
          services.AddTransient<IPermissionExposer, ShopPermissionExposer>();
 
+         //Cart
+         services.AddTransient<IComputCart, ComputCart>();
+
          services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString, b => b.MigrationsAssembly("ServiceHost")));
       }
    }
