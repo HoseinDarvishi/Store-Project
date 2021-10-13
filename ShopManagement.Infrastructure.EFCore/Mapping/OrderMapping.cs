@@ -10,7 +10,7 @@ namespace ShopManagement.Infrastructure.EFCore.Mapping
       {
          b.ToTable("Orders");
          b.HasKey(X => X.Id);
-         b.Property(x => x.TrackNumber).HasMaxLength(10).IsRequired();
+         b.Property(x => x.TrackNumber).HasMaxLength(10);
 
          b.OwnsMany(x => x.Items, b => 
          {

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InventoryManagement.Application.Constracts\InventoryManagement.Application.Constracts.csproj" />
+    <ProjectReference Include="..\UtilityFreamwork\UtilityFreamwork.csproj" />
   </ItemGroup>
 
 </Project>

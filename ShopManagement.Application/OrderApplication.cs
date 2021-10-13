@@ -1,9 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using ShopManagement.Application.Constract.Order;
+﻿using ShopManagement.Application.Constract.Order;
 using ShopManagement.Domain.OrderAgg;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UtilityFreamwork.Application;
 
 namespace ShopManagement.Application
@@ -19,7 +15,12 @@ namespace ShopManagement.Application
          _authHelper = authHelper;
       }
 
-      public void Pay(long orderId, long refId)
+      public double GetTotalPaymentPriceById(long id)
+      {
+         return _orderRepository.GetTotalPaymentPriceById(id);
+      }
+
+      public string Pay(long orderId, long refId)
       {
          var order = _orderRepository.Get(orderId);
          order.Payed(refId);
@@ -27,6 +28,7 @@ namespace ShopManagement.Application
          order.SetTrackingNumber(trackingNumber);
          //We Should Reeduce From Inventory
          _orderRepository.Save();
+         return trackingNumber;
       }
 
       public long PlaceOrder(Cart cart)

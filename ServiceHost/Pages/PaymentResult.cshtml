@@ -1,0 +1,21 @@
+﻿@page
+@model ServiceHost.Pages.PaymentResultModel
+@{
+   ViewData["Title"] = "نتیجه خرید";
+}
+
+@if (TempData["mess"] != null)
+{
+   @if (TempData["mess"].ToString() == "1")
+   {
+      <div class="h5 alert alert-danger text-center mt-4">عملیات پرداخت موفقیت آمیز نبود<br>در صورت کسر وجه مبلغ تا 24 ساعت آینده به حساب شما واریز خواهد شد</div>
+   }
+   else
+   {
+      <div class="h5 alert alert-success text-center mt-4">عملیات پرداخت موفقیت آمیز بود<br>کد پیگیری شما : @TempData["mess"]</div>
+   }
+}
+else
+{
+   RedirectToPage("/NotFound");
+}

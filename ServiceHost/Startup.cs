@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using UtilityFreamwork.Application;
+using UtilityFreamwork.Application.ZarinPal;
 
 namespace ServiceHost
 {
@@ -44,6 +45,7 @@ namespace ServiceHost
          services.AddTransient<IFileUploader, FileUploader>();
          services.AddSingleton<IPasswordHasher, PasswordHasher>();
          services.AddTransient<IAuthHelper, AuthHelper>();
+         services.AddTransient<IZarinPalFactory, ZarinPalFactory>();
 
          //Coockies ==> Authentication
          services.Configure<CookiePolicyOptions>(options =>

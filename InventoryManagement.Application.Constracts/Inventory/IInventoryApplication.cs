@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using UtilityFreamwork.Application;
 
 namespace InventoryManagement.Application.Constracts.Inventory
 {
-    public interface IInventoryApplication
+   public interface IInventoryApplication
     {
         GenerateResult Create(CreateInventory command);
         GenerateResult Edit(EditInventory command);

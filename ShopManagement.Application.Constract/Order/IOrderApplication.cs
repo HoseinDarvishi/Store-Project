@@ -3,6 +3,7 @@
    public interface IOrderApplication
    {
       long PlaceOrder(Cart cart);
-      void Pay(long orderId, long refId);
+      string Pay(long orderId, long refId);
+      double GetTotalPaymentPriceById(long id);
    }
 }
