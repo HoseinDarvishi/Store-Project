@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopManagement.Configuration;
+using ShopManagement.Domain.ACL_Services;
+using ShopManagement.Infrastructure.ShopInventoryACL;
 using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
@@ -39,6 +41,9 @@ namespace ServiceHost
          InventoryManagementConfigurator.Configure(services, connection);
          BlogManagementConfigurator.Configure(services, connection);
          AccountManagementConfigurator.Configure(services, connection);
+
+         // ACLs
+         services.AddTransient<IShopInventoryACL, ShopInventoryACL>();
 
          //Interal Services
          services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));

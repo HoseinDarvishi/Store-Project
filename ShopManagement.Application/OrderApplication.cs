@@ -1,4 +1,5 @@
 ﻿using ShopManagement.Application.Constract.Order;
+using ShopManagement.Domain.ACL_Services;
 using ShopManagement.Domain.OrderAgg;
 using UtilityFreamwork.Application;
 
@@ -8,11 +9,13 @@ namespace ShopManagement.Application
    {
       private readonly IOrderRepository _orderRepository;
       private readonly IAuthHelper _authHelper;
+      private readonly IShopInventoryACL _inventoryACL;
 
-      public OrderApplication(IOrderRepository orderRepository , IAuthHelper authHelper)
+      public OrderApplication(IOrderRepository orderRepository , IAuthHelper authHelper , IShopInventoryACL inventoryACL)
       {
          _orderRepository = orderRepository;
          _authHelper = authHelper;
+         _inventoryACL = inventoryACL;
       }
 
       public double GetTotalPaymentPriceById(long id)
@@ -26,9 +29,13 @@ namespace ShopManagement.Application
          order.Payed(refId);
          var trackingNumber = CodeGenerator.Generate("R");
          order.SetTrackingNumber(trackingNumber);
-         //We Should Reeduce From Inventory
-         _orderRepository.Save();
-         return trackingNumber;
+
+         if (_inventoryACL.ReduceFromInventory(order.Items))
+         {
+            _orderRepository.Save();
+            return trackingNumber;
+         }
+         return "";
       }
 
       public long PlaceOrder(Cart cart)
