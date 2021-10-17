@@ -56,6 +56,14 @@ namespace ShopManagement.Configuration.Permissions
                   new PermissionDto(ShopPermissions.ListProductComments , "مشاهده لیست نظرات محصولات"),
                   new PermissionDto(ShopPermissions.ChangeStatusProductComments, "تایید یا رد نظرات محصول")
                }
+            },
+
+            {
+               "سفارشات", new List<PermissionDto>
+               {
+                  new PermissionDto(ShopPermissions.ListOrders , "مشاهده لیست سفارشات"),
+                  new PermissionDto(ShopPermissions.CancelOrder, "لغو سفارش")
+               }
             }
          };
       }

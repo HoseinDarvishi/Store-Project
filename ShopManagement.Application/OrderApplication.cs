@@ -1,6 +1,7 @@
 ﻿using ShopManagement.Application.Constract.Order;
 using ShopManagement.Domain.ACL_Services;
 using ShopManagement.Domain.OrderAgg;
+using System.Collections.Generic;
 using UtilityFreamwork.Application;
 
 namespace ShopManagement.Application
@@ -16,6 +17,13 @@ namespace ShopManagement.Application
          _orderRepository = orderRepository;
          _authHelper = authHelper;
          _inventoryACL = inventoryACL;
+      }
+
+      public void Cancel(long id)
+      {
+         var order = _orderRepository.Get(id);
+         order.Cancel();
+         _orderRepository.Save();
       }
 
       public double GetTotalPaymentPriceById(long id)
@@ -53,6 +61,11 @@ namespace ShopManagement.Application
          _orderRepository.Create(order);
          _orderRepository.Save();
          return order.Id;
+      }
+
+      public List<OrderViewModel> Search(OrderSearchModel searchModel)
+      {
+         return _orderRepository.Search(searchModel);
       }
    }
 }

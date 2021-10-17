@@ -41,11 +41,9 @@ namespace ShopManagement.Domain.OrderAgg
 
       public void Payed(long refId)
       {
+         IsPaid = true;
          if (refId > 0)
-         {
             RefId = refId;
-            IsPaid = true;
-         }
       }
 
       public void SetTrackingNumber(string number)

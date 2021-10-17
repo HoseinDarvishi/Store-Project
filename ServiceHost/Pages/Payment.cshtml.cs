@@ -58,9 +58,8 @@ namespace ServiceHost.Pages
 
          var orderId = _orderApplication.PlaceOrder(cart);
          string description = $"خرید کالا";
-         var mobile = _authHelper.CurrentAccountInfo().Mobile;
 
-         var responsePay = _zarinFactory.CreatePaymentRequest(cart.TotalPayment.ToString(), mobile , "user@gmail.com", description, orderId);
+         var responsePay = _zarinFactory.CreatePaymentRequest(cart.TotalPayment.ToString(), "" , "user@gmail.com", description, orderId);
 
          return Redirect($"https://{_zarinFactory.Prefix}.zarinpal.com/pg/StartPay{responsePay.Authority}");
       }

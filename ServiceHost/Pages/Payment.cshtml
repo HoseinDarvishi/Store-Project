@@ -91,7 +91,7 @@
                                  <h2>مبلغ قابل پرداخت <span>@Model.Cart.TotalPayment.ToString("#,#")</span></h2>
                               </div>
                               <div class="cart-summary-button">
-                                 <button class="checkout-btn">پرداخت</button>
+                                 <a asp-page-handler="Pay" class="checkout-btn">پرداخت</a>
                               </div>
                            </div>
                         </div>

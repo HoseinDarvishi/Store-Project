@@ -65,5 +65,9 @@
       public const int ListRoles = 121;
       public const int CreateRole = 122;
       public const int EditRole = 123;
-   } 
+
+      // Orders
+      public const int ListOrders = 131;
+      public const int CancelOrder = 132;
+   }
 }

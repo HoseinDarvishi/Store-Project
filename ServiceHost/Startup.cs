@@ -72,6 +72,7 @@ namespace ServiceHost
          {
             opt.AddPolicy("AdminArea", user => user.RequireRole(new List<string> { AccountRoles.Manager, AccountRoles.ContentUploader,AccountRoles.Inventor }));
             opt.AddPolicy("Shop", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
+            opt.AddPolicy("Orders", user => user.RequireRole(new List<string> { AccountRoles.Manager , AccountRoles.Inventor }));
             opt.AddPolicy("Inventory", user => user.RequireRole(new List<string> { AccountRoles.Manager , AccountRoles.Inventor}));
             opt.AddPolicy("Discount", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
             opt.AddPolicy("Users", user => user.RequireRole(new List<string> { AccountRoles.Manager }));
@@ -84,6 +85,7 @@ namespace ServiceHost
             opt.Conventions.AuthorizeAreaFolder("Administration", "/", "AdminArea");
             opt.Conventions.AuthorizeAreaFolder("Administration", "/Shop", "Shop");
             opt.Conventions.AuthorizeAreaFolder("Administration", "/Inventory", "Inventory");
+            opt.Conventions.AuthorizeAreaFolder("Administration", "/Order", "Orders");
             opt.Conventions.AuthorizeAreaFolder("Administration", "/Discounts", "Discount");
             opt.Conventions.AuthorizeAreaFolder("Administration", "/Account", "Users");
          });
