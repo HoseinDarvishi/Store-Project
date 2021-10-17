@@ -1,4 +1,5 @@
 ﻿using AccountManagement.Infrastructure.EFCore;
+using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Constract.Order;
 using ShopManagement.Domain.OrderAgg;
 using System.Collections.Generic;
@@ -18,7 +19,34 @@ namespace ShopManagement.Infrastructure.EFCore.Repositories
          _context = context;
          _accountContext = accountContext;
       }
-      
+
+      public List<OrderItemViewModel> GetItems(long orderId)
+      {
+         var order = _context.Orders.AsNoTracking().FirstOrDefault(x => x.Id == orderId);
+         if (order == null) return new List<OrderItemViewModel>();
+
+         var items = order.Items.Select(x => new OrderItemViewModel 
+         {
+            ProductId = x.ProductId,
+            Count = x.Count,
+            OrderId = x.OrderId,
+            DiscountRate = x.DiscountRate,
+            UnitPrice = x.Price,
+            TotalPrice = x.Price*x.Count,
+            TotalDiscount = ((x.Price * x.Count)*(x.DiscountRate)/100),
+         }).ToList();
+
+         var products = _context.Products.AsNoTracking().Select(x => new { x.Id, x.Name }).ToList();
+
+         foreach (var item in items)
+         {
+            item.TotalPayment = item.TotalPrice - item.TotalDiscount;
+            item.ProductName = products.FirstOrDefault(x => x.Id == item.ProductId)?.Name;
+         }
+
+         return items;
+      }
+
       public double GetTotalPaymentPriceById(long id)
       {
          var order = _context.Orders.Select(x => new { x.TotalPaymentPrice, x.Id }).FirstOrDefault(x => x.Id == id);

@@ -31,8 +31,16 @@ namespace ServiceHost.Areas.Administration.Pages.Order
          return RedirectToPage("./Index");
       }
 
-      public void OnGetListItems(long id)
+      public IActionResult OnGetRestore(long id)
       {
+         orderApplication.Restore(id);
+         return RedirectToPage("./Index");
+      }
+
+      public IActionResult OnGetFactor(long id)
+      {
+         var items = orderApplication.GetItemsBy(id);
+         return Partial("OrderItems", items);
       }
    }
 }

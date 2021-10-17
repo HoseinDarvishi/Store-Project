@@ -9,5 +9,7 @@ namespace ShopManagement.Application.Constract.Order
       double GetTotalPaymentPriceById(long id);
       List<OrderViewModel> Search(OrderSearchModel searchModel);
       void Cancel(long id);
+      void Restore(long id);
+      List<OrderItemViewModel> GetItemsBy(long orderId);
    }
 }

@@ -26,6 +26,11 @@ namespace ShopManagement.Application
          _orderRepository.Save();
       }
 
+      public List<OrderItemViewModel> GetItemsBy(long orderId)
+      {
+         return _orderRepository.GetItems(orderId);
+      }
+
       public double GetTotalPaymentPriceById(long id)
       {
          return _orderRepository.GetTotalPaymentPriceById(id);
@@ -61,6 +66,13 @@ namespace ShopManagement.Application
          _orderRepository.Create(order);
          _orderRepository.Save();
          return order.Id;
+      }
+
+      public void Restore(long id)
+      {
+         var order = _orderRepository.Get(id);
+         order.Restore();
+         _orderRepository.Save();
       }
 
       public List<OrderViewModel> Search(OrderSearchModel searchModel)

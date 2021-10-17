@@ -8,5 +8,6 @@ namespace ShopManagement.Domain.OrderAgg
    {
       double GetTotalPaymentPriceById(long id);
       List<OrderViewModel> Search(OrderSearchModel searchModel);
+      List<OrderItemViewModel> GetItems(long orderId);
    }
 }

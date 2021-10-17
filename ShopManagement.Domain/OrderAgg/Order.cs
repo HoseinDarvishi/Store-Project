@@ -56,6 +56,11 @@ namespace ShopManagement.Domain.OrderAgg
          IsCanceled = true;
       }
 
+      public void Restore()
+      {
+         IsCanceled = false;
+      }
+
       public void AddItem(OrderItem item)
       {
          Items.Add(item);
