@@ -2,6 +2,7 @@ using AccountManagement.Infrastructure.Configuration;
 using BlogManagement.Infrastracture.Configuration;
 using DiscountManagement.Configuration;
 using InventoryManagement.Infrastructure.Configuration;
+using InventoryManagement.Presentation;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -79,7 +80,7 @@ namespace ServiceHost
          });
 
          services.AddRazorPages()
-            .AddMvcOptions(opt=> opt.Filters.Add<SecurityPageFilter>())
+            .AddMvcOptions(opt => opt.Filters.Add<SecurityPageFilter>())
             .AddRazorPagesOptions(opt =>
          {
             opt.Conventions.AuthorizeAreaFolder("Administration", "/", "AdminArea");
@@ -88,7 +89,8 @@ namespace ServiceHost
             opt.Conventions.AuthorizeAreaFolder("Administration", "/Order", "Orders");
             opt.Conventions.AuthorizeAreaFolder("Administration", "/Discounts", "Discount");
             opt.Conventions.AuthorizeAreaFolder("Administration", "/Account", "Users");
-         });
+         })
+         .AddApplicationPart(typeof(InventoryController).Assembly);
 
          services.AddRazorPages();
       }
