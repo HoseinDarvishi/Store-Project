@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using UtilityFreamwork.Application;
+using UtilityFreamwork.Application.Email;
 using UtilityFreamwork.Application.ZarinPal;
 
 namespace ServiceHost
@@ -43,15 +44,16 @@ namespace ServiceHost
          BlogManagementConfigurator.Configure(services, connection);
          AccountManagementConfigurator.Configure(services, connection);
 
-         // ACLs
-         services.AddTransient<IShopInventoryACL, ShopInventoryACL>();
 
-         //Interal Services
          services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));
          services.AddTransient<IFileUploader, FileUploader>();
          services.AddSingleton<IPasswordHasher, PasswordHasher>();
          services.AddTransient<IAuthHelper, AuthHelper>();
          services.AddTransient<IZarinPalFactory, ZarinPalFactory>();
+         services.AddTransient<IEmailService, EmailService>();
+
+         // ACLs
+         services.AddTransient<IShopInventoryACL, ShopInventoryACL>();
 
          //Coockies ==> Authentication
          services.Configure<CookiePolicyOptions>(options =>
