@@ -90,7 +90,8 @@ namespace ServiceHost
             opt.Conventions.AuthorizeAreaFolder("Administration", "/Discounts", "Discount");
             opt.Conventions.AuthorizeAreaFolder("Administration", "/Account", "Users");
          })
-         .AddApplicationPart(typeof(InventoryController).Assembly);
+         .AddApplicationPart(typeof(InventoryController).Assembly)
+         .AddNewtonsoftJson();
 
          services.AddRazorPages();
       }

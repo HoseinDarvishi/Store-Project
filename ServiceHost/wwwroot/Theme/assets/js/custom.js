@@ -1,4 +1,4 @@
-﻿const { parse } = require("path/posix");
+﻿/*const { parse } = require("path/posix");*/
 
 function addToCart(id, name, picture, price) {
    let products = $.cookie("cart");
@@ -90,4 +90,32 @@ function ChangeCount(id, TotalId, count) {
    // Set New cookie
    $.cookie("cart", JSON.stringify(products), { expires: 2, path: "/" });
    UpdateCart();
+
+   const settings = {
+        "url": "https://localhost:5001/api/inventory",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({ "productId": id, "count": count })
+    };
+
+   $.ajax(settings).done(function (data) {
+       if (data.isInStock == false) {
+          const warningsDiv = $('#page-wrapper');
+            if ($(`#${id}`).length == 0) {
+               warningsDiv.append(`
+                    <div class="alert alert-warning" id="${id}">
+                     <i class="fas fa-warning"></i>
+                     تعداد موجودی <strong>${data.productName}</strong> کمتر از تعداد درخواستی است
+                  </div>
+                `);
+            }
+        } else {
+            if ($(`#${id}`).length > 0) {
+                $(`#${id}`).remove();
+            }
+        }
+    });
 }

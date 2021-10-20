@@ -31,82 +31,80 @@
             <!--=======  page wrapper  =======-->
             @if (Model.CartItems != null)
             {
-               <div class="page-wrapper">
-
-                  @if (Model.CartItems.Any(x => !x.IsInStock))
+            <div class="page-wrapper" >
+               <div id="page-wrapper">
+                  @foreach (var item in Model.CartItems.Where(x => !x.IsInStock))
                   {
-                     <div class="alert alert-warning">
+                     <div class="alert alert-warning" id="@item.Id">
                         <i class="fas fa-warning"></i>
-                        تعداد موجودی @foreach (var item in Model.CartItems.Where(x => !x.IsInStock))
-                        {
-                           <strong>@item.Name , </strong>
-                        } کمتر از تعداد درخواستی است
+                        تعداد موجودی <strong>@item.Name</strong> کمتر از تعداد درخواستی است
                      </div>
                   }
+               </div>
 
-                  <div class="page-content-wrapper">
-                     <div class="cart-table table-responsive">
-                        <table class="table">
-                           <thead>
-                              <tr>
-                                 <th class="pro-thumbnail">عکس</th>
-                                 <th class="pro-title">نام</th>
-                                 <th class="pro-price">قیمت واحد</th>
-                                 <th class="pro-quantity">تعداد</th>
-                                 <th class="pro-subtotal">قیمت کل</th>
-                                 <th class="pro-remove">حذف</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              @foreach (var product in Model.CartItems)
-                              {
-                                 <tr>
-                                    <td class="pro-thumbnail">
-                                       <a href="single-product.html">
-                                          <img src="~/ProductPictures/@product.Picture" width="100px" class="img-fluid" alt="@product.Name">
-                                       </a>
-                                    </td>
-                                    <td class="pro-title">
-                                       <a href="single-product.html">@product.Name</a>
-                                    </td>
-                                    <td class="pro-price">
-                                       <span>@product.Price.ToString("#,#")</span>
-                                    </td>
-                                    <td class="pro-quantity">
-                                       <div class="quantity-selection">
-                                          <input type="number" value="@product.Count" min="1" onchange="ChangeCount('@product.Id','total-price-@product.Id',this.value)">
-                                       </div>
-                                    </td>
-                                    <td class="pro-subtotal">
-                                       <span id="total-price-@product.Id">@product.TotalPrice.ToString("#,#")</span>
-                                    </td>
-                                    <td class="pro-remove">
-                                       <a class="py-1 bg-danger text-white rounded" asp-page="/Cart" asp-page-handler="Remove" asp-route-id="@product.Id">
-                                          X
-                                       </a>
-                                    </td>
-                                 </tr>
-                              }
-                           </tbody>
-                        </table>
-                        <div class="cart-summary-button d-flex align-items-center">
-                           <a asp-page-handler="Payment" class="checkout-btn border-0 p-3 btn-success m-3 rounded">تکمیل خرید</a>
-
-                           @if (Model.CartItems.Any(x => !x.IsInStock))
+               <div class="page-content-wrapper">
+                  <div class="cart-table table-responsive">
+                     <table class="table"> 
+                        <thead>
+                           <tr>
+                              <th class="pro-thumbnail">عکس</th>
+                              <th class="pro-title">نام</th>
+                              <th class="pro-price">قیمت واحد</th>
+                              <th class="pro-quantity">تعداد</th>
+                              <th class="pro-subtotal">قیمت کل</th>
+                              <th class="pro-remove">حذف</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           @foreach (var product in Model.CartItems)
                            {
-                              <div class="alert alert-danger m-0 flex-grow-1">
-                                 <i class="fas fa-warning"></i>
-                                 تعداد موجودی @foreach (var item in Model.CartItems.Where(x => !x.IsInStock))
-                                 {
-                                    <strong>@item.Name , </strong>
-                                 } کمتر از تعداد درخواستی است
-                              </div>
+                              <tr>
+                                 <td class="pro-thumbnail">
+                                    <a href="single-product.html">
+                                       <img src="~/ProductPictures/@product.Picture" width="100px" class="img-fluid" alt="@product.Name">
+                                    </a>
+                                 </td>
+                                 <td class="pro-title">
+                                    <a href="single-product.html">@product.Name</a>
+                                 </td>
+                                 <td class="pro-price">
+                                    <span>@product.Price.ToString("#,#")</span>
+                                 </td>
+                                 <td class="pro-quantity">
+                                    <div class="quantity-selection">
+                                       <input type="number" value="@product.Count" min="1" onchange="ChangeCount('@product.Id','total-price-@product.Id',this.value)">
+                                    </div>
+                                 </td>
+                                 <td class="pro-subtotal">
+                                    <span id="total-price-@product.Id">@product.TotalPrice.ToString("#,#")</span>
+                                 </td>
+                                 <td class="pro-remove">
+                                    <a class="py-1 bg-danger text-white rounded" asp-page="/Cart" asp-page-handler="Remove" asp-route-id="@product.Id">
+                                       X
+                                    </a>
+                                 </td>
+                              </tr>
                            }
+                        </tbody>
+                     </table>
+                     <div class="cart-summary-button d-flex align-items-center">
+                        <a asp-page-handler="Payment" class="checkout-btn border-0 p-3 btn-success m-3 rounded">تکمیل خرید</a>
 
-                        </div>
+                        @if (Model.CartItems.Any(x => !x.IsInStock))
+                        {
+                           <div class="alert alert-danger m-0 flex-grow-1">
+                              <i class="fas fa-warning"></i>
+                              تعداد موجودی @foreach (var item in Model.CartItems.Where(x => !x.IsInStock))
+                              {
+                                 <strong>@item.Name , </strong>
+                              } کمتر از تعداد درخواستی است
+                           </div>
+                        }
+
                      </div>
                   </div>
                </div>
+            </div>
             }
             else
             {
